@@ -1,0 +1,100 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+#form input, #form textarea, #form select{
+	border: 1px solid #ccc;
+}
+.painel{
+	border: 1px solid #ccc;
+    margin-bottom: 20px;
+	border-radius: 4px;
+}
+.painel .corpo-painel{
+    padding: 15px;
+}
+
+.painel .titulo-painel{
+	border-bottom: 1px solid #ccc;
+	background-color: #eee;
+    padding: 15px;
+	text-align: center;
+	font-size: 18px;
+    line-height: 22px;
+    color: #444;
+	font-weight: bold;
+}
+
+#form input,#form textarea,#form select {
+	border:0px;
+	border:1px solid #eee;
+	width:100%;
+	background-color:transparent;
+	padding:14px 10px;
+	margin-bottom:20px;
+	border-radius:0;
+	font-size:14px;
+}
+#form .btn {
+	background:#333;
+	color:#fff;
+	border:1px solid #333;
+	font-size:16px;
+	font-weight:700;
+	text-transform:uppercase;
+}
+.limiter {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.container-login100 {
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background: #f2f2f2;
+}
+
+.wrap-login100 {
+    width: 390px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 77px 55px 33px;
+    box-shadow: 0 5px 10px 0 rgb(0 0 0 / 10%);
+    -moz-box-shadow: 0 5px 10px 0 rgba(0,0,0,.1);
+    -webkit-box-shadow: 0 5px 10px 0 rgb(0 0 0 / 10%);
+    -o-box-shadow: 0 5px 10px 0 rgba(0,0,0,.1);
+    -ms-box-shadow: 0 5px 10px 0 rgba(0,0,0,.1);
+}
+
+.login100-form-title {
+	font-size: 48px;
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    color: #333;
+    line-height: 1.2;
+    text-align: center;
+	font-weight: 500;
+	margin-bottom: 20px;
+}
+
+button.main_bt {
+    font-size: 16px;
+    border: #282e40 solid 1px;
+    background-color: #282e40;
+    color: #fff;
+    padding: 8px 15px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 4px;
+}
