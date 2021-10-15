@@ -1,7 +1,10 @@
+<?php $controller = "cadastro/cadastroController.js";?>
+
 <?php include 'header.php' ?>
+<?php include 'capa.php' ?>
 
 <!-- CONTENT =============================-->
-<section class="item content" style="margin-top:50px">
+<section class="item content" style="margin-top:50px;margin-bottom:50px;" ng-app="appCadastro" ng-controller="cadastroController">
     <div class="container toparea">
         <div class="underlined-title">
             <div class="editContent">
@@ -9,9 +12,9 @@
             </div>
             <div class="wow-hr type_short">
                 <span class="wow-hr-h">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
                 </span>
             </div>
         </div>
@@ -34,7 +37,7 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="cpf">CPF:</label>
-                                        <input type="text" name="cpf" autocomplete="off">
+                                        <input type="text" name="cpf" ng-model="cad.cpf" ui-br-cpf-mask autocomplete="off">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="rg">RG:</label>
@@ -44,7 +47,7 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="dt_nascimento">Data Nascimento:</label>
-                                        <input type="text" name="dt_nascimento" autocomplete="off">
+                                        <input type="text" data-provide="datepicker" class="date_picker" name="dt_nascimento" autocomplete="off" data-date-format="dd/mm/yyyy">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="sexo">Sexo:</label>
@@ -52,6 +55,16 @@
                                             <option value="F">Feminino</option>
                                             <option value="M">Masculino</option>
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="telefone">Telefone:</label>
+                                        <input type="text" id="telefone" name="telefone" ng-model="cad.telefone" autocomplete="off" ui-br-phone-number-mask="areaCode" required="required">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="celular">Celular:</label>
+                                        <input type="text" id="celular" name="celular" ng-model="cad.celular" autocomplete="off" ui-br-phone-number-mask="areaCode" required="required">
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +77,7 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="cep">CEP:</label>
-                                        <input type="text" name="cep" autocomplete="off">
+                                        <input type="text" ui-mask="99999-999" name="cep" autocomplete="off" ng-model="cad.cep">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="cidade">Cidade:</label>
@@ -132,5 +145,5 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 <?php include 'footer.php' ?>

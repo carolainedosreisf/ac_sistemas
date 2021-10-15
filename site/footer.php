@@ -1,36 +1,36 @@
 
 <section class="content-block" style="background-color:#282e40;">
-<div class="container text-center">
-	<div class="row">
-		<div class="col-sm-10 col-sm-offset-1">
-			<div class="formas-pagamento">
-				<p>Formas de pagamento</p>
-				<img src="images/master-card.png" alt="">
-				<img src="images/visa.png" alt="">
-				<img src="images/boleto.png" alt="">
-			</div>
-			<div class="contatos">
-				<span class="item-contatos">
-					<i class="fa fa-envelope"></i> <span>blablablaentrada@gmail.com</span>
-				</span>
-				<span class="item-contatos">
-					<i class="fa fa-phone"></i> <span>(48) 3434-1455</span>
-				</span>
+	<div class="container text-center">
+		<div class="row">
+			<div class="col-sm-10 col-sm-offset-1">
+				<div class="formas-pagamento">
+					<p>Formas de pagamento</p>
+					<img src="images/master-card.png" alt="">
+					<img src="images/visa.png" alt="">
+					<img src="images/boleto.png" alt="">
+				</div>
+				<div class="contatos">
+					<span class="item-contatos">
+						<i class="fa fa-envelope"></i> <span>blablablaentrada@gmail.com</span>
+					</span>
+					<span class="item-contatos">
+						<i class="fa fa-phone"></i> <span>(48) 3434-1455</span>
+					</span>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="row">
-		<div class="col-sm-10 col-sm-offset-1">
-			<ul class="social-iconsfooter">
-				<li><a href="#"><i class="fa fa-phone"></i></a></li>
-				<li><a href="#"><i class="fa fa-envelope"></i></a></li>
-				<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-				<li><a href="#"><i class="fa fa-instagram"></i></a></li>
-			</ul>
+		<div class="row">
+			<div class="col-sm-10 col-sm-offset-1">
+				<ul class="social-iconsfooter">
+					<li><a href="#"><i class="fa fa-phone"></i></a></li>
+					<li><a href="#"><i class="fa fa-envelope"></i></a></li>
+					<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+					<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+				</ul>
+			</div>
 		</div>
 	</div>
-</div>
 </section>
 
 

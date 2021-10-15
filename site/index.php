@@ -1,5 +1,6 @@
 <?php include 'header.php' ?>
-</section>
+<?php include 'capa.php' ?>
+
 	<div class="container filtros">
 		<div class="row">
 			<div class="col-sm-4">
@@ -197,10 +198,9 @@
 			</div>
 		</div>
 	</div>
-</div>
 </section>
 
-<section>
+<section style="margin-bottom:50px">
 	<div class="row">
 		<div class="col-sm-12 text-center">
 			<nav aria-label="...">

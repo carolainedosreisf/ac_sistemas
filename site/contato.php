@@ -1,7 +1,8 @@
 <?php include 'header.php' ?>
+<?php include 'capa.php' ?>
 
 <!-- CONTENT =============================-->
-<section class="item content" style="margin-top:50px">
+<section class="item content" style="margin-top:50px;margin-bottom:50px;">
 	<div class="container toparea">
 		<div class="underlined-title">
 			<div class="editContent">

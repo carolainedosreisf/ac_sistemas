@@ -1,17 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="">
-<title>Blablabla Eventos - Home</title>
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<link rel="stylesheet"  type="text/css" href="css/owl.carousel.css"/>
-<link rel="stylesheet"  type="text/css" href="css/owl.theme.default.css"/>
-<link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Roboto:200,300,400,500,600,700" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="generator" content="">
+	<title>Blablabla Eventos - Home</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<link rel="stylesheet"  type="text/css" href="css/owl.carousel.css"/>
+	<link rel="stylesheet"  type="text/css" href="css/owl.theme.default.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:200,300,400,500,600,700" rel="stylesheet">
+	
+	
+	<?php if(isset($controller)){?>
+		<link rel="stylesheet" type="text/css" href="css/datepicker.css">
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="js/angular.min.js"></script>
+		<script src="js/jquery.inputmask.bundle.min.js"></script>
+		<script src="js/angular-br-filters.js"></script>
+		<script src="js/angular-sanitize.min.js"></script>
+		<script src="js/masks.js"></script>
+		<script src="js/ui-mask.js"></script>
+		<script src="js/angular-locale_pt-br.js"></script>
+		<script src="js/bootstrap-datepicker.js"></script>
+		<script src="js/controllers/<?php echo $controller;?>"></script>
+		<script src="js/angular-input-masks-standalone.min.js"></script>
+	<?php } ?>
 </head>
 <body>
 <header class="margin-top-0">
@@ -44,7 +61,7 @@
 					<li class="propClone"><a href="">Agenda</a></li>
 					<li class="propClone"><a href="">Albuns</a></li>
 					<li class="propClone"><a href="contato.php">Contato</a></li>
-					<li class="propClone"><a href="">Login</a></li>
+					<li class="propClone"><a href="login.php">Login</a></li>
 					<li class="propClone"><a href="cadastro.php">Cadastro</a></li>
 				</ul>
 			</div>
@@ -52,10 +69,3 @@
 		</nav>
 	</div>
 </header>
-<div id="owl-demo" class="owl-carousel owl-theme owl-loaded">
-	<div class="item"><img src="images/capa.jpg" alt="The Last of us"></div>
-	<div class="item"><img src="images/capa.jpg" alt="The Last of us"></div>
-	<div class="item"><img src="images/capa.jpg" alt="The Last of us"></div>
-</div>
-
-<section>
