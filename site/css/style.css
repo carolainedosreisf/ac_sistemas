@@ -640,7 +640,7 @@ ul,ol {
 .footer a {
 	color:#00bba7;
 }
-#contactform input,#contactform textarea,#contactform select {
+#contactform input,#contactform textarea,#contactform select,#contactform button {
 	border:0px;
 	border:1px solid #eee;
 	width:100%;
@@ -837,4 +837,8 @@ button.main_bt {
     display: inline-block;
     text-align: center;
     border-radius: 4px;
+}
+
+.has-error input, .has-error select{
+	border: 1px solid #b94a48 !important;
 }
