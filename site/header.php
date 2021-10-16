@@ -1,3 +1,12 @@
+<?php
+	session_start();
+	$usuario = isset($_SESSION['usuario'])?$_SESSION['usuario']:0;
+
+	if(!isset($controller)){
+		$controller = "siteController";
+
+	}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,24 +22,23 @@
 	<link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:200,300,400,500,600,700" rel="stylesheet">
 	
+	<link rel="stylesheet" type="text/css" href="css/datepicker.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/angular.min.js"></script>
+	<script src="js/jquery.inputmask.bundle.min.js"></script>
+	<script src="js/angular-br-filters.js"></script>
+	<script src="js/angular-sanitize.min.js"></script>
+	<script src="js/masks.js"></script>
+	<script src="js/ui-mask.js"></script>
+	<script src="js/angular-locale_pt-br.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="controllers_js/<?php echo $controller;?>.js"></script>
+	<script src="js/angular-input-masks-standalone.min.js"></script>
 	
-	<?php if(isset($controller)){?>
-		<link rel="stylesheet" type="text/css" href="css/datepicker.css">
-		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.js"></script>
-		<script src="js/angular.min.js"></script>
-		<script src="js/jquery.inputmask.bundle.min.js"></script>
-		<script src="js/angular-br-filters.js"></script>
-		<script src="js/angular-sanitize.min.js"></script>
-		<script src="js/masks.js"></script>
-		<script src="js/ui-mask.js"></script>
-		<script src="js/angular-locale_pt-br.js"></script>
-		<script src="js/bootstrap-datepicker.js"></script>
-		<script src="js/controllers/<?php echo $controller;?>"></script>
-		<script src="js/angular-input-masks-standalone.min.js"></script>
-	<?php } ?>
 </head>
-<body>
+<body ng-app="app" ng-controller="<?php echo $controller; ?>">
+<script> var usuario = '<?php echo json_encode($usuario);?>';</script>
 <header class="margin-top-0">
 	<div class="barra-topo">
 		<div class="text-homeimage text-center">
@@ -45,12 +53,19 @@
 	
 	<div class="wrapper">
 		<nav role="navigation" class="navbar navbar-white navbar-embossed navbar-lg bg-light">
-		<div class="container">
+		<div class="">
 			<div class="navbar-header">
 				<button data-target="#navbar-collapse-02" data-toggle="collapse" class="navbar-toggle" type="button">
-				<i class="fa fa-bars"></i>
-				<span class="sr-only"></span>
+					<i class="fa fa-bars"></i>
+					<span class="sr-only"></span>
 				</button>
+				<a class="navbar-brand brand" ng-show="usuario"> 
+					<span class="carrinho">
+						<i class="fa fa-shopping-cart"></i>
+						<span class="qtd-carrinho">{{lista_carrinho.length}}</span>
+					</span>
+					Bem vind{{usuario.sexo=='F'?'a':'o'}} {{usuario.nm_cadastro}}
+				</a>
 			</div>
 			<div id="navbar-collapse-02" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -61,8 +76,9 @@
 					<li class="propClone"><a href="">Agenda</a></li>
 					<li class="propClone"><a href="">Albuns</a></li>
 					<li class="propClone"><a href="contato.php">Contato</a></li>
-					<li class="propClone"><a href="login.php">Login</a></li>
-					<li class="propClone"><a href="cadastro.php">Cadastro</a></li>
+					<li class="propClone"><a href="logout.php" ng-show="usuario">Sair</a></li>
+					<li class="propClone"><a href="login.php" ng-show="!usuario">Login</a></li>
+					<li class="propClone"><a href="cadastro.php" ng-show="!usuario">Cadastro</a></li>
 				</ul>
 			</div>
 		</div>

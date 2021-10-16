@@ -842,3 +842,21 @@ button.main_bt {
 .has-error input, .has-error select{
 	border: 1px solid #b94a48 !important;
 }
+
+.carrinho {
+    border: 2px solid#3D566E;
+    border-radius: 50%;
+    padding: 7px 7px 7px 10px;
+    margin-right: 15px;
+}
+
+.qtd-carrinho{
+	font-size: 15px;
+    color: white;
+    background: orange;
+    border-radius: 50%;
+    padding: 2px 4px 0px 4px;
+    position: absolute;
+    top: 35px;
+    left: 45px;
+}
