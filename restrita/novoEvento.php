@@ -96,6 +96,12 @@
             </div>
         </div>
         <div class="row form-group">
+            <div class="col-sm-4">
+                <label for="ft_caminho">Imagem:</label>
+                <input type="file" ng-model="cad.ft_caminho" ngf-select="uploadMyFile()">
+            </div>
+        </div>
+        <div class="row form-group">
             <div class="col-sm-2">
                 <button class="btn btn-success form-control">Salvar</button>
             </div>

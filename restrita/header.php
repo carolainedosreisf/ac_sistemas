@@ -24,6 +24,9 @@
 	    <script src="js/bootstrap-datepicker.js"></script>
 
         <script src="js/dirPagination.js" language="javascript" type="text/javascript"></script>
+        
+        <script data-require="ng-file-upload@*" data-semver="4.0.0" src="https://raw.githubusercontent.com/danialfarid/ng-file-upload/master/dist/ng-file-upload-all.js"></script>
+        <script data-require="ng-file-upload-shim.min.js@*" data-semver="7.2.0" src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/7.2.0/ng-file-upload-shim.min.js"></script>
 
         <script src="controllers/<?php echo $controller;?>.js"></script>
         <script src="js/angular-input-masks-standalone.min.js"></script>

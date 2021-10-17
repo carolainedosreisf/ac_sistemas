@@ -2,8 +2,13 @@ var app = angular.module('app', ['ngSanitize','idf.br-filters','ui.utils.masks',
 app.controller('siteController', ['$scope', '$http','$filter', function($scope,$http,$filter) {
     $scope.lista_lancamentos = [1,2,3,4,5,6];
     $scope.usuario = JSON.parse(usuario);
-    $scope.lista_carrinho = JSON.parse(localStorage.getItem("lista_carrinho"));
 
+    if(localStorage.lista_carrinho){
+        $scope.lista_carrinho = JSON.parse(localStorage.getItem("lista_carrinho"));
+    }else{
+        $scope.lista_carrinho = [];
+    }
+    $scope.lista_carrinho = [];
     $scope.setCarrinho = function(dados){
         $scope.carregando = true;
         var i = 0;
@@ -16,7 +21,7 @@ app.controller('siteController', ['$scope', '$http','$filter', function($scope,$
             });
         }
         
-        $scope.lista_carrinho [i] = {
+        $scope.lista_carrinho[i] = {
             teste:'',
             dados
         };

@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ui.utils.masks','ui.mask','angularUtils.directives.dirPagination']);
+var app = angular.module('app', ['ui.utils.masks','ui.mask','angularUtils.directives.dirPagination','ngFileUpload']);
 app.controller('eventosController', ['$scope', '$http','$filter', function($scope,$http,$filter) {
     $scope.cad = {};
     $scope.lista_eventos = [];
