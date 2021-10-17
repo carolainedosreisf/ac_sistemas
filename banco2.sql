@@ -22,7 +22,7 @@ create table if not exists `ac_sistemas`.`cidade` (
   `nm_cidade` varchar(50) not null,
   `uf_cidade` char(2) not null,
   primary key (`cd_cidade`))
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ENGINE=InnoDB ;
 
 
 -- -----------------------------------------------------
@@ -47,7 +47,7 @@ create table if not exists `ac_sistemas`.`empresa` (
     references `ac_sistemas`.`cidade` (`cd_cidade`)
     on delete restrict
     on update cascade)
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ENGINE=InnoDB ;
 
 
 -- -----------------------------------------------------
@@ -78,7 +78,7 @@ create table if not exists `ac_sistemas`.`cadastro` (
     references `ac_sistemas`.`cidade` (`cd_cidade`)
     on delete cascade
     on update cascade)
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ENGINE=InnoDB ;
 
 
 -- -----------------------------------------------------
@@ -90,7 +90,7 @@ create table if not exists `ac_sistemas`.`fpagamento` (
   `qt_parcela` int null,
   `vl_min` decimal(18,2) null,
   primary key (`cd_fpagto`))
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ENGINE=InnoDB ;
 
 
 -- -----------------------------------------------------
@@ -114,7 +114,7 @@ create table if not exists `ac_sistemas`.`compra` (
     references `ac_sistemas`.`fpagamento` (`cd_fpagto`)
     on delete restrict
     on update cascade)
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ENGINE=InnoDB ;
 
 
 -- -----------------------------------------------------
@@ -127,7 +127,7 @@ create table if not exists `ac_sistemas`.`promocao` (
   `dt_prazoini` date null,
   `dt_prazofim` date null,
   primary key (`cd_promossao`))
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ENGINE=InnoDB ;
 
 
 -- -----------------------------------------------------
@@ -137,26 +137,26 @@ create table if not exists `ac_sistemas`.`tipoevento` (
   `cd_tipoevento` int not null auto_increment,
   `ds_evento` varchar(50) not null,
   primary key (`cd_tipoevento`))
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ENGINE=InnoDB ;
 
 
 -- -----------------------------------------------------
 -- table `ac_sistemas`.`evento`
 -- -----------------------------------------------------
 create table if not exists `ac_sistemas`.`evento` (
-  `cd_evento` int not null auto_increment,
-  `cd_cidade` int not null,
-  `cd_promocao` int null,
-  `ds_evento` varchar(50) not null,
-  `ds_local` varchar(50) not null,
-  `dt_evento` date not null,
+  --`cd_evento` int not null auto_increment,
+  --`cd_cidade` int not null,
+  --`cd_promocao` int null,
+  --`ds_evento` varchar(50) not null,
+  --`ds_local` varchar(50) not null,
+  --`dt_evento` date not null,
   `ft_caminho` varchar(255) null,
   `ft_evento` blob null,
   `sn_cancelado` char(1) null,
-  `vl_venda` decimal(18,2) not null,
-  `vl_promocao` decimal(18,2) null,
-  `nr_classifi` int null,
-  `cd_tipoevento` int not null,
+  --`vl_venda` decimal(18,2) not null,
+  --`vl_promocao` decimal(18,2) null,
+  --`nr_classifi` int null,
+  --`cd_tipoevento` int not null,
   primary key (`cd_evento`),
   index `fk104_idx` (`cd_cidade` asc) ,
   index `fk204_idx` (`cd_promocao` asc) ,
@@ -176,7 +176,7 @@ create table if not exists `ac_sistemas`.`evento` (
     references `ac_sistemas`.`tipoevento` (`cd_tipoevento`)
     on delete cascade
     on update cascade)
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ENGINE=InnoDB ;
 
 
 -- -----------------------------------------------------
@@ -197,7 +197,7 @@ create table if not exists `ac_sistemas`.`ingresso` (
     references `ac_sistemas`.`evento` (`cd_evento`)
     on delete restrict
     on update cascade)
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ENGINE=InnoDB ;
 
 
 -- -----------------------------------------------------
@@ -220,7 +220,7 @@ create table if not exists `ac_sistemas`.`comprait` (
     references `ac_sistemas`.`compra` (`cd_compra`)
     on delete restrict
     on update cascade)
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ENGINE=InnoDB ;
 
 
 -- -----------------------------------------------------
@@ -230,7 +230,7 @@ create table if not exists `ac_sistemas`.`permissao` (
   `cd_permissao` int not null auto_increment,
   `ds_permissao` varchar(50) not null,
   primary key (`cd_permissao`))
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ENGINE=InnoDB ;
 
 
 -- -----------------------------------------------------
@@ -254,7 +254,7 @@ create table if not exists `ac_sistemas`.`login` (
     references `ac_sistemas`.`permissao` (`cd_permissao`)
     on delete restrict
     on update cascade)
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ENGINE=InnoDB ;
 
 
 -- -----------------------------------------------------
@@ -270,7 +270,7 @@ create table if not exists `ac_sistemas`.`fpagamentoit` (
     references `ac_sistemas`.`fpagamento` (`cd_fpagto`)
     on delete restrict
     on update cascade)
-ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ENGINE=InnoDB ;
 
 
 set sql_mode=@old_sql_mode;

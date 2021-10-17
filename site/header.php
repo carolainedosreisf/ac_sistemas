@@ -38,6 +38,9 @@
 	
 </head>
 <body ng-app="app" ng-controller="<?php echo $controller; ?>">
+<div class="loading ng-hide" ng-show="carregando">
+	<img class="loading-img" src="images/load.gif">
+</div>
 <script> var usuario = '<?php echo json_encode($usuario);?>';</script>
 <header class="margin-top-0">
 	<div class="barra-topo">

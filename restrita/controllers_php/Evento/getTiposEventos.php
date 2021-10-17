@@ -1,12 +1,11 @@
 <?php
     require '../../conexao.php';
-    require '../../funcoes.php';
+    
     $sql = "SELECT 
-            cd_cidade
-            ,nm_cidade
-            ,uf_cidade
-        FROM cidade 
-        ORDER BY nm_cidade ASC";
+            cd_tipoevento
+            ,ds_evento
+        FROM tipoevento 
+        ORDER BY cd_tipoevento DESC";
 
     $query = mysqli_query($conexao, $sql);
     $lista = [];

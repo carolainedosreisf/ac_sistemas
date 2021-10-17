@@ -5,9 +5,9 @@ app.controller('cadastroController', ['$scope', '$http','$filter','$timeout','$l
     
     $scope.cad = {
         nm_cadastro:"João da Silva",
-        nr_cpf:"88072590014",
-        nr_rg:"55555554",
-        dt_nascto:"05/11/1990",
+        nr_cpf:"431.298.700-91",
+        nr_rg:"55555c54",
+        //dt_nascto:"05/11/1990",
         sexo:"F",
         nr_telefone: null,
         nr_contato: null,
@@ -17,8 +17,8 @@ app.controller('cadastroController', ['$scope', '$http','$filter','$timeout','$l
         ed_cadastro:"teste endereco",
         ba_cadastro:"bairro teste",
         co_complemento:null,
-        ed_email:"teste@gmail.com",
-        nm_usuario:"testão.silva",
+        ed_email:"teste@gmail22.com",
+        nm_usuario:"testão.silva22",
         senha:"123456ã",
         confirm_senha:"123456ã"
     };
@@ -26,6 +26,7 @@ app.controller('cadastroController', ['$scope', '$http','$filter','$timeout','$l
     $scope.setCadastro = function(){ 
         $scope.mensagem = "";
         if($scope.form_cadastro.$valid && $scope.cad.senha == $scope.cad.confirm_senha){
+            $scope.carregando = true;
             $scope.cadastro = 1;
             $http({
                 url: 'controllers_php/Cadastro/setCadastro.php',
@@ -40,6 +41,7 @@ app.controller('cadastroController', ['$scope', '$http','$filter','$timeout','$l
                     $location.hash("mensagens");
                     $anchorScroll();
                 }
+                $scope.carregando = false;
             },
             function (retorno) {
                 console.log('Error: '+retorno.status);
@@ -53,6 +55,7 @@ app.controller('cadastroController', ['$scope', '$http','$filter','$timeout','$l
     $scope.setSessao = function(){ 
         $scope.mensagem = "";
         //if(($scope.form_login.$valid && cadastro == 0) || cadastro == 1){
+            $scope.carregando = true;
             $scope.login.cadastro = cadastro;
             $http({
                 url: 'controllers_php/Cadastro/setSessao.php',
@@ -63,6 +66,7 @@ app.controller('cadastroController', ['$scope', '$http','$filter','$timeout','$l
                     window.location = "index.php";
                 }else{
                     $scope.mensagem = "Usuário ou senha inválida.";
+                    $scope.carregando = false;
                 }
             },
             function (retorno) {

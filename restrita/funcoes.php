@@ -40,15 +40,42 @@
         return json_decode(file_get_contents('php://input'),true);
     }
 
-    function serializaDados($lista)
+    function serializaDados($lista,$tipo=1)
     {
-        foreach ($lista as $key => $value) {
-            foreach ($value as $k => $v) {
-                $lista[$key][$k] = utf8_encode($v);
+        if($tipo == 1){
+            foreach ($lista as $key => $value) {
+                foreach ($value as $k => $v) {
+                    $lista[$key][$k] = utf8_encode($v);
+                }
             }
+        }else{
+            foreach ($lista as $key => $value) {
+                $lista[$key] = utf8_encode($value);
+            } 
         }
+        
 
         return $lista;
+    }
+
+    function montaUpdate($obj,$semAspa = [])
+    {
+        //Tipo 1 é lista
+        //Tipos 2 é objeto
+        
+        $txt = "";
+        foreach ($obj as $key => $value) {
+            if($value){
+                if(array_search($key,$semAspa) === false){
+                    $txt .= $key." = '".$value."', ";
+                }else{
+                    $txt .= $key." = ".$value.", ";
+                }
+            }else{
+                $txt .= $key." = null, ";
+            }
+        }
+        return substr($txt,0, strlen($txt) -2);
     }
 
 

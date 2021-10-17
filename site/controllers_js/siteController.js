@@ -5,6 +5,7 @@ app.controller('siteController', ['$scope', '$http','$filter', function($scope,$
     $scope.lista_carrinho = JSON.parse(localStorage.getItem("lista_carrinho"));
 
     $scope.setCarrinho = function(dados){
+        $scope.carregando = true;
         var i = 0;
         if(localStorage.lista_carrinho){
             var lista = angular.copy($scope.lista_carrinho);
@@ -20,5 +21,6 @@ app.controller('siteController', ['$scope', '$http','$filter', function($scope,$
             dados
         };
         localStorage.setItem("lista_carrinho", JSON.stringify($scope.lista_carrinho ));
+        $scope.carregando = false;
     }
 }]);
