@@ -97,8 +97,12 @@
         </div>
         <div class="row form-group">
             <div class="col-sm-4">
-                <label for="ft_caminho">Imagem:</label>
-                <input type="file" ng-model="cad.ft_caminho" ngf-select="uploadMyFile()">
+                <label>Imagem</label>
+                    <div class="ft-evento-miniatura-media-div" ng-show="cad.ft_caminho">
+                        <img class="ft-evento-miniatura-media" src="../{{cad.ft_caminho}}" >
+                        <span title="Apagar Iamgem" ng-click="apagarImagem()" class="btn btn-danger btn-xs" style="position: absolute;right: 20px;top: 30px;">X</span>
+                    </div>
+                <input type="file" file-input="files" class="form-control">
             </div>
         </div>
         <div class="row form-group">

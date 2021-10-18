@@ -9,7 +9,6 @@
 
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/style.css">
-        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="css/datepicker.css">
 
         <script src="js/jquery-.js"></script>
@@ -19,15 +18,11 @@
 	    <script src="js/jquery.inputmask.bundle.min.js"></script>
         <script src="js/masks.js"></script>
 	    <script src="js/ui-mask.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 	    <script src="js/angular-locale_pt-br.js"></script>
 	    <script src="js/bootstrap-datepicker.js"></script>
 
         <script src="js/dirPagination.js" language="javascript" type="text/javascript"></script>
         
-        <script data-require="ng-file-upload@*" data-semver="4.0.0" src="https://raw.githubusercontent.com/danialfarid/ng-file-upload/master/dist/ng-file-upload-all.js"></script>
-        <script data-require="ng-file-upload-shim.min.js@*" data-semver="7.2.0" src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/7.2.0/ng-file-upload-shim.min.js"></script>
-
         <script src="controllers/<?php echo $controller;?>.js"></script>
         <script src="js/angular-input-masks-standalone.min.js"></script>
 

@@ -4,23 +4,23 @@ app.controller('cadastroController', ['$scope', '$http','$filter','$timeout','$l
     $scope.lista_cidades = [];
     
     $scope.cad = {
-        nm_cadastro:"João da Silva",
-        nr_cpf:"431.298.700-91",
-        nr_rg:"55555c54",
-        //dt_nascto:"05/11/1990",
-        sexo:"F",
-        nr_telefone: null,
-        nr_contato: null,
-        nr_cep:"88810563",
-        cd_cidade:"70",
-        nr_endereco:"111",
-        ed_cadastro:"teste endereco",
-        ba_cadastro:"bairro teste",
-        co_complemento:null,
-        ed_email:"teste@gmail22.com",
-        nm_usuario:"testão.silva22",
-        senha:"123456ã",
-        confirm_senha:"123456ã"
+        // nm_cadastro:"João da Silva",
+        // nr_cpf:"431.298.700-91",
+        // nr_rg:"55555c54",
+        // dt_nascto:"05/11/1990",
+        // sexo:"F",
+        // nr_telefone: null,
+        // nr_contato: null,
+        // nr_cep:"88810563",
+        // cd_cidade:"70",
+        // nr_endereco:"111",
+        // ed_cadastro:"teste endereco",
+        // ba_cadastro:"bairro teste",
+        // co_complemento:null,
+        // ed_email:"teste@gmail22.com",
+        // nm_usuario:"testão.silva22",
+        // senha:"123456ã",
+        // confirm_senha:"123456ã"
     };
 
     $scope.setCadastro = function(){ 
@@ -76,15 +76,15 @@ app.controller('cadastroController', ['$scope', '$http','$filter','$timeout','$l
     }
 
     $scope.getCidades = function(){ 
-            $http({
-                url: 'controllers_php/Cidade/getCidades.php',
-                method: 'GET',
-            }).then(function (retorno) {
-                $scope.lista_cidades = retorno.data;
-            },
-            function (retorno) {
-                console.log('Error: '+retorno.status);
-            });
+        $http({
+            url: 'controllers_php/Cidade/getCidades.php',
+            method: 'GET',
+        }).then(function (retorno) {
+            $scope.lista_cidades = retorno.data;
+        },
+        function (retorno) {
+            console.log('Error: '+retorno.status);
+        });
     }
 
     if(cadastro==1){

@@ -64,7 +64,7 @@
                 <br/>
                 <p><b>Note:</b> Once you successfully uploaded the image or file, you get automatically preview to display the image can't file</p>
                <div class="col-md-12 file_list"> 
-                       <div class="col-md-3" ng-repeat="myimages in images">  
+                       <div class="col-md-3" ng-repeat="myimages in listaimages">  
                         <img ng-src="uploads/{{myimages.name}}" width="150" height="150" style="padding:3px; border:1px solid #dcdcdc; margin:5px;" />  
                     </div>  
                 </div>
@@ -83,6 +83,7 @@
                     }  
                });  
                app.controller("saController", function($scope, $http){  
+                    $scope.listaimages = [];
                     $scope.uploadFile = function(){  
                          var form_data = new FormData();  
                          angular.forEach($scope.files, function(file){  

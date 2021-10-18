@@ -50,6 +50,7 @@
                 <thead>
                     <tr>
                         <th width="5%" class="text-center">#</th>
+                        <th width="5%" class="text-center">Imagem</th>
                         <th>Evento</th>
                         <th width="15%">Tipo</th>
                         <th width="15%" class="text-center">Cidade</th>
@@ -62,6 +63,9 @@
                     </tr>
                     <tr pagination-id="pg_eventos" dir-paginate="l in lista_eventos| filter:{sn_cancelado:filtro_status} | filter:{nome_cidade:filtro_cidade} | filter:filtro | itemsPerPage:20">
                         <td class="text-center">{{l.cd_evento}}</td>
+                        <td class="text-center">
+                            <img class="ft-evento-miniatura" src="../{{l.ft_caminho?l.ft_caminho:'arquivos/uploads_evento/sem-foto.jpg'}}" >
+                        </td>
                         <td>{{l.ds_evento}} - {{l.dt_evento_br}} ({{l.vl_venda | currency:'R$'}})</td>
                         <td>{{l.nome_tipo_evento}}</td>
                         <td class="text-center">{{l.nome_cidade}} ({{l.uf_cidade}})</td>

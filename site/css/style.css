@@ -879,3 +879,7 @@ button.main_bt {
     margin-top: -50px;
     margin-left: -50px;
 }
+
+.card-evento img{
+	width: 100% !important;
+}

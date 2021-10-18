@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngSanitize','idf.br-filters','ui.utils.masks','ui.mask']);
+var app = angular.module('app', ['ngSanitize','idf.br-filters','ui.utils.masks','ui.mask','angularUtils.directives.dirPagination']);
 app.controller('siteController', ['$scope', '$http','$filter', function($scope,$http,$filter) {
     $scope.lista_lancamentos = [1,2,3,4,5,6];
     $scope.usuario = JSON.parse(usuario);
@@ -8,7 +8,20 @@ app.controller('siteController', ['$scope', '$http','$filter', function($scope,$
     }else{
         $scope.lista_carrinho = [];
     }
-    $scope.lista_carrinho = [];
+    //$scope.lista_carrinho = [];
+
+    $scope.getEventos = function(){ 
+        $http({
+            url: 'controllers_php/Evento/getEventos.php',
+            method: 'GET',
+        }).then(function (retorno) {
+            $scope.lista_lancamentos = retorno.data;
+        },
+        function (retorno) {
+            console.log('Error: '+retorno.status);
+        });
+    }
+
     $scope.setCarrinho = function(dados){
         $scope.carregando = true;
         var i = 0;
@@ -21,11 +34,10 @@ app.controller('siteController', ['$scope', '$http','$filter', function($scope,$
             });
         }
         
-        $scope.lista_carrinho[i] = {
-            teste:'',
-            dados
-        };
+        $scope.lista_carrinho[i] = dados;
         localStorage.setItem("lista_carrinho", JSON.stringify($scope.lista_carrinho ));
         $scope.carregando = false;
     }
+
+    $scope.getEventos();
 }]);

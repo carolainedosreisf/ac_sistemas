@@ -33,6 +33,8 @@
 	<script src="js/ui-mask.js"></script>
 	<script src="js/angular-locale_pt-br.js"></script>
 	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/dirPagination.js" language="javascript" type="text/javascript"></script>
+
 	<script src="controllers_js/<?php echo $controller;?>.js"></script>
 	<script src="js/angular-input-masks-standalone.min.js"></script>
 	
