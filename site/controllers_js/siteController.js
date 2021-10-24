@@ -4,19 +4,44 @@ app.controller('siteController', ['$scope', '$http','$filter', function($scope,$
     $scope.usuario = JSON.parse(usuario);
     $scope.lista_carrinho = JSON.parse(carrinho);
     $scope.qtd_carrinho = qtd;
-    // if(localStorage.lista_carrinho && $scope.usuario != 0){
-    //     $scope.lista_carrinho = JSON.parse(localStorage.getItem("lista_carrinho"));
-    // }else{
-    //     $scope.lista_carrinho = [];
-    //     localStorage.removeItem("lista_carrinho");
-    // }
-    
+    $scope.lista_cidades = [];
+    $scope.lista_tipos_eventos = [];
+
+    $scope.filtros = {
+        nome_cidade:'',
+        nome_tipo_evento:''
+    };
+
     $scope.getEventos = function(){ 
         $http({
             url: 'controllers_php/Evento/getEventos.php',
             method: 'GET',
         }).then(function (retorno) {
             $scope.lista_lancamentos = retorno.data;
+        },
+        function (retorno) {
+            console.log('Error: '+retorno.status);
+        });
+    }
+
+    $scope.getCidades = function(){ 
+        $http({
+            url: 'controllers_php/Cidade/getCidades.php',
+            method: 'GET',
+        }).then(function (retorno) {
+            $scope.lista_cidades = retorno.data;
+        },
+        function (retorno) {
+            console.log('Error: '+retorno.status);
+        });
+    }
+
+    $scope.getTiposEventos = function(){ 
+        $http({
+            url: 'controllers_php/TipoEvento/getTiposEvento.php',
+            method: 'GET',
+        }).then(function (retorno) {
+            $scope.lista_tipos_eventos = retorno.data;
         },
         function (retorno) {
             console.log('Error: '+retorno.status);
@@ -31,6 +56,7 @@ app.controller('siteController', ['$scope', '$http','$filter', function($scope,$
                 type: "warning",
                 showCancelButton: true,
                 cancelButtonClass: "btn-warning",
+                confirmButtonClass: "btn-success",
                 confirmButtonText: "Logar",
                 cancelButtonText: "Cancelar"
               },
@@ -39,29 +65,51 @@ app.controller('siteController', ['$scope', '$http','$filter', function($scope,$
               });
         }else{
             dados.tipo = tipo;
-            $http({
-                url: 'controllers_php/Carrinho/setCarrinho.php',
-                method: 'POST',
-                data: dados
-            }).then(function (retorno) {
-                $scope.lista_carrinho = retorno.data.carrinho;
-                $scope.qtd_carrinho = retorno.data.qtd;
-                if(tipo==4){
+            if(!(tipo==1 && dados.qtd <=1)){
+                if(tipo==3){
                     swal({
-                        title: 'Adicionado com sucesso!',
-                        text: '',
-                        type: 'success',
-                        timer: 1,
-                        showCancelButton: false,
-                        showConfirmButton: false
-                    })
+                        title: "",
+                        text: "Deseja realmente excluir esse item do carrinho?",
+                        type: "warning",
+                        showCancelButton: true,
+                        cancelButtonClass: "btn-info",
+                        confirmButtonClass: "btn-danger",
+                        confirmButtonText: "Sim",
+                        cancelButtonText: "Cancelar"
+                      },
+                      function(){
+                        postCarrinho(dados);
+                      });
+                }else{
+                    postCarrinho(dados);
                 }
-                
-            },
-            function (retorno) {
-                console.log('Error: '+retorno.status);
-            });
+            }
         }
+    }
+
+    var postCarrinho = function(dados){
+        $http({
+            url: 'controllers_php/Carrinho/setCarrinho.php',
+            method: 'POST',
+            data: dados
+        }).then(function (retorno) {
+            $scope.lista_carrinho = retorno.data.carrinho;
+            $scope.qtd_carrinho = retorno.data.qtd;
+            if(dados.tipo==4){
+                swal({
+                    title: 'Adicionado com sucesso!',
+                    text: '',
+                    type: 'success',
+                    timer: 1500,
+                    showCancelButton: false,
+                    showConfirmButton: false
+                })
+            }
+            
+        },
+        function (retorno) {
+            console.log('Error: '+retorno.status);
+        });
     }
 
     $scope.openDetalhesEvento = function(dados){
@@ -79,4 +127,6 @@ app.controller('siteController', ['$scope', '$http','$filter', function($scope,$
     }
 
     $scope.getEventos();
+    $scope.getCidades();
+    $scope.getTiposEventos();
 }]);

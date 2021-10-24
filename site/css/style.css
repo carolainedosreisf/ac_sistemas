@@ -755,14 +755,7 @@ button.main_bt {
 	margin-top:20px;
 }
 .filtros input,.filtros select{
-	border: none;
-    margin: 10px 0;
-    color: #fff;
-    border-radius: 0;
-    background: #282e40;
     height: 55px;
-    color: #fff;
-    width: 100%;
 }
 .limiter #form input, #form textarea, #form select{
 	border: 1px solid #ccc;
@@ -884,12 +877,16 @@ button.main_bt {
 	width: 100% !important;
 }
 
-.sweet-alert .confirm{
+/* .sweet-alert .confirm{
 	background-color: #282e40 !important;
-}
+} */
 
 .cursor-pointer{
 	cursor:pointer;
+}
+
+.cursor-not-allowed{
+	cursor: not-allowed!important;
 }
 
 .body {
@@ -946,7 +943,10 @@ button.main_bt {
 	display: block;
 	font-size:14px
 }
-
+.carrinho-acoes .span-disabled{
+	border: 1px solid #b4cfba;
+    color: #c5c5c5;
+}
 
 .carrinho-acoes span{
 	border:1px solid #28a745;
@@ -1030,6 +1030,20 @@ button.main_bt {
     border-bottom: 1px solid #fff; 
     text-align: center;
     color: #333;
+}
+
+.bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-right-width: 5px;
+    border-radius: 3px;
+}
+
+.bs-callout-default {
+    border-left-color: #777;
+    border-right-color: #777;
 }
 
 

@@ -30,6 +30,13 @@
             </div>
         </div>
     </div>
+    <div class="row form-group" ng-show="erro_hora && form_evento.hr_evento.$valid">
+        <div class="col-sm-12">
+            <div class="alert alert-danger" role="alert">
+                Hora Inválida
+            </div>
+        </div>
+    </div>
     <form name="form_evento" ng-submit="setEvento()" novalidate>
         <div class="row form-group" ng-show="cad.cd_evento">
             <div class="col-sm-3">
@@ -42,11 +49,15 @@
                 <label for="ds_evento">Descrição:</label>
                 <input type="text" class="form-control" name="ds_evento" id="ds_evento" autocomplete="off" ng-model="cad.ds_evento" required="required" maxlength="50">
             </div>
-            <div class="col-sm-3" ng-class="form_evento.dt_evento.$invalid && (form_evento.$submitted || form_evento.dt_evento.$dirty)?'has-error':''">
+            <div class="col-sm-2" ng-class="form_evento.dt_evento.$invalid && (form_evento.$submitted || form_evento.dt_evento.$dirty)?'has-error':''">
                 <label for="dt_evento">Data:</label>
                 <input type="text" data-provide="datepicker" class="form-control date_picker" name="dt_evento" autocomplete="off" data-date-format="dd/mm/yyyy" ng-model="cad.dt_evento" ng-required="true">
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-2" ng-class="(form_evento.hr_evento.$invalid || erro_hora) && (form_evento.$submitted || form_evento.hr_evento.$dirty)?'has-error':''">
+                <label for="hr_evento">Hora:</label>
+                <input type="text" somentenumeros name="hr_evento" class="form-control" ng-required="true" ng-model="cad.hr_evento" ui-mask="99:99" ng-change="validaHora()">
+            </div>
+            <div class="col-sm-2">
                 <label for="nr_classifi">Classificação:</label>
                 <select class="form-control" name="nr_classifi" id="nr_classifi" autocomplete="off" ng-model="cad.nr_classifi">
                     <option value="">Livre</option>

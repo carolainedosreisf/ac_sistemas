@@ -9,6 +9,7 @@
                 ,(SELECT uf_cidade FROM cidade AS c WHERE c.cd_cidade = e.cd_cidade) AS uf_cidade
                 ,ds_evento
                 ,DATE_FORMAT(dt_evento, '%d/%m/%Y') AS dt_evento_br
+                ,DATE_FORMAT(hr_evento, '%H:%i') AS hr_evento
                 ,cd_tipoevento
                 ,(SELECT ds_evento FROM tipoevento AS c WHERE c.cd_tipoevento = e.cd_tipoevento) AS nome_tipo_evento
                 ,vl_venda

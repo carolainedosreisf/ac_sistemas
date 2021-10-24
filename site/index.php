@@ -2,19 +2,24 @@
 <?php include 'capa.php' ?>
 
 <div>
-	<div class="container filtros">
-		<div class="row">
+	<div class="container">
+		<div class="row filtros bs-callout bs-callout-default">
 			<div class="col-sm-4">
-				<input type="text" class="form-control" placeholder="Pesquisar...">
+				<label for="filtrar">Busca Rápida:</label>
+				<input type="text" name="filtrar" id="filtrar" class="form-control" ng-model="filtrar" placeholder="Pesquisar...">
 			</div>
 			<div class="col-sm-4">
-				<select name="" id="" class="form-control">
-					<option value="">Cidade</option>
+				<label for="nome_cidade">Cidade:</label>
+				<select name="nome_cidade" id="nome_cidade" class="form-control" ng-model="filtros.nome_cidade">
+					<option value="">Todas</option>
+					<option value="{{l.nm_cidade}}" ng-repeat="l in lista_cidades">{{l.nm_cidade}} ({{l.uf_cidade}})</option>
 				</select>
 			</div>
 			<div class="col-sm-4">
-				<select name="" id="" class="form-control">
-					<option value="">Categoria</option>
+				<label for="nome_tipo_evento">Categoria:</label>
+				<select name="nome_tipo_evento" id="nome_tipo_evento" class="form-control" ng-model="filtros.nome_tipo_evento">
+					<option value="">Todas</option>
+					<option value="{{l.ds_evento}}" ng-repeat="l in lista_tipos_eventos">{{l.ds_evento}}</option>
 				</select>
 			</div>
 		</div>
@@ -34,7 +39,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-4" pagination-id="pg_lancamentos" dir-paginate="l in lista_lancamentos| filter:filtrar | itemsPerPage:6">
+				<div class="col-md-4" pagination-id="pg_lancamentos" dir-paginate="l in lista_lancamentos| filter:filtrar |filter:{nome_cidade:filtros.nome_cidade} | filter:{nome_tipo_evento:filtros.nome_tipo_evento} | itemsPerPage:6">
 					<div class="productbox">
 						<div class="fadeshop" ng-mouseover="aparece='evento-car-'+l.cd_evento">
 							<div class="captionshop text-center" id="evento-car-{{l.cd_evento}}" ng-show="aparece=='evento-car-'+l.cd_evento">
@@ -51,7 +56,7 @@
 						<div class="product-details">
 							<a href="#">
 								<h1>
-									{{l.dt_evento_br}}
+									{{l.dt_evento_br}} {{l.hr_evento}} 
 									
 								</h1>
 							</a>
@@ -99,7 +104,7 @@
 			<div class="modal-body">
 				<span><b>Local: </b>{{objEvento.ds_local}} - {{objEvento.nome_cidade}} ({{objEvento.uf_cidade}})</span><br>
 				<span><b>Classificação: </b>{{objEvento.nr_classifi?objEvento.nr_classifi+' anos':'Livre'}} </span><br>
-				<span><b>Data: </b>{{objEvento.dt_evento_br}}</span><br>
+				<span><b>Data: </b>{{objEvento.dt_evento_br}} {{objEvento.hr_evento}}</span><br>
 				<span><b>Valor: </b>
 					<span ng-class="objEvento.cd_promocao>0?'vl-promocao':''" ng-show="objEvento.cd_promocao>0">{{objEvento.vl_promocao | currency:'R$'}}</span>
 					<span ng-class="objEvento.cd_promocao>0?'vl-venda':''">

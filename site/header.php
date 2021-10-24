@@ -16,8 +16,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="generator" content="">
 	<title>Blablabla Eventos - Home</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 	<link rel="stylesheet"  type="text/css" href="css/owl.carousel.css"/>
 	<link rel="stylesheet"  type="text/css" href="css/owl.theme.default.css"/>

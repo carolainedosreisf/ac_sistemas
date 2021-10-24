@@ -3,6 +3,8 @@
     require '../../funcoes.php';
 
     $obj = getPostAngular();
+    $hr = substr($obj['hr_evento'],0,2);
+    $min = substr($obj['hr_evento'],2,2);
 
     $data = [
         "cd_cidade" => $obj['cd_cidade'],
@@ -12,6 +14,7 @@
         "ds_local" => $obj['ds_local'],
         "dt_evento" => formataData($obj['dt_evento'],1),
         "vl_venda" => $obj['vl_venda'],
+        "hr_evento" => $hr.":".$min.":00",
         "nr_classifi" => isset($obj['nr_classifi'])?$obj['nr_classifi']:null,
         "cd_tipoevento" => $obj['cd_tipoevento'],
     ];

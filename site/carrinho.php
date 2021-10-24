@@ -1,4 +1,10 @@
-<?php include 'header.php' ?>
+<?php 
+include 'header.php';
+if(!(isset($_SESSION['usuario']))){
+	header('Location: index.php');
+}
+
+?>
 <section class="body">
     <div class="container" style="margin-top:50px;margin-bottom:50px;">
         <div class="underlined-title" id="mensagens">
@@ -31,12 +37,12 @@
                                 <div class="informacoes">
                                     <span class="titulo-evento">{{l.ds_evento}} ({{l.nome_tipo_evento}})</span>
                                     <span class="text">Local: {{l.ds_local}} / {{l.nome_cidade}} ({{l.uf_cidade}})</span>
-                                    <span class="text">Data: {{l.dt_evento_br}}</span>
+                                    <span class="text">Data: {{l.dt_evento_br}} {{l.hr_evento}}</span>
                                 </div>
                             </td>
                             <td class="text-center">
                                 <div class="carrinho-acoes">
-                                    <span class="cursor-pointer" ng-click="setCarrinho(l,1)"><i class="fa fa-minus"></i></span>
+                                    <span ng-class="l.qtd<=1?'cursor-not-allowed span-disabled':'cursor-pointer'" ng-click="setCarrinho(l,1)"><i class="fa fa-minus"></i></span>
                                     <span class="qtd">{{l.qtd}}</span>
                                     <span class="cursor-pointer" ng-click="setCarrinho(l,2)"><i class="fa fa-plus"></i></span>
                                 </div>

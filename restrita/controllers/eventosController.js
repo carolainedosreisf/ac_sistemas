@@ -91,7 +91,7 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
 
     $scope.setEvento = function(){
         $scope.mensagem = "";
-        if($scope.form_evento.$valid){
+        if($scope.form_evento.$valid && !($scope.erro_hora)){
             var form_data = new FormData();  
             angular.forEach($scope.files, function(file){  
                 form_data.append('file', file);  
@@ -157,6 +157,18 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
     $scope.openSetEvento = function(id)
     {
         window.location = "novoEvento.php?id="+btoa(id);
+    }
+
+    $scope.validaHora = function(){
+
+        if($scope.form_evento.hr_evento.$valid){
+            $scope.erro_hora = false;
+            var hr = $scope.cad.hr_evento.substr(0, 2);
+            var min = $scope.cad.hr_evento.substr(2, 2);
+            if(hr > 23 || min > 59){
+                $scope.erro_hora = true;
+            }
+        }
     }
 
     var array_column_search = function(lista,coluna,id){
