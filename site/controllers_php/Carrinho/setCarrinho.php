@@ -24,15 +24,20 @@
         $carrinho = $_SESSION['carrinho'];
         $_SESSION['carrinho'] = [];
         $qtd = 0;
+        $valor = 0;
         foreach ($carrinho as $key => $v) {
             $_SESSION['carrinho'][] = $v;
             $qtd += $v['qtd'];
+            $valor += $v['cd_promocao'] >0?($v['vl_promocao'] * $v['qtd']):$v['vl_venda'] * $v['qtd'];
         }
 
     }elseif($obj['tipo']==2){
         
         $_SESSION['carrinho'][$existe]['qtd'] = $_SESSION['carrinho'][$existe]['qtd'] + 1;
-        $qtd = returnQtd($_SESSION['carrinho']);
+
+        $valores = returnQtd($_SESSION['carrinho']);
+        $qtd = $valores['qtd'];
+        $valor = $valores['valor'];
 
     }elseif($obj['tipo']==3){
 
@@ -41,9 +46,11 @@
         $carrinho = $_SESSION['carrinho'];
         $_SESSION['carrinho'] = [];
         $qtd = 0;
+        $valor = 0;
         foreach ($carrinho as $key => $v) {
             $_SESSION['carrinho'][] = $v;
             $qtd += $v['qtd'];
+            $valor += $v['cd_promocao'] >0?($v['vl_promocao'] * $v['qtd']):$v['vl_venda'] * $v['qtd'];
         }
 
     }elseif($obj['tipo']==4){
@@ -56,21 +63,26 @@
             $_SESSION['carrinho'][$existe]['qtd'] = $_SESSION['carrinho'][$existe]['qtd'] +1;
         }
 
-        $qtd = returnQtd($_SESSION['carrinho']);
-
+        $valores = returnQtd($_SESSION['carrinho']);
+        $qtd = $valores['qtd'];
+        $valor = $valores['valor'];
         
     }
 
     function returnQtd($lista){
         $qtd = 0;
+        $valor = 0;
         foreach ($lista as $key => $v) {
             $qtd += $v['qtd'];
+            $valor += $v['cd_promocao'] >0?($v['vl_promocao'] * $v['qtd']):$v['vl_venda'] * $v['qtd'];
+
         }
-        return $qtd;
+        return ['qtd'=>$qtd,'valor'=>$valor];
     }
 
     $_SESSION['qtd'] = $qtd;
+    $_SESSION['valor'] = $valor;
 
-    echo json_encode(['qtd'=>$_SESSION['qtd'],'carrinho'=>$_SESSION['carrinho']]);
+    echo json_encode(['qtd'=>$_SESSION['qtd'],'carrinho'=>$_SESSION['carrinho'],'valor'=>$_SESSION['valor']]);
 
 ?>

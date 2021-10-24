@@ -4,6 +4,7 @@ app.controller('siteController', ['$scope', '$http','$filter', function($scope,$
     $scope.usuario = JSON.parse(usuario);
     $scope.lista_carrinho = JSON.parse(carrinho);
     $scope.qtd_carrinho = qtd;
+    $scope.valor_carrinho = valor;
     $scope.lista_cidades = [];
     $scope.lista_tipos_eventos = [];
     $scope.contato = {};
@@ -50,7 +51,7 @@ app.controller('siteController', ['$scope', '$http','$filter', function($scope,$
     }
 
     $scope.setCarrinho = function(dados,tipo=4){
-        if($scope.usuario==0){
+        if($scope.usuario==0 || $scope.usuario.cd_permissao ==1){
             swal({
                 title: "",
                 text: "Você deve logar para adicionar ao carrinho!",
@@ -96,6 +97,7 @@ app.controller('siteController', ['$scope', '$http','$filter', function($scope,$
         }).then(function (retorno) {
             $scope.lista_carrinho = retorno.data.carrinho;
             $scope.qtd_carrinho = retorno.data.qtd;
+            $scope.valor_carrinho = retorno.data.valor;
             if(dados.tipo==4){
                 swal({
                     title: 'Adicionado com sucesso!',

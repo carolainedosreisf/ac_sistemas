@@ -61,7 +61,9 @@ if(!(isset($_SESSION['usuario']))){
                 </div>
             </div><br>
             <div class="col-md-4 col-lg-offset-4">
-                <button class="btn-comprar">Comprar</button>
+                <button class="btn-comprar">
+                    Comprar {{valor_carrinho | currency:'R$'}}
+                </button>
             </div>
         </div>
         

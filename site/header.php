@@ -11,6 +11,7 @@
 	$usuario = isset($_SESSION['usuario'])?$_SESSION['usuario']:0;
 	$carrinho = isset($_SESSION['carrinho'])?$_SESSION['carrinho']:[];
 	$qtd = isset($_SESSION['qtd'])?$_SESSION['qtd']:0;
+	$valor = isset($_SESSION['valor'])?$_SESSION['valor']:0;
 
 	if(!isset($controller)){
 		$controller = "siteController";
@@ -61,6 +62,7 @@
 	var usuario = '<?php echo json_encode($usuario);?>';
 	var carrinho = '<?php echo json_encode($carrinho);?>';
 	var qtd = '<?php echo $qtd;?>';
+	var valor = '<?php echo $valor;?>';
 </script>
 <header class="margin-top-0">
 	<div class="barra-topo">
