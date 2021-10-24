@@ -17,20 +17,20 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2">
-				<form method="post" action="contact.php" id="contactform">
+				<form name="form_contato" novalidate ng-submit="setContato()" id="contactform" autocomplete="off">
 					<div class="form">
 						<label for="nome">Nome:</label>
-						<input type="text" name="nome">
+						<input type="text" name="nome" ng-model="contato.nome" ng-required="true">
 
 						<label for="email">E-mail:</label>
-						<input type="text" name="email">
+						<input type="email" name="email" ng-model="contato.email" ng-required="true">
 
 						<label for="assunto">Assunto:</label>
-						<input type="text" name="assunto">
+						<input type="text" name="assunto" ng-model="contato.assunto" ng-required="true">
 
 						<label for="mensagem">Mensagem:</label>
-						<textarea name="comment" rows="7"></textarea>
-						<input type="submit" id="submit" class="clearfix btn" value="Enviar Mensagem">
+						<textarea name="mensagem" rows="7" ng-model="contato.mensagem" ng-required="true"></textarea>
+						<input ng-disabled="form_contato.$invalid" type="submit" id="submit" class="clearfix btn" value="Enviar Mensagem">
 					</div>
 				</form>
 			</div>

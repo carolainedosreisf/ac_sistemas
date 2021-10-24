@@ -69,14 +69,26 @@
                     <h4 class="modal-title">{{txt_modal}}</h4>
             </div>
             <div class="modal-body">
-                <form name="form_tipo_evento" novalidate>
-                    <label for="ds_evento">Descrição:</label>
-                    <input type="text" name="ds_evento" autocomplete="off" class="form-control" maxlength="50" ng-model="cad.ds_evento" ng-required="true">
+                <div class="row form-group" ng-show="form_tipo_evento.$invalid && form_tipo_evento.$submitted">
+                    <div class="col-sm-12">
+                        <div class="alert alert-danger" role="alert">
+                            Preencha os campos destacados!
+                        </div>
+                    </div>
+                </div>
+                <form name="form_tipo_evento" id="form_tipo_evento" novalidate ng-submit="setTipoEvento()">
+                    <div class="row">
+                        <div class="col-sm-12" ng-class="form_tipo_evento.ds_evento.$invalid && (form_tipo_evento.$submitted || form_tipo_evento.ds_evento.$dirty)?'has-error':''">
+                            <label for="ds_evento">Descrição:</label>
+                            <input type="text" name="ds_evento" autocomplete="off" class="form-control" maxlength="50" ng-model="cad.ds_evento" ng-required="true">
+                        </div>
+                    </div>
+                    
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                <button type="submit" class="btn btn-success" ng-click="setTipoEvento()" ng-disabled="form_tipo_evento.$invalid">Salvar</button>
+                <button type="submit" class="btn btn-success" form="form_tipo_evento">Salvar</button>
             </div>
         </div>
     </div>

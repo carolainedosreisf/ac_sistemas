@@ -1,3 +1,21 @@
+<?php
+    session_start();
+    if(!(isset($_SESSION['usuario']))){
+        header('Location: ../site/login.php');
+    }else{
+        if($_SESSION['usuario']['cd_permissao'] != 1){
+            header('Location: ../site/login.php');
+        }
+    }
+    if(strtotime(date("Y-m-d H:i:s")) >= $_SESSION['usuario']['tempo_inatividade']){
+        header('Location: logout.php');
+    }
+    $usuario = $_SESSION['usuario'];
+
+    $_SESSION['usuario']['tempo_inatividade'] = strtotime(date("Y-m-d H:i:s")."+30 minutes");
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,6 +28,7 @@
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/datepicker.css">
+        <link rel="stylesheet" href="css/sweetalert.css"/>
 
         <script src="js/jquery-.js"></script>
         <script src="js/bootstrap.min.js"></script>
@@ -25,6 +44,7 @@
         
         <script src="controllers/<?php echo $controller;?>.js"></script>
         <script src="js/angular-input-masks-standalone.min.js"></script>
+        <script src="js/sweetalert.min.js"></script>
 
     </head>
     <body ng-app="app" ng-controller="<?php echo $controller; ?>">
@@ -35,7 +55,9 @@
             <!-- Sidebar Holder -->
             <nav id="sidebar">
                 <div class="sidebar-header">
-                    <h3>AC SISTEMAS</h3>
+                    <h3>
+                        AC SISTEMAS
+                    </h3>
                 </div>
 
                 <ul class="list-unstyled components">
@@ -50,6 +72,8 @@
                     <li><a href="promocoes.php">Promoções</a></li>
                     <li><a href="tiposEventos.php">Tipos de Eventos</a></li>
                     <li><a href="eventos.php">Eventos</a></li>
+                    <li><a href="formasPagamento.php">Formas de Pagamento</a></li>
+                    <li><a href="logout.php">Sair</a></li>
                 </ul>
             </nav>
             <script>var id = "<?php echo  isset($_GET['id'])?$_GET['id']:0;?>";</script>

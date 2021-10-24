@@ -6,6 +6,7 @@ app.controller('siteController', ['$scope', '$http','$filter', function($scope,$
     $scope.qtd_carrinho = qtd;
     $scope.lista_cidades = [];
     $scope.lista_tipos_eventos = [];
+    $scope.contato = {};
 
     $scope.filtros = {
         nome_cidade:'',
@@ -115,6 +116,26 @@ app.controller('siteController', ['$scope', '$http','$filter', function($scope,$
     $scope.openDetalhesEvento = function(dados){
         $scope.objEvento = angular.copy(dados);
         $('#modalDetalhesEvento').modal('show');
+    }
+
+    if($scope.usuario!=0){
+        $scope.contato.nome = $scope.usuario.nm_cadastro;
+        $scope.contato.email = $scope.usuario.ed_email;
+    }
+
+    $scope.setContato = function(){
+        if($scope.form_contato.$valid){
+            $http({
+                url: 'controllers_php/Contato/sendEmail.php',
+                method: 'POST',
+                data: $scope.contato
+            }).then(function (retorno) {
+                
+            },
+            function (retorno) {
+                console.log('Error: '+retorno.status);
+            });
+        }
     }
 
     var array_column_search = function(lista,coluna,id,tipo=1){

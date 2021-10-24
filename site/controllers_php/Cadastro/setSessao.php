@@ -17,6 +17,7 @@
                 ,c.ed_email
                 ,l.nm_usuario
                 ,c.cd_cadastro
+                ,l.cd_permissao
             FROM cadastro AS c
             INNER JOIN login AS l
             ON c.cd_cadastro = l.cd_cadastro
@@ -32,7 +33,8 @@
     if($cont==1){
         session_start();
         $_SESSION['usuario'] = $item;
-        echo 1;
+        $_SESSION['usuario']['tempo_inatividade'] = strtotime(date("Y-m-d H:i:s")."+30 minutes");
+        echo $item['cd_permissao'];
     }else{
         echo 0;
     }

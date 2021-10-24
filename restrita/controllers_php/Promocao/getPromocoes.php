@@ -9,7 +9,7 @@
                 ,DATE_FORMAT(dt_prazofim, '%d/%m/%Y') AS dt_prazofim
                 ,vl_promossao
             FROM promocao AS e
-            ORDER BY dt_prazofim DESC";
+            ORDER BY cd_promossao DESC";
 
     $query = mysqli_query($conexao, $sql);
     $lista = [];

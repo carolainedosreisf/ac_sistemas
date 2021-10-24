@@ -36,7 +36,11 @@ app.controller('promocoesController', ['$scope', '$http','$filter', function($sc
                 $('#cadPromocao').modal('hide');
                 $scope.cad = {};
                 if(retorno.data!=1){
-                    alert("Erro ao salvar!");
+                    swal({
+                        title: 'Erro ao salvar!',
+                        text: '',
+                        type: 'warning'
+                    });
                 }else{
                     $scope.getPromocoes();
                 }

@@ -90,7 +90,6 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
     }
 
     $scope.setEvento = function(){
-        $scope.mensagem = "";
         if($scope.form_evento.$valid && !($scope.erro_hora)){
             var form_data = new FormData();  
             angular.forEach($scope.files, function(file){  
@@ -112,7 +111,11 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
                         window.location = "eventos.php";
                     }else{
                         $scope.carregando = false;
-                        $scope.mensagem = "Erro ao cadastrar.";
+                        swal({
+                            title: 'Erro ao salvar!',
+                            text: '',
+                            type: 'warning'
+                        });
                     }
                 },
                 function (retorno) {
@@ -135,7 +138,16 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
     }
 
     $scope.apagarImagem = function(liberado=0){
-        if(confirm("Deseja realmente apagar a imagem?")){
+        swal({
+            title: "",
+            text: "Deseja realmente apagar a imagem?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Sim",
+            cancelButtonText: "Não"
+          },
+          function(){
             $http({
                 url: 'controllers_php/Evento/apagarImagem.php',
                 method: 'POST',
@@ -151,7 +163,7 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
             function (retorno) {
                 console.log('Error: '+retorno.status);
             });
-        }
+        });
     }
 
     $scope.openSetEvento = function(id)

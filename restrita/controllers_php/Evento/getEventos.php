@@ -18,7 +18,7 @@
                 ,IFNULL(sn_cancelado,'N') AS sn_cancelado
                 ,ft_caminho
             FROM evento AS e
-            ORDER BY dt_evento DESC";
+            ORDER BY cd_evento DESC";
 
     $query = mysqli_query($conexao, $sql);
     $lista = [];

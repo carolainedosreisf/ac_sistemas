@@ -1,5 +1,5 @@
 
-<?php $controller = "promocoesController"; ?>
+<?php $controller = "formasPagamentoController"; ?>
 
 <?php include 'header.php' ?>
 <script>var cadastro = 0;</script>
@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <h2>Promoções</h2><br>
+    <h2>Formas de Pagamento</h2><br>
 
     <div class="row form-group">
         <div class="col-sm-8"></div>
@@ -31,21 +31,21 @@
                 <thead>
                     <tr>
                         <th width="5%" class="text-center">#</th>
-                        <th>Promoção</th>
-                        <th width="8%" class="text-center">Dt. Início</th>
-                        <th width="8%" class="text-center">Dt. Fim</th>
+                        <th>Descrição</th>
+                        <th width="8%" class="text-center">Qtd. Parcelas</th>
+                        <th width="8%" class="text-center">Valor Mínimo</th>
                         <th width="5%" class="text-center">Editar</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-show="(lista_promocoes | filter:filtrar ).length <=0">
-                        <td class="text-center" colspan="4">Nenhum resgistro encontrado.</td>
+                    <tr ng-show="(lista_tipos_eventos | filter:filtrar ).length <=0">
+                        <td class="text-center" colspan="5">Nenhum resgistro encontrado.</td>
                     </tr>
-                    <tr pagination-id="pg_promocoes" dir-paginate="l in lista_promocoes| filter:filtrar | itemsPerPage:20">
-                        <td class="text-center">{{l.cd_promossao}}</td>
-                        <td>{{l.ds_promossao}} ({{l.vl_promossao | currency:'R$'}})</td>
-                        <td class="text-center">{{l.dt_prazoini}}</td>
-                        <td class="text-center">{{l.dt_prazofim}}</td>
+                    <tr pagination-id="pg_formas_pagamento" dir-paginate="l in lista_tipos_eventos| filter:filtrar | itemsPerPage:20">
+                        <td class="text-center">{{l.cd_fpagto}}</td>
+                        <td>{{l.ds_fpagto}}</td>
+                        <td class="text-center">{{l.qt_parcela}}</td>
+                        <td class="text-center">{{l.vl_min | currency:'R$'}}</td>
                         <td class="text-center">
                             <button ng-click="openModalCad(l)" class="btn btn-primary btn-sm">
                                 <i class="glyphicon glyphicon-pencil"></i>
@@ -59,12 +59,12 @@
                     max-size="7" 
                     direction-links="true" 
                     boundary-links="true" 
-                    pagination-id="pg_promocoes">  
+                    pagination-id="pg_formas_pagamento">  
                 </dir-pagination-controls>  
             </div>
         </div>
     </div>
-    <div id="cadPromocao" class="modal fade" role="dialog">
+    <div id="cadFormaPagamento" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -72,6 +72,13 @@
                         <h4 class="modal-title">{{txt_modal}}</h4>
                 </div>
                 <div class="modal-body">
+                    <div class="row form-group" ng-show="form_forma_pagamento.$invalid && form_forma_pagamento.$submitted">
+                        <div class="col-sm-12">
+                            <div class="alert alert-danger" role="alert">
+                                Preencha os campos destacados!
+                            </div>
+                        </div>
+                    </div>
                     <div class="row form-group" ng-show="mensagem">
                         <div class="col-sm-12">
                             <div class="alert alert-danger" role="alert">
@@ -79,47 +86,35 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row form-group" ng-show="form_promocao.$invalid && form_promocao.$submitted">
-                        <div class="col-sm-12">
-                            <div class="alert alert-danger" role="alert">
-                                Preencha os campos destacados!
-                            </div>
-                        </div>
-                    </div>
-                    <form name="form_promocao" id="form_promocao" novalidate ng-submit="setPromocao()">
-                        <div class="row form-group" ng-show="cad.cd_promossao">
+                    <form name="form_forma_pagamento" id="form_forma_pagamento" novalidate ng-submit="setFormaPagamento()">
+                        <div class="row form-group" ng-show="cad.cd_fpagto">
                             <div class="col-sm-3">
-                                <label for="cd_promossao">Código:</label>
-                                <input type="text" class="form-control" name="cd_promossao" id="cd_promossao" autocomplete="off" ng-model="cad.cd_promossao" ng-disabled="true">
+                                <label for="cd_fpagto">Código:</label>
+                                <input type="text" class="form-control" name="cd_fpagto" id="cd_fpagto" autocomplete="off" ng-model="cad.cd_fpagto" ng-disabled="true">
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col-sm-8" ng-class="form_promocao.ds_promossao.$invalid && (form_promocao.$submitted || form_promocao.ds_promossao.$dirty)?'has-error':''">
-                                <label for="ds_promossao">Descrição:</label>
-                                <input type="text" name="ds_promossao" autocomplete="of" class="form-control" maxlength="45" ng-model="cad.ds_promossao" ng-required="true">
+                            <div class="col-sm-12" ng-class="form_forma_pagamento.ds_fpagto.$invalid && (form_forma_pagamento.$submitted || form_forma_pagamento.ds_fpagto.$dirty)?'has-error':''">
+                                <label for="ds_fpagto">Descrição:</label>
+                                <input type="text" name="ds_fpagto" autocomplete="of" class="form-control" maxlength="50" ng-model="cad.ds_fpagto" ng-required="true">
                             </div>
-                            <div class="col-sm-4" ng-class="form_promocao.vl_promossao.$invalid && (form_promocao.$submitted || form_promocao.vl_promossao.$dirty)?'has-error':''">
-                                <label for="vl_promossao">Valor:</label>
-                                <input type="text" class="form-control" name="vl_promossao" id="vl_promossao" autocomplete="off" ng-model="cad.vl_promossao" required="required" maxlength="22" ui-number-mask="2">
-                            </div>
+                            
                         </div>
-
                         <div class="row form-group">
                             <div class="col-sm-6">
-                                <label for="dt_prazoini">Data Início:</label>
-                                <input type="text" data-provide="datepicker" class="form-control date_picker" name="dt_prazoini" autocomplete="off" data-date-format="dd/mm/yyyy" ng-model="cad.dt_prazoini">
+                                <label for="qt_parcela">Qtd Parcelas:</label>
+                                <input type="text" class="form-control" name="qt_parcela" id="qt_parcela" autocomplete="off" ng-model="cad.qt_parcela" maxlength="11" ui-number-mask="0">
                             </div>
                             <div class="col-sm-6">
-                                <label for="dt_prazofim">Data Final:</label>
-                                <input type="text" data-provide="datepicker" class="form-control date_picker" name="dt_prazofim" autocomplete="off" data-date-format="dd/mm/yyyy" ng-model="cad.dt_prazofim">
+                                <label for="vl_min">Valor Mínino:</label>
+                                <input type="text" class="form-control" name="vl_min" id="vl_min" autocomplete="off" ng-model="cad.vl_min" maxlength="22" ui-number-mask="2">
                             </div>
                         </div>
-                        
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                    <button type="submit" class="btn btn-success" form="form_promocao">Salvar</button>
+                    <button type="submit" form="form_forma_pagamento" class="btn btn-success" ng-disabled="form_promocao.$invalid">Salvar</button>
                 </div>
             </div>
         </div>

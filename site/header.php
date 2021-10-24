@@ -1,13 +1,22 @@
 <?php
 	session_start();
+	if(isset($_SESSION['usuario'])){
+		if(strtotime(date("Y-m-d H:i:s")) >= $_SESSION['usuario']['tempo_inatividade']){
+			session_destroy();
+		}
+	
+		$_SESSION['usuario']['tempo_inatividade'] = strtotime(date("Y-m-d H:i:s")."+30 minutes ");
+	}
+
 	$usuario = isset($_SESSION['usuario'])?$_SESSION['usuario']:0;
 	$carrinho = isset($_SESSION['carrinho'])?$_SESSION['carrinho']:[];
 	$qtd = isset($_SESSION['qtd'])?$_SESSION['qtd']:0;
 
 	if(!isset($controller)){
 		$controller = "siteController";
-
 	}
+
+	
 ?>
 <!DOCTYPE html>
 <html>
@@ -73,7 +82,7 @@
 					<i class="fa fa-bars"></i>
 					<span class="sr-only"></span>
 				</button>
-				<a class="navbar-brand brand cursor-pointer" href="carrinho.php" ng-show="usuario"> 
+				<a class="navbar-brand brand cursor-pointer" href="carrinho.php" ng-show="usuario && usuario.cd_permissao != 1"> 
 					<span class="carrinho">
 						<i class="fa fa-shopping-cart"></i>
 						<span class="qtd-carrinho">{{qtd_carrinho}}</span>
@@ -90,9 +99,9 @@
 					<li class="propClone"><a href="">Agenda</a></li>
 					<li class="propClone"><a href="">Albuns</a></li>
 					<li class="propClone"><a href="contato.php">Contato</a></li>
-					<li class="propClone"><a href="logout.php" ng-show="usuario">Sair</a></li>
-					<li class="propClone"><a href="login.php" ng-show="!usuario">Login</a></li>
-					<li class="propClone"><a href="cadastro.php" ng-show="!usuario">Cadastro</a></li>
+					<li class="propClone"><a href="logout.php" ng-show="usuario && usuario.cd_permissao != 1">Sair</a></li>
+					<li class="propClone"><a href="login.php" ng-show="!usuario || usuario.cd_permissao == 1">Login</a></li>
+					<li class="propClone"><a href="cadastro.php" ng-show="!usuario || usuario.cd_permissao == 1">Cadastro</a></li>
 				</ul>
 			</div>
 		</div>
