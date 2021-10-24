@@ -1,7 +1,6 @@
 <?php $controller = "cadastroController";?>
 
 <?php include 'header.php' ?>
-<?php include 'capa.php' ?>
 
 <section class="item content" style="margin-top:50px;margin-bottom:50px;">
     <script>var cadastro = 1;</script>
@@ -21,6 +20,9 @@
         </div>
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
+                <div class="alert alert-danger" role="alert" ng-repeat="l in lista_msg">
+                    Esse {{l.nome}} já esta cadastrado, por favor digite outro!
+                </div>
                 <div class="alert alert-danger" role="alert" ng-show="mensagem">
                     {{mensagem}}
                 </div>
@@ -33,8 +35,7 @@
                 <div class="alert alert-danger" role="alert" ng-show="form_cadastro.$invalid && form_cadastro.$submitted">
                     Preencha os campos destacados!
                 </div>
-                <form id="contactform" name="form_cadastro" novalidate
-                ng-submit="setCadastro()">
+                <form id="contactform" name="form_cadastro" novalidate ng-submit="getVerificaColunas()">
                     <div class="form">
                         <div class="painel">
                             <div class="titulo-painel">
@@ -95,7 +96,9 @@
                                     </div>
                                     <div class="col-sm-6" ng-class="form_cadastro.cd_cidade.$invalid && (form_cadastro.$submitted || form_cadastro.cd_cidade.$dirty)?'has-error':''">
                                         <label for="cidade">Cidade:</label>
-                                        <select name="cd_cidade" id="cd_cidade" autocomplete="off" ng-model="cad.cd_cidade" required="required" ng-options="item as item.nm_cidade for item in lista_cidades track by item.cd_cidade">
+                                        <select name="cd_cidade" id="cd_cidade" autocomplete="off" ng-model="cad.cd_cidade" required="required">
+                                        <option value="">Selecione...</option>
+                                        <option value="{{l.cd_cidade}}" ng-repeat="l in lista_cidades">{{l.nm_cidade}}</option>
                                         </select>
                                     </div>
                                 </div>

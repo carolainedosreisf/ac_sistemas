@@ -1,6 +1,8 @@
 <?php
 	session_start();
 	$usuario = isset($_SESSION['usuario'])?$_SESSION['usuario']:0;
+	$carrinho = isset($_SESSION['carrinho'])?$_SESSION['carrinho']:[];
+	$qtd = isset($_SESSION['qtd'])?$_SESSION['qtd']:0;
 
 	if(!isset($controller)){
 		$controller = "siteController";
@@ -23,6 +25,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:200,300,400,500,600,700" rel="stylesheet">
 	
 	<link rel="stylesheet" type="text/css" href="css/datepicker.css">
+	<link rel="stylesheet" href="css/sweetalert.css"/>
+
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script src="js/angular.min.js"></script>
@@ -34,6 +38,7 @@
 	<script src="js/angular-locale_pt-br.js"></script>
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script src="js/dirPagination.js" language="javascript" type="text/javascript"></script>
+	<script src="js/sweetalert.min.js"></script>
 
 	<script src="controllers_js/<?php echo $controller;?>.js"></script>
 	<script src="js/angular-input-masks-standalone.min.js"></script>
@@ -43,7 +48,11 @@
 <div class="loading ng-hide" ng-show="carregando">
 	<img class="loading-img" src="images/load.gif">
 </div>
-<script> var usuario = '<?php echo json_encode($usuario);?>';</script>
+<script> 
+	var usuario = '<?php echo json_encode($usuario);?>';
+	var carrinho = '<?php echo json_encode($carrinho);?>';
+	var qtd = '<?php echo $qtd;?>';
+</script>
 <header class="margin-top-0">
 	<div class="barra-topo">
 		<div class="text-homeimage text-center">
@@ -64,10 +73,10 @@
 					<i class="fa fa-bars"></i>
 					<span class="sr-only"></span>
 				</button>
-				<a class="navbar-brand brand" ng-show="usuario"> 
+				<a class="navbar-brand brand cursor-pointer" href="carrinho.php" ng-show="usuario"> 
 					<span class="carrinho">
 						<i class="fa fa-shopping-cart"></i>
-						<span class="qtd-carrinho">{{lista_carrinho.length}}</span>
+						<span class="qtd-carrinho">{{qtd_carrinho}}</span>
 					</span>
 					Bem vind{{usuario.sexo=='F'?'a':'o'}} {{usuario.nm_cadastro}}
 				</a>

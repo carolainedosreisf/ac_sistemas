@@ -12,7 +12,7 @@
         "ds_local" => $obj['ds_local'],
         "dt_evento" => formataData($obj['dt_evento'],1),
         "vl_venda" => $obj['vl_venda'],
-        "nr_classifi" => $obj['nr_classifi'],
+        "nr_classifi" => isset($obj['nr_classifi'])?$obj['nr_classifi']:null,
         "cd_tipoevento" => $obj['cd_tipoevento'],
     ];
 

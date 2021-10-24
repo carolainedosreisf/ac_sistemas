@@ -46,7 +46,7 @@
     <div class="row">
         
         <div class="col-sm-12">
-            <table class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered table-eventos">
                 <thead>
                     <tr>
                         <th width="5%" class="text-center">#</th>
@@ -66,7 +66,10 @@
                         <td class="text-center">
                             <img class="ft-evento-miniatura" src="../{{l.ft_caminho?l.ft_caminho:'arquivos/uploads_evento/sem-foto.jpg'}}" >
                         </td>
-                        <td>{{l.ds_evento}} - {{l.dt_evento_br}} ({{l.vl_venda | currency:'R$'}})</td>
+                        <td>{{l.ds_evento}} - {{l.dt_evento_br}} 
+                            (<span ng-class="l.cd_promocao>0?'vl-venda':''">{{l.vl_venda | currency:'R$'}}</span>
+                            <span ng-class="l.cd_promocao>0?'vl-promocao':''" ng-show="l.cd_promocao>0">{{l.vl_promocao | currency:'R$'}}</span>)
+                        </td>
                         <td>{{l.nome_tipo_evento}}</td>
                         <td class="text-center">{{l.nome_cidade}} ({{l.uf_cidade}})</td>
                         <td class="text-center">

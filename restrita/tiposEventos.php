@@ -71,7 +71,7 @@
             <div class="modal-body">
                 <form name="form_tipo_evento" novalidate>
                     <label for="ds_evento">Descrição:</label>
-                    <input type="text" name="ds_evento" autocomplete="of" class="form-control" maxlength="50" ng-model="cad.ds_evento" ng-required="true">
+                    <input type="text" name="ds_evento" autocomplete="off" class="form-control" maxlength="50" ng-model="cad.ds_evento" ng-required="true">
                 </form>
             </div>
             <div class="modal-footer">

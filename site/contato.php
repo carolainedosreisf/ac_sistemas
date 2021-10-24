@@ -1,5 +1,4 @@
 <?php include 'header.php' ?>
-<?php include 'capa.php' ?>
 
 <!-- CONTENT =============================-->
 <section class="item content" style="margin-top:50px;margin-bottom:50px;">

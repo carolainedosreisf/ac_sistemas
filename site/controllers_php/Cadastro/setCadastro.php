@@ -8,7 +8,7 @@
         "nm_cadastro" => $obj['nm_cadastro'],
         "dt_nascto" => formataData($obj['dt_nascto'],1),
         "sexo" => $obj['sexo'],
-        "co_complemento" => $obj['co_complemento'],
+        "co_complemento" => isset($obj['co_complemento'])?$obj['co_complemento']:null,
         "nr_endereco" => $obj['nr_endereco'],
         "ba_cadastro" => $obj['ba_cadastro'],
         "cd_cidade" => $obj['cd_cidade'],
@@ -17,9 +17,13 @@
         "nr_cpf" => $obj['nr_cpf'],
         "nr_rg" => $obj['nr_rg'],
         "ed_email" => $obj['ed_email'],
-        "nr_telefone" => $obj['nr_telefone'],
-        "nr_contato" => $obj['nr_contato']
+        "nr_telefone" => isset($obj['nr_telefone'])?$obj['nr_telefone']:null,
+        "nr_contato" => isset($obj['nr_contato'])?$obj['nr_contato']:null
     ];
+
+    // echo "<pre>";
+    // print_r($data_cadastro);
+    // exit;
 
     $insert_cadastro = montaInsert($data_cadastro,['cd_cidade']);
     $sql_cadastro = "INSERT INTO cadastro ({$insert_cadastro['colunas']}) VALUES ({$insert_cadastro['valores']})";

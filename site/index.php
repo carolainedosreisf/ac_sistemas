@@ -46,15 +46,25 @@
 									<a href="#" class="learn-more detailslearn"><i class="fa fa-link"></i> Ver Mais</a>
 								</p>
 							</div>
-							<span class="maxproduct card-evento" style="width: 100% !important"><img src="../{{l.ft_caminho?l.ft_caminho:'arquivos/uploads_eventos/sem-foto.jpg'}}" alt=""></span>
+							<span class="maxproduct card-evento" style="width: 100% !important"><img src="../{{l.ft_caminho?l.ft_caminho:'arquivos/uploads_evento/sem-foto.jpg'}}" alt=""></span>
 						</div>
 						<div class="product-details">
 							<a href="#">
-								<h1>{{l.dt_evento_br}}</h1>
+								<h1>
+									{{l.dt_evento_br}}
+									
+								</h1>
 							</a>
 							<span class="price">
 								<span class="edd_price">
-									<button class="main_bt" ng-click="setCarrinho(l)"><i class="fa fa-shopping-cart"></i> {{l.vl_venda | currency:'R$'}}</button>
+									<button class="main_bt eventos-button" ng-click="setCarrinho(l)">
+										<i class="fa fa-shopping-cart"></i> 
+										<span ng-class="l.cd_promocao>0?'vl-venda':''">
+											{{l.cd_promocao>0?('('+(l.vl_venda | currency:'R$')+')'):(l.vl_venda | currency:'R$')}}
+										</span>
+										<span ng-class="l.cd_promocao>0?'vl-promocao':''" ng-show="l.cd_promocao>0">&nbsp;&nbsp;{{l.vl_promocao | currency:'R$'}}</span>
+									</button>
+									<button class="main_bt" ng-click="openDetalhesEvento(l)"><i class="fa fa-search"></i>  </button>
 								</span>
 							</span>
 						</div>
@@ -73,6 +83,29 @@
 					boundary-links="true" 
 					pagination-id="pg_lancamentos">  
 				</dir-pagination-controls>  
+			</div>
+		</div>
+	</div>
+	
+	<div id="modalDetalhesEvento" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+				<button type="button" class="close fechar" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">{{objEvento.ds_evento}} ({{objEvento.nome_tipo_evento}})</h4>
+			</div>
+			<div class="modal-body">
+				<span><b>Local: </b>{{objEvento.ds_local}} - {{objEvento.nome_cidade}} ({{objEvento.uf_cidade}})</span><br>
+				<span><b>Classificação: </b>{{objEvento.nr_classifi?objEvento.nr_classifi+' anos':'Livre'}} </span><br>
+				<span><b>Data: </b>{{objEvento.dt_evento_br}}</span><br>
+				<span><b>Valor: </b>
+					<span ng-class="objEvento.cd_promocao>0?'vl-promocao':''" ng-show="objEvento.cd_promocao>0">{{objEvento.vl_promocao | currency:'R$'}}</span>
+					<span ng-class="objEvento.cd_promocao>0?'vl-venda':''">
+						{{objEvento.cd_promocao>0?('('+(objEvento.vl_venda | currency:'R$')+')'):(objEvento.vl_venda | currency:'R$')}}
+					</span>
+				</span><br>
 			</div>
 		</div>
 	</div>

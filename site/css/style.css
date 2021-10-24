@@ -883,3 +883,154 @@ button.main_bt {
 .card-evento img{
 	width: 100% !important;
 }
+
+.sweet-alert .confirm{
+	background-color: #282e40 !important;
+}
+
+.cursor-pointer{
+	cursor:pointer;
+}
+
+.body {
+    background: #eee;
+    padding:50px 0px;
+}
+
+.body .wow-hr-h i{
+	color:#444;
+}
+
+.panel-carrinho{
+	background: #fff;
+	padding: 10px;
+	border-radius: .25rem!important;
+}
+
+.panel-carrinho table{
+	width:100%;
+}
+.panel-carrinho .item .apagar{
+	font-size: 20px;
+	color:#a94442;
+}
+
+.panel-carrinho{
+	padding: 20px 30px!important;
+	box-shadow: 5px 5px 4px -1px rgb(0 0 0 / 8%);
+}
+
+.panel-carrinho .item{
+	box-shadow: 5px 5px 4px -1px rgb(0 0 0 / 8%);
+	border:1px solid #f1eded;
+	padding: 5px!important;
+	border-radius: .25rem!important;
+}
+
+.panel-carrinho .padding-item{
+	padding-top:8px;
+	padding-bottom:8px;
+}
+.panel-carrinho .item img{
+	width:60px;
+	border-radius: .25rem!important;
+}
+.panel-carrinho .item .informacoes{
+	padding-left: 15px;
+}
+.panel-carrinho .item .titulo-evento{
+	font-weight: bold;
+}
+
+.panel-carrinho .item .text{
+	display: block;
+	font-size:14px
+}
+
+
+.carrinho-acoes span{
+	border:1px solid #28a745;
+	color: #28a745;
+	padding:5px 9px;
+	width: 15px;
+}
+.carrinho-acoes span i{
+	font-size: 10px;
+}
+
+.carrinho-acoes .qtd{
+	background: #28a745;
+    color: white;
+}
+
+.btn-comprar{
+	background: #333;
+    color: #fff;
+    border: 1px solid #333;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+	width: 100%;
+	margin-top: 20px;
+	padding: 10px;
+}
+
+.alert {
+    position: relative;
+    padding: 15px;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+.alert-primary {
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+}
+
+.panel-carrinho .item .vl-venda{
+	text-decoration: line-through !important;
+    font-size: 13px !important;
+    color: #bbb7b7 !important;
+}
+.panel-carrinho .item .vl-promocao{
+	color: #333;
+}
+
+.eventos-button .vl-venda{
+	text-decoration: line-through !important;
+    font-size: 13px !important;
+}
+
+.eventos-button .vl-promocao{
+	font-weight: bold;
+}
+
+#modalDetalhesEvento .vl-venda{
+	text-decoration: line-through !important;
+    font-size: 13px !important;
+}
+
+#modalDetalhesEvento  .item .vl-promocao{
+	color: #333;
+}
+
+#modalDetalhesEvento .fechar{
+	font-size: 28px !important;;
+    opacity: 1 !important;;
+    color: #a94442 !important;;
+}
+
+#modalDetalhesEvento .modal-body{
+	margin-bottom:30px;
+}
+
+#modalDetalhesEvento .modal-header {
+    border-bottom: 1px solid #fff; 
+    text-align: center;
+    color: #333;
+}
+
+
+

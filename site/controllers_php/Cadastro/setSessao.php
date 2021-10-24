@@ -16,6 +16,7 @@
                 ,c.sexo
                 ,c.ed_email
                 ,l.nm_usuario
+                ,c.cd_cadastro
             FROM cadastro AS c
             INNER JOIN login AS l
             ON c.cd_cadastro = l.cd_cadastro

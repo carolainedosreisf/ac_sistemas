@@ -10,11 +10,14 @@
                 ,ds_evento
                 ,DATE_FORMAT(dt_evento, '%d/%m/%Y') AS dt_evento_br
                 ,cd_tipoevento
+                ,ifnull(cd_promocao,0) AS cd_promocao
                 ,(SELECT ds_evento FROM tipoevento AS c WHERE c.cd_tipoevento = e.cd_tipoevento) AS nome_tipo_evento
                 ,vl_venda
                 ,vl_promocao
                 ,IFNULL(sn_cancelado,'N') AS sn_cancelado
                 ,ft_caminho
+                ,ds_local
+                ,nr_classifi
             FROM evento AS e
             ORDER BY dt_evento DESC";
 

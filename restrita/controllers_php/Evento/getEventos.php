@@ -13,6 +13,7 @@
                 ,(SELECT ds_evento FROM tipoevento AS c WHERE c.cd_tipoevento = e.cd_tipoevento) AS nome_tipo_evento
                 ,vl_venda
                 ,vl_promocao
+                ,ifnull(cd_promocao,0) AS cd_promocao
                 ,IFNULL(sn_cancelado,'N') AS sn_cancelado
                 ,ft_caminho
             FROM evento AS e
