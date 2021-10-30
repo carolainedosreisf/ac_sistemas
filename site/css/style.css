@@ -640,7 +640,7 @@ ul,ol {
 .footer a {
 	color:#00bba7;
 }
-#contactform input,#contactform textarea,#contactform select,#contactform button {
+#contactform input,#contactform textarea,#contactform select {
 	border:0px;
 	border:1px solid #eee;
 	width:100%;
@@ -720,14 +720,6 @@ button.main_bt {
 
 #contactform input, #contactform textarea, #contactform select{
 	border: 1px solid #ccc;
-}
-.painel{
-	border: 1px solid #ccc;
-    margin-bottom: 20px;
-	border-radius: 4px;
-}
-.painel .corpo-painel{
-    padding: 15px;
 }
 
 .painel .titulo-painel{
@@ -832,7 +824,7 @@ button.main_bt {
     border-radius: 4px;
 }
 
-.has-error input, .has-error select{
+.has-error input, .has-error select, .has-error textarea{
 	border: 1px solid #b94a48 !important;
 }
 
@@ -929,7 +921,7 @@ button.main_bt {
 	padding-bottom:8px;
 }
 .panel-carrinho .item img{
-	width:60px;
+	width:80px;
 	border-radius: .25rem!important;
 }
 .panel-carrinho .item .informacoes{
@@ -963,16 +955,15 @@ button.main_bt {
     color: white;
 }
 
-.btn-comprar{
+.btn-large-black{
 	background: #333;
     color: #fff;
-    border: 1px solid #333;
+    border: 1px solid #333 ;
     font-size: 16px;
-    font-weight: 700;
-    text-transform: uppercase;
-	width: 100%;
-	margin-top: 20px;
-	padding: 10px;
+    font-weight: 700 ;
+    text-transform: uppercase ;
+	width: 100% ;
+	padding: 10px ;
 }
 
 .alert {
@@ -1046,5 +1037,35 @@ button.main_bt {
     border-right-color: #777;
 }
 
+.total-compra span{
+	text-align: right;
+	font-size: 20px;
+	color: #282e40;
+}
+
+.painel {
+    margin-bottom: 20px;
+    border-radius: 4px;
+    box-shadow: 5px 5px 4px -1px rgb(0 0 0 / 15%);
+    border: 1px solid #f1eded;
+    border-radius: 0.25rem!important;
+}
+.painel .corpo-painel{
+    padding: 15px;
+}
+.painel .titulo-painel {
+    border-bottom: 1px solid #ccc;
+    background-color: #333;
+    padding: 15px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 22px;
+    color: #DCDCDC;
+    font-weight: bold;
+}
+
+.margin-20{
+	margin-top:20px;
+}
 
 

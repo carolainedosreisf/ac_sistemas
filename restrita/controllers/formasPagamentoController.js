@@ -16,7 +16,7 @@ app.controller('formasPagamentoController', ['$scope', '$http','$filter', functi
             url: 'controllers_php/FormasPagamento/getFormasPagamento.php',
             method: 'GET'
         }).then(function (retorno) {
-            $scope.lista_tipos_eventos = retorno.data;
+            $scope.lista_formas_pagamento = retorno.data;
             $scope.carregando = false;
         },
         function (retorno) {

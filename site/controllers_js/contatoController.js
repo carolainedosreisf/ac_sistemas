@@ -19,6 +19,9 @@ app.controller('contatoController', ['$scope', '$http','$filter','$timeout','$lo
             function (retorno) {
                 console.log('Error: '+retorno.status);
             });
+        }else{
+            $location.hash("mensagens");
+            $anchorScroll();
         }
     }
 }]);

@@ -36,8 +36,9 @@ if(!(isset($_SESSION['usuario']))){
                             <td width="60%">
                                 <div class="informacoes">
                                     <span class="titulo-evento">{{l.ds_evento}} ({{l.nome_tipo_evento}})</span>
-                                    <span class="text">Local: {{l.ds_local}} / {{l.nome_cidade}} ({{l.uf_cidade}})</span>
-                                    <span class="text">Data: {{l.dt_evento_br}} {{l.hr_evento}}</span>
+                                    <span class="text"><b>Valor Unitário: </b>{{(l.cd_promocao>0?l.vl_promocao:l.vl_venda) | currency:'R$'}}</span>
+                                    <span class="text"><b>Local: </b>{{l.ds_local}} / {{l.nome_cidade}} ({{l.uf_cidade}})</span>
+                                    <span class="text"><b>Data: </b>{{l.dt_evento_br}} {{l.hr_evento}}</span>
                                 </div>
                             </td>
                             <td class="text-center">
@@ -60,8 +61,8 @@ if(!(isset($_SESSION['usuario']))){
                     </table>
                 </div>
             </div><br>
-            <div class="col-md-4 col-lg-offset-4">
-                <button class="btn-comprar">
+            <div class="col-md-4 col-lg-offset-4 margin-20">
+                <button class="btn-large-black" ng-click="setToken()">
                     Comprar {{valor_carrinho | currency:'R$'}}
                 </button>
             </div>

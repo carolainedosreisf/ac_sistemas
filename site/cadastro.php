@@ -1,4 +1,10 @@
-<?php $controller = "cadastroController";?>
+<?php 
+    session_start();
+    if(isset($_SESSION['usuario'])){
+        //header('Location: index.php');
+    }
+    $controller = "cadastroController";
+?>
 
 <?php include 'header.php' ?>
 
@@ -157,7 +163,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" id="submit" class="clearfix btn">Cadastrar</button>
+                        <button type="submit" class="btn-large-black">Cadastrar</button>
                     </div>
                 </form>
             </div>

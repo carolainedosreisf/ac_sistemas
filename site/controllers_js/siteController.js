@@ -1,5 +1,5 @@
 var app = angular.module('app', ['ngSanitize','idf.br-filters','ui.utils.masks','ui.mask','angularUtils.directives.dirPagination']);
-app.controller('siteController', ['$scope', '$http','$filter', function($scope,$http,$filter) {
+app.controller('siteController', ['$scope', '$http','$filter','$location','$anchorScroll', function($scope,$http,$filter,$location,$anchorScroll) {
     $scope.lista_lancamentos = [1,2,3,4,5,6];
     $scope.usuario = JSON.parse(usuario);
     $scope.lista_carrinho = JSON.parse(carrinho);
@@ -7,7 +7,10 @@ app.controller('siteController', ['$scope', '$http','$filter', function($scope,$
     $scope.valor_carrinho = valor;
     $scope.lista_cidades = [];
     $scope.lista_tipos_eventos = [];
+    $scope.lista_formas_pagamento = [];
+    $scope.parcelas = [];
     $scope.contato = {};
+    $scope.cad_compra = {};
 
     $scope.filtros = {
         nome_cidade:'',
@@ -140,16 +143,104 @@ app.controller('siteController', ['$scope', '$http','$filter', function($scope,$
         }
     }
 
-    var array_column_search = function(lista,coluna,id,tipo=1){
-        if(tipo==1){
-            var index = lista.map(e => e[coluna]).indexOf(id);
-            return index>=0?1:0;
-        }else{
-            return lista.map(e => e[coluna]).filter(x => x === id).length
+    $scope.getFormasPagamento = function(){
+        $scope.carregando = true;
+        $http({
+            url: 'controllers_php/FormasPagamento/getFormasPagamento.php',
+            method: 'GET',
+            params:{valor_min:$scope.valor_carrinho}
+        }).then(function (retorno) {
+            $scope.lista_formas_pagamento = retorno.data;
+            $scope.carregando = false;
+        },
+        function (retorno) {
+            console.log('Error: '+retorno.status);
+        });
+    }
+
+    $scope.setToken = function(apaga=0){
+        $http({
+            url: 'controllers_php/Compra/setToken.php',
+            method: 'GET',
+            params: {apaga}
+        }).then(function (retorno) {
+            if(apaga==0){
+                window.location = "compra.php?t="+retorno.data
+            }else{
+                window.location = "minhasCompras.php";
+            }
+        },
+        function (retorno) {
+            console.log('Error: '+retorno.status);
+        });
+        
+    }
+
+    $scope.calculaParcelas = function(){
+        $scope.objFormaPagamento = array_column_search($scope.lista_formas_pagamento,'cd_fpagto',$scope.cad_compra.cd_fpagto);
+        $http({
+            url: 'controllers_php/FormasPagamento/calculaParcelas.php',
+            method: 'GET',
+            params:{
+                qtd:$scope.objFormaPagamento.qt_parcela,
+                valor:$scope.valor_carrinho
+            }
+        }).then(function (retorno) {
+            $scope.parcelas = retorno.data;
+        },
+        function (retorno) {
+            console.log('Error: '+retorno.status);
+        });
+        
+    }
+
+    $scope.setCompra = function(){
+        
+        if($scope.form_compra.$valid){
+            swal({
+                title: "",
+                text: "Deseja realmente finalizar sua compra?",
+                type: "warning",
+                showCancelButton: true,
+                cancelButtonClass: "btn-danger",
+                confirmButtonClass: "btn-success",
+                confirmButtonText: "Sim",
+                cancelButtonText: "Não"
+              },
+              function(){
+                var data = {
+                    usuario:$scope.usuario,
+                    carrinho:$scope.lista_carrinho,
+                    total:$scope.valor_carrinho,
+                    data:$scope.cad_compra
+                }
+                $http({
+                    url: 'controllers_php/Compra/setCompra.php',
+                    method: 'POST',
+                    data: data
+                }).then(function (retorno) {
+                    if(retorno.data==1){
+                        $scope.setToken(1);
+                    }
+                },
+                function (retorno) {
+                    console.log('Error: '+retorno.status);
+                });
+              });
         }
+    }
+
+    var array_column_search = function(lista,coluna,id){
+        var index = lista.map(e => e[coluna]).indexOf(id);
+        return lista[index];
     }
 
     $scope.getEventos();
     $scope.getCidades();
     $scope.getTiposEventos();
+
+    if(pagina=='CARRINHO'){
+        $scope.getFormasPagamento();
+    }
+    
 }]);

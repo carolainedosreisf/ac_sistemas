@@ -1,4 +1,10 @@
-<?php $controller = "cadastroController";?>
+<?php 
+    session_start();
+    if(isset($_SESSION['usuario'])){
+        header('Location: index.php');
+    }
+    $controller = "cadastroController";
+?>
 <?php include 'header.php' ?>
     <script>var cadastro = 0;</script>
     <div class="limiter">

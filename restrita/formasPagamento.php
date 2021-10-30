@@ -38,10 +38,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-show="(lista_tipos_eventos | filter:filtrar ).length <=0">
+                    <tr ng-show="(lista_formas_pagamento | filter:filtrar ).length <=0">
                         <td class="text-center" colspan="5">Nenhum resgistro encontrado.</td>
                     </tr>
-                    <tr pagination-id="pg_formas_pagamento" dir-paginate="l in lista_tipos_eventos| filter:filtrar | itemsPerPage:20">
+                    <tr pagination-id="pg_formas_pagamento" dir-paginate="l in lista_formas_pagamento| filter:filtrar | itemsPerPage:20">
                         <td class="text-center">{{l.cd_fpagto}}</td>
                         <td>{{l.ds_fpagto}}</td>
                         <td class="text-center">{{l.qt_parcela}}</td>

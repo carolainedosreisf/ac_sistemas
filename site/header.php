@@ -1,5 +1,7 @@
 <?php
-	session_start();
+	if(!isset($_SESSION)){ 
+        session_start(); 
+    }
 	if(isset($_SESSION['usuario'])){
 		if(strtotime(date("Y-m-d H:i:s")) >= $_SESSION['usuario']['tempo_inatividade']){
 			session_destroy();
@@ -63,6 +65,7 @@
 	var carrinho = '<?php echo json_encode($carrinho);?>';
 	var qtd = '<?php echo $qtd;?>';
 	var valor = '<?php echo $valor;?>';
+	var pagina = "";
 </script>
 <header class="margin-top-0">
 	<div class="barra-topo">
