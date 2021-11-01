@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 18-Out-2021 às 02:00
+-- Tempo de geração: 31-Out-2021 às 17:00
 -- Versão do servidor: 5.7.31
 -- versão do PHP: 7.3.21
 
@@ -48,17 +48,24 @@ CREATE TABLE IF NOT EXISTS `cadastro` (
   UNIQUE KEY `nr_rg_unique` (`nr_rg`),
   UNIQUE KEY `nr_cpf_unique` (`nr_cpf`),
   KEY `fk102_idx` (`cd_cidade`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `cadastro`
 --
 
 INSERT INTO `cadastro` (`cd_cadastro`, `nm_cadastro`, `dt_nascto`, `sexo`, `co_complemento`, `nr_endereco`, `ba_cadastro`, `cd_cidade`, `ed_cadastro`, `nr_cep`, `nr_cpf`, `nr_rg`, `ed_email`, `nr_telefone`, `nr_contato`) VALUES
-(1, 'JoÃ£o da Silva', '1990-05-11', 'M', NULL, '111', 'bairro teste', 70, 'teste endereco', '88810563', '88072590014', '55555554', 'teste@gmail.com', NULL, NULL),
-(2, 'JoÃ£o da Silva', '1997-08-10', 'M', NULL, '111', 'bairro teste', 70, 'teste endereco', '88810563', '10842255907', '55555g54', 'teste@gmail2.com', NULL, NULL),
-(3, 'JoÃ£o da Silva', '2021-11-05', 'M', NULL, '111', 'bairro teste', 70, 'teste endereco', '88810563', '431.298.700-91', '55555c54', 'teste@gmail22.com', NULL, NULL),
-(4, 'JoÃ£o da Silva', '2021-10-22', 'M', NULL, '111', 'bairro teste', 70, 'teste endereco', '88810563', '14838921071', '55555c52', 'teste@gmail222.com', NULL, NULL);
+(1, 'Vitor Souza', '1990-05-11', 'M', NULL, '111', 'bairro teste', 70, 'teste endereco', '88810563', '88072590014', '55555554', 'vitorsouza@gmail.com', NULL, NULL),
+(2, 'Maria Augusta', '1997-08-10', 'F', NULL, '111', 'bairro teste', 70, 'teste endereco', '88810563', '10842255907', '55555g54', 'mariaaugusta@gmail.com', NULL, NULL),
+(3, 'Alfredo Neves', '2021-11-05', 'M', NULL, '111', 'bairro teste', 70, 'teste endereco', '88810563', '431.298.700-91', '55555c54', 'alfredoneves@gmail.com', NULL, NULL),
+(4, 'Ricardo da Silva', '2021-10-22', 'M', NULL, '111', 'bairro teste', 70, 'teste endereco', '88810563', '14838921071', '55555c52', 'ricardosilva@gmail.com', NULL, NULL),
+(5, 'Patricia Lemos', '2021-10-21', 'F', NULL, 'sdd', 'dsasda', 4, 'asdfdfdf', '88815320', '02778306056', '027.783.0', 'patricialemos@gmail.com', NULL, NULL),
+(6, 'Jose antonio', '1997-06-11', 'M', NULL, '275', 'bairro teste', 10, 'endereÃ§o teste', '88818300', '70650449045', '42.062.11', 'joseantonio@gmail.com', NULL, NULL),
+(7, 'Pedro Paulo', '1990-11-05', 'M', NULL, '111', 'bairro teste', 70, 'teste endereco', '88810563', '43129870091', '55555c544', 'pedropaulo@gmail.com', NULL, NULL),
+(8, 'Vitoria Reis', '2021-10-22', 'F', NULL, '275', 'hfhhfg', 5, 'sdfsdfd', '72450160', '55252444030', '22.278.40', 'vitoriareis@gmail.com', NULL, NULL),
+(9, 'Maria Eduarda', '2021-10-22', 'F', NULL, '344', 'sdfsdf', 6, 'fsdfsdf', '74391291', '45200316057', '21.322.60', 'mariaeduarda@gmail.com', NULL, NULL),
+(10, 'Ana Paula Souza', '2021-10-07', 'F', NULL, 'fggd', 'dgdfg', 5, 'dgfdgf', '59090615', '30627636047', 'gdfgdfg', 'anapaulasouza@gmail.com', NULL, NULL),
+(11, 'AdmnistraÃ§Ã£o Blablabla', '1990-07-14', 'M', NULL, '000', 'Centro', 70, 'teste', '88818120', '34173818009', '23.884.92', 'admblablabla@gmail.com', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -379,12 +386,16 @@ CREATE TABLE IF NOT EXISTS `compra` (
   `cd_cadastro` int(11) NOT NULL,
   `cd_compra` int(11) NOT NULL AUTO_INCREMENT,
   `cd_fpagto` int(11) NOT NULL,
-  `dt_compra` date NOT NULL,
+  `dt_compra` timestamp NOT NULL,
   `vl_total` decimal(18,2) DEFAULT NULL,
   PRIMARY KEY (`cd_compra`),
   KEY `fk103_idx` (`cd_cadastro`),
   KEY `fk203` (`cd_fpagto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `compra`
+--
 
 -- --------------------------------------------------------
 
@@ -446,24 +457,26 @@ CREATE TABLE IF NOT EXISTS `evento` (
   `vl_promocao` decimal(18,2) DEFAULT NULL,
   `nr_classifi` int(11) DEFAULT NULL,
   `cd_tipoevento` int(11) NOT NULL,
+  `hr_evento` time NOT NULL,
   PRIMARY KEY (`cd_evento`),
   KEY `fk104_idx` (`cd_cidade`),
   KEY `fk204_idx` (`cd_promocao`),
   KEY `fk304_idx` (`cd_tipoevento`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `evento`
 --
 
-INSERT INTO `evento` (`cd_evento`, `cd_cidade`, `cd_promocao`, `ds_evento`, `ds_local`, `dt_evento`, `ft_caminho`, `ft_evento`, `sn_cancelado`, `vl_venda`, `vl_promocao`, `nr_classifi`, `cd_tipoevento`) VALUES
-(1, 70, NULL, 'Show Gusttavo Lima', 'Ginasio', '2021-10-14', 'arquivos/uploads_evento/7300544974257000202110180130.jpg', NULL, NULL, '90.00', NULL, NULL, 4),
-(2, 61, NULL, 'Show Ivete Sangalo', 'Ginasio', '2022-03-21', 'arquivos/uploads_evento/1089548478331145980202110180119.png', NULL, NULL, '100.00', NULL, 10, 4),
-(3, 70, NULL, 'Palestra motivacional', 'Ginasio 2', '2022-03-21', 'arquivos/uploads_evento/1157140418406253351202110180120.jpg', NULL, NULL, '25.00', NULL, 14, 5),
-(4, 72, 3, 'Evento de incentivo a leitura', 'Ginasio', '2022-03-25', 'arquivos/uploads_evento/652928826570819300202110180119.jpg', NULL, NULL, '50.00', '20.00', NULL, 3),
-(5, 69, 3, 'Curso bÃ¡sico de programaÃ§Ã£o web', 'Ginasio', '2022-03-16', 'arquivos/uploads_evento/435655679279669125202110180122.png', NULL, NULL, '70.00', '20.00', NULL, 1),
-(6, 1, NULL, 'Curso de mÃ¡gica', 'Ginasio', '2021-11-06', 'arquivos/uploads_evento/52839379419850508202110180130.jpg', NULL, NULL, '30.00', NULL, NULL, 3),
-(7, 3, NULL, 'Show Wesley safadÃ£o', 'Ginasio', '2022-01-29', 'arquivos/uploads_evento/863015299628290534202110180123.jpg', NULL, NULL, '80.00', NULL, NULL, 4);
+INSERT INTO `evento` (`cd_evento`, `cd_cidade`, `cd_promocao`, `ds_evento`, `ds_local`, `dt_evento`, `ft_caminho`, `ft_evento`, `sn_cancelado`, `vl_venda`, `vl_promocao`, `nr_classifi`, `cd_tipoevento`, `hr_evento`) VALUES
+(1, 70, NULL, 'Show Gusttavo Lima', 'Ginasio', '2021-10-14', 'arquivos/uploads_evento/225962606625243596202110192345.jpg', NULL, NULL, '90.00', NULL, NULL, 4, '22:00:00'),
+(2, 61, NULL, 'Show Ivete Sangalo', 'Ginasio', '2022-03-21', 'arquivos/uploads_evento/1089548478331145980202110180119.png', NULL, NULL, '100.00', NULL, 10, 4, '13:00:00'),
+(3, 70, NULL, 'Palestra motivacional', 'Ginasio 2', '2022-03-21', 'arquivos/uploads_evento/1157140418406253351202110180120.jpg', NULL, NULL, '25.00', NULL, 14, 5, '20:00:00'),
+(4, 72, 3, 'Evento de incentivo a leitura', 'Ginasio', '2022-03-25', NULL, NULL, NULL, '50.00', '20.00', NULL, 3, '12:00:00'),
+(5, 69, 3, 'Curso bÃ¡sico de programaÃ§Ã£o web', 'Ginasio', '2022-03-16', 'arquivos/uploads_evento/435655679279669125202110180122.png', NULL, NULL, '70.00', '20.00', NULL, 1, '08:00:00'),
+(6, 1, NULL, 'Curso de mÃ¡gica', 'Ginasio', '2021-11-06', 'arquivos/uploads_evento/52839379419850508202110180130.jpg', NULL, NULL, '30.00', NULL, NULL, 3, '15:00:00'),
+(7, 3, NULL, 'Show Wesley safadÃ£o', 'Ginasio', '2022-01-29', 'arquivos/uploads_evento/863015299628290534202110180123.jpg', NULL, NULL, '80.00', NULL, NULL, 4, '19:00:00'),
+(11, 37, 3, 'evento de teste', 'local teste', '2021-12-22', NULL, NULL, NULL, '100.00', '20.00', 10, 5, '14:00:00');
 
 -- --------------------------------------------------------
 
@@ -478,7 +491,16 @@ CREATE TABLE IF NOT EXISTS `fpagamento` (
   `qt_parcela` int(11) DEFAULT NULL,
   `vl_min` decimal(18,2) DEFAULT NULL,
   PRIMARY KEY (`cd_fpagto`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `fpagamento`
+--
+
+INSERT INTO `fpagamento` (`cd_fpagto`, `ds_fpagto`, `qt_parcela`, `vl_min`) VALUES
+(1, '3x no cartÃ£o de crÃ©dito', 3, '150.00'),
+(2, '2x no cartÃ£o de crÃ©dito', 2, '100.00'),
+(3, 'Avista', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -511,7 +533,20 @@ CREATE TABLE IF NOT EXISTS `ingresso` (
   `vl_venda` decimal(18,2) NOT NULL,
   PRIMARY KEY (`cd_ingresso`,`cd_evento`),
   KEY `fk105_idx` (`cd_evento`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `ingresso`
+--
+
+INSERT INTO `ingresso` (`cd_ingresso`, `ds_ingresso`, `cd_evento`, `dt_prazoini`, `dt_prazofim`, `nr_lote`, `vl_venda`) VALUES
+(1, 'Ingresso do Evento: Evento de incentivo a leitura', 4, NULL, NULL, '2915b939c5a6440d2358', '20.00'),
+(2, 'Ingresso do Evento: Show Ivete Sangalo', 2, NULL, NULL, '7cd3d83f4178a598930e', '100.00'),
+(3, 'Ingresso do Evento: Palestra motivacional', 3, NULL, NULL, '5db996a8b3612fb5f5f9', '25.00'),
+(4, 'Ingresso do Evento: Show Wesley safadÃ£o', 7, NULL, NULL, '45cdf1d7b48a1fa85cca', '80.00'),
+(5, 'Ingresso do Evento: evento de teste', 11, NULL, NULL, 'c961836aba9ffeea2fd5', '20.00'),
+(6, 'Ingresso do Evento: Curso de mÃ¡gica', 6, NULL, NULL, '27285be7d824413227bd', '30.00'),
+(7, 'Ingresso do Evento: Show Gusttavo Lima', 1, NULL, NULL, '535be723be7555321b0e', '90.00');
 
 -- --------------------------------------------------------
 
@@ -528,17 +563,24 @@ CREATE TABLE IF NOT EXISTS `login` (
   UNIQUE KEY `nm_usuario_unique` (`nm_usuario`),
   UNIQUE KEY `cd_cadastro_unique` (`cd_cadastro`),
   KEY `fk207_idx` (`cd_permissao`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `login`
 --
 
 INSERT INTO `login` (`cd_cadastro`, `nm_usuario`, `senha`, `cd_permissao`) VALUES
-(1, 'testÃ£o.silva', '789157c0a65bb78e56c4773ce503180f', 2),
-(2, 'testÃ£o.silva2', '789157c0a65bb78e56c4773ce503180f', 2),
-(3, 'testÃ£o.silva22', '789157c0a65bb78e56c4773ce503180f', 2),
-(4, 'testÃ£o.silva222', '789157c0a65bb78e56c4773ce503180f', 2);
+(11, 'adm.blablabla', '25d55ad283aa400af464c76d713c07ad', 1),
+(3, 'alfredo.neves', '25d55ad283aa400af464c76d713c07ad', 2),
+(10, 'ana.paula.souza', '25d55ad283aa400af464c76d713c07ad', 2),
+(6, 'jose.antonio', '25d55ad283aa400af464c76d713c07ad', 2),
+(2, 'maria.augusta', '25d55ad283aa400af464c76d713c07ad', 2),
+(9, 'maria.eduarda', '25d55ad283aa400af464c76d713c07ad', 2),
+(5, 'patricia.lemos', '25d55ad283aa400af464c76d713c07ad', 2),
+(7, 'pedro.paulo', '25d55ad283aa400af464c76d713c07ad', 2),
+(4, 'ricardo.silva', '25d55ad283aa400af464c76d713c07ad', 2),
+(1, 'vitor.souza', '25d55ad283aa400af464c76d713c07ad', 2),
+(8, 'vitoria.reis', '25d55ad283aa400af464c76d713c07ad', 2);
 
 -- --------------------------------------------------------
 
@@ -583,7 +625,7 @@ CREATE TABLE IF NOT EXISTS `promocao` (
 
 INSERT INTO `promocao` (`cd_promossao`, `ds_promossao`, `vl_promossao`, `dt_prazoini`, `dt_prazofim`) VALUES
 (1, 'Idoso 80+', '15.00', NULL, NULL),
-(2, 'CrianÃ§a 2021, crianÃ§a atÃ© 13 anos', '10.00', '2021-10-01', '2021-10-30'),
+(2, 'CrianÃ§a 2021, crianÃ§a atÃ© 13 anos', '15.00', '2021-10-01', '2021-10-31'),
 (3, 'Estudante 2022', '20.00', '2022-01-02', '2022-12-31');
 
 -- --------------------------------------------------------
@@ -597,7 +639,7 @@ CREATE TABLE IF NOT EXISTS `tipoevento` (
   `cd_tipoevento` int(11) NOT NULL AUTO_INCREMENT,
   `ds_evento` varchar(50) NOT NULL,
   PRIMARY KEY (`cd_tipoevento`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `tipoevento`
@@ -608,7 +650,9 @@ INSERT INTO `tipoevento` (`cd_tipoevento`, `ds_evento`) VALUES
 (2, 'Evento Escolar'),
 (3, 'Evento Infantil'),
 (4, 'Show'),
-(5, 'Palestra');
+(5, 'Palestra'),
+(6, 'Gospel'),
+(7, 'teste');
 
 --
 -- Restrições para despejos de tabelas
@@ -671,6 +715,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-ALTER TABLE evento
-ADD hr_evento time NOT NULL;

@@ -1,6 +1,6 @@
 var app = angular.module('app', ['ngSanitize','idf.br-filters','ui.utils.masks','ui.mask','angularUtils.directives.dirPagination']);
-app.controller('siteController', ['$scope', '$http','$filter','$location','$anchorScroll', function($scope,$http,$filter,$location,$anchorScroll) {
-    $scope.lista_lancamentos = [1,2,3,4,5,6];
+app.controller('siteController', ['$scope', '$http','$filter','$location','$anchorScroll','$timeout', function($scope,$http,$filter,$location,$anchorScroll,$timeout) {
+    $scope.lista_lancamentos = [];
     $scope.usuario = JSON.parse(usuario);
     $scope.lista_carrinho = JSON.parse(carrinho);
     $scope.qtd_carrinho = qtd;
@@ -23,6 +23,14 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
             method: 'GET',
         }).then(function (retorno) {
             $scope.lista_lancamentos = retorno.data;
+            if($scope.lista_lancamentos.length >0){
+                setTimeout(() => {
+                    var img = document.getElementById('evento-id-0'); 
+                    var img_esgotado = document.querySelector('.imagem-esgotado'); 
+                    $scope.top_esgotado = parseInt(((img.clientHeight>300?300:img.clientHeight) - img_esgotado.clientHeight)/2);
+                }, 500);
+            }
+            
         },
         function (retorno) {
             console.log('Error: '+retorno.status);
@@ -219,6 +227,7 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
                     method: 'POST',
                     data: data
                 }).then(function (retorno) {
+                    $scope.error = retorno.data;
                     if(retorno.data==1){
                         $scope.setToken(1);
                     }
@@ -230,17 +239,35 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
         }
     }
 
+    $scope.verificaItens = function(){
+        
+        $scope.lista_carrinho.forEach(e => {
+            var strData = e.dt_evento_br;
+            var partesData = strData.split("/");
+            var data = new Date(partesData[2], partesData[1] - 1, partesData[0]);
+            if(data <= new Date() || e.lotado==1){
+                $scope.erro = 1
+            }
+            
+        });
+    }
+
     var array_column_search = function(lista,coluna,id){
         var index = lista.map(e => e[coluna]).indexOf(id);
         return lista[index];
     }
 
-    $scope.getEventos();
     $scope.getCidades();
     $scope.getTiposEventos();
 
-    if(pagina=='CARRINHO'){
+    if(pagina=='COMPRA'){
         $scope.getFormasPagamento();
+        $scope.verificaItens();
     }
+
+    if(pagina=='HOME'){
+        $scope.getEventos();
+    }
+
     
 }]);

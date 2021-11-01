@@ -19,7 +19,14 @@
     <h2>Promoções</h2><br>
 
     <div class="row form-group">
-        <div class="col-sm-8"></div>
+        <div class="col-sm-5"></div>
+        <div class="col-sm-3">
+            <select name="status" id="status" class="form-control" ng-model="filtro_status">
+                <option value="">Todas</option>
+                <option value="A">Ativas</option>
+                <option value="I">Inativas</option>
+            </select>
+        </div>
         <div class="col-sm-4">
             <input type="text" class="form-control" placeholder="Pesquisar..." ng-model="filtrar">
         </div>
@@ -34,18 +41,20 @@
                         <th>Promoção</th>
                         <th width="8%" class="text-center">Dt. Início</th>
                         <th width="8%" class="text-center">Dt. Fim</th>
+                        <th width="8%" class="text-center">Status</th>
                         <th width="5%" class="text-center">Editar</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-show="(lista_promocoes | filter:filtrar ).length <=0">
+                    <tr ng-show="(lista_promocoes | filter:filtrar | filter:{status:filtro_status} ).length <=0">
                         <td class="text-center" colspan="4">Nenhum resgistro encontrado.</td>
                     </tr>
-                    <tr pagination-id="pg_promocoes" dir-paginate="l in lista_promocoes| filter:filtrar | itemsPerPage:20">
+                    <tr pagination-id="pg_promocoes" dir-paginate="l in lista_promocoes| filter:filtrar | filter:{status:filtro_status} | itemsPerPage:20">
                         <td class="text-center">{{l.cd_promossao}}</td>
                         <td>{{l.ds_promossao}} ({{l.vl_promossao | currency:'R$'}})</td>
                         <td class="text-center">{{l.dt_prazoini}}</td>
                         <td class="text-center">{{l.dt_prazofim}}</td>
+                        <td class="text-center">{{l.status=='A'?'Ativa':'Inativa'}}</td>
                         <td class="text-center">
                             <button ng-click="openModalCad(l)" class="btn btn-primary btn-sm">
                                 <i class="glyphicon glyphicon-pencil"></i>

@@ -23,7 +23,7 @@ if(!(isset($_SESSION['usuario']))){
             Nenhum item adicionado ao carrinho ainda!
         </div>
         
-        <div class="container panel-carrinho" ng-show="lista_carrinho.length >0">
+        <div class="container panel-white" ng-show="lista_carrinho.length >0">
             <div class="col-sm-12">
                 <p><b>Total de itens: {{qtd_carrinho}}</b></p>
             </div>

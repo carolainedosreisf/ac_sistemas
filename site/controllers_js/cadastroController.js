@@ -26,7 +26,7 @@ app.controller('cadastroController', ['$scope', '$http','$filter','$timeout','$l
 
     $scope.setCadastro = function(){ 
         $scope.mensagem = "";
-        if($scope.form_cadastro.$valid && $scope.cad.senha == $scope.cad.confirm_senha){
+        if($scope.form_cadastro.$valid && $scope.cad.senha == $scope.cad.confirm_senha && $scope.erro_idade==0){
             $scope.carregando = true;
             $scope.cadastro = 1;
             $http({
@@ -107,6 +107,31 @@ app.controller('cadastroController', ['$scope', '$http','$filter','$timeout','$l
                 console.log('Error: '+retorno.status);
             });
         }
+    }
+
+    $scope.calculaIdade = function(){ 
+        var dataNasc = $scope.cad.dt_nascto;
+        var dataAtual = new Date();
+        var anoAtual = dataAtual.getFullYear();
+        var anoNascParts = dataNasc.split('/');
+        var diaNasc = anoNascParts[0];
+        var mesNasc = anoNascParts[1];
+        var anoNasc = anoNascParts[2];
+        var idade = anoAtual - anoNasc;
+        var mesAtual = dataAtual.getMonth() + 1; 
+        //Se mes atual for menor que o nascimento, nao fez aniversario ainda;  
+        if(mesAtual < mesNasc){
+            idade--; 
+        } else {
+            //Se estiver no mes do nascimento, verificar o dia
+            if(mesAtual == mesNasc){ 
+                if(new Date().getDate() < diaNasc ){ 
+                //Se a data atual for menor que o dia de nascimento ele ainda nao fez aniversario
+                    idade--; 
+                }
+            }
+        } 
+        $scope.erro_idade = idade <18?1:0;
     }
 
     if(cadastro==1){

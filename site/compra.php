@@ -20,7 +20,7 @@
 
 ?>
 <script>
-    var pagina = "CARRINHO";
+    var pagina = "COMPRA";
 </script>
 <section class="body">
     <div class="container" style="margin-top:50px;margin-bottom:50px;">
@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div class="container panel-carrinho">
+        <div class="container panel-white">
             <form name="form_compra" id="form_compra" novalidate ng-submit="setCompra()">
                 <div class="painel">
                     <div class="titulo-painel text-left">
@@ -122,6 +122,13 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row form-group" ng-show="error == 2">
+                            <div class="col-sm-12">
+                                <div class="alert alert-danger" role="alert">
+                                    Existem um ou mais itens da sua compra esgotados!
+                                </div>
+                            </div>
+                        </div>
                         <div class="row form-group">
                             <div class="col-sm-6" ng-class="form_compra.cd_fpagto.$invalid && (form_compra.$submitted || form_compra.cd_fpagto.$dirty)?'has-error':''">
                                 <label for="cd_fpagto">Forma de pagamento:</label>
@@ -159,7 +166,7 @@
             </form>
 
             <div class="col-md-4 col-lg-offset-4">
-                <button class="btn-large-black" form="form_compra">
+                <button class="btn-large-black" form="form_compra" ng-disabled="error == 2" ng-class="error == 2?'botao-disabled':''">
                     FINALIZAR COMPRA 
                 </button>
             </div>

@@ -4,6 +4,8 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
     $scope.lista_eventos = [];
     $scope.lista_promocoes = [];
     $scope.filtro_status = "N";
+    $scope.erro_promocao = 0;
+
     $scope.cad = {
         // ds_evento:"Evento de incentivo a leitura",
         // dt_evento:"21/03/2022",
@@ -90,7 +92,7 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
     }
 
     $scope.setEvento = function(){
-        if($scope.form_evento.$valid && !($scope.erro_hora)){
+        if($scope.form_evento.$valid && !($scope.erro_hora) && $scope.erro_promocao==0){
             var form_data = new FormData();  
             angular.forEach($scope.files, function(file){  
                 form_data.append('file', file);  
@@ -128,8 +130,12 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
         }
     }
     $scope.setCampoPromocao = function(){
+        $scope.erro_promocao = 0;
         if($scope.cad.cd_promocao){
             var obj = array_column_search($scope.lista_promocoes,'cd_promossao',$scope.cad.cd_promocao);
+            if($scope.cad.vl_venda <= obj.vl_promossao){
+                $scope.erro_promocao = 1;
+            }
             $scope.cad.vl_promocao = obj.vl_promossao;
         }else{
             $scope.cad.vl_promocao = "";
@@ -216,3 +222,24 @@ app.directive("fileInput", function($parse){
          }  
     }  
 });  
+
+app.directive('somentenumeros', function () {
+    return {
+      require: 'ngModel',
+      restrict: 'A',
+      link: function (scope, element, attr, ctrl) {
+        function inputValue(val) {
+          if (val) {
+            var numeros = val.replace(/[^0-9]/g, '');
+            if (numeros !== val) {
+              ctrl.$setViewValue(numeros);
+              ctrl.$render();
+            }
+            return parseInt(numeros,10);
+          }
+          return '';
+        }
+        ctrl.$parsers.push(inputValue);
+      }
+    };
+});

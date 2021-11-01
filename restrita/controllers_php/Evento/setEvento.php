@@ -18,6 +18,7 @@
         "hr_evento" => ($hr.":".$min.":00"),
         "nr_classifi" => isset($obj['nr_classifi'])?$obj['nr_classifi']:null,
         "cd_tipoevento" => $obj['cd_tipoevento'],
+        "nr_lotacao" => $obj['nr_lotacao'],
     ];
 
     if(isset($obj['ft_caminho_novo'])){
@@ -33,7 +34,7 @@
     }
 
     $id = isset($obj['cd_evento'])?$obj['cd_evento']:0;
-    $semAspa = ['cd_cidade','cd_promocao','nr_classifi','cd_tipoevento'];
+    $semAspa = ['cd_cidade','cd_promocao','nr_classifi','cd_tipoevento','nr_lotacao'];
     if($id){
         
         $update = montaUpdate($data,$semAspa);

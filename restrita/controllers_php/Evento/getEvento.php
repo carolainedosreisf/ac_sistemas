@@ -22,6 +22,7 @@
                 ,ds_local
                 ,ft_caminho
                 ,nr_classifi
+                ,nr_lotacao
             FROM evento AS e
             WHERE cd_evento = {$id}";
 

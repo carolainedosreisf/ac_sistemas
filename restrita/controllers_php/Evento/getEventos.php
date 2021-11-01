@@ -17,6 +17,13 @@
                 ,ifnull(cd_promocao,0) AS cd_promocao
                 ,IFNULL(sn_cancelado,'N') AS sn_cancelado
                 ,ft_caminho
+                ,nr_lotacao
+                ,IFNULL((SELECT SUM(qt_compra) 
+                            FROM comprait 
+                            WHERE comprait.cd_ingresso = (SELECT cd_ingresso 
+                                                            FROM ingresso AS i 
+                                                            WHERE i.cd_evento = e.cd_evento))
+                        ,0) AS qtd_vendas
             FROM evento AS e
             ORDER BY cd_evento DESC";
 

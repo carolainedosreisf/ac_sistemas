@@ -2,6 +2,9 @@
 <?php include 'capa.php' ?>
 
 <div>
+<script>
+    var pagina = "HOME";
+</script>
 	<div class="container">
 		<div class="row filtros bs-callout bs-callout-default">
 			<div class="col-sm-4">
@@ -38,6 +41,10 @@
 					</span>
 				</div>
 			</div>
+			<div class="alert alert-primary text-center" role="alert" ng-show="lista_lancamentos.length<=0">
+				Em breve!
+			</div>
+        
 			<div class="row">
 				<div class="col-md-4" pagination-id="pg_lancamentos" dir-paginate="l in lista_lancamentos| filter:filtrar |filter:{nome_cidade:filtros.nome_cidade} | filter:{nome_tipo_evento:filtros.nome_tipo_evento} | itemsPerPage:6">
 					<div class="productbox">
@@ -51,18 +58,31 @@
 									<a href="#" class="learn-more detailslearn"><i class="fa fa-link"></i> Ver Mais</a>
 								</p>
 							</div>
-							<span class="maxproduct card-evento" style="width: 100% !important"><img src="../{{l.ft_caminho?l.ft_caminho:'arquivos/uploads_evento/sem-foto.jpg'}}" alt=""></span>
+							<span class="maxproduct card-evento" style="width: 100% !important">
+							<img 
+								id="evento-id-{{$index}}" 
+								ng-class="l.lotado==1?'escurecer-img':''"
+								src="../{{l.ft_caminho?l.ft_caminho:'arquivos/uploads_evento/sem-foto.jpg'}}" 
+								alt="">
+							<img 
+								class="imagem-esgotado"  
+								ng-class="l.lotado==0?'esconder-lotado':''"
+								style="top: {{top_esgotado}}px;" 
+								src="images/esgotado.png" />
+						</span>
 						</div>
 						<div class="product-details">
 							<a href="#">
 								<h1>
-									{{l.dt_evento_br}} {{l.hr_evento}} 
-									
+									{{l.dt_evento_br}} {{l.hr_evento}} <br>
+									<span>
+										Lotação: {{l.qtd_vendas}}/{{l.nr_lotacao}}
+									</span>
 								</h1>
 							</a>
 							<span class="price">
 								<span class="edd_price">
-									<button class="main_bt eventos-button" ng-click="setCarrinho(l)">
+									<button class="main_bt eventos-button" ng-click="setCarrinho(l)" ng-disabled="l.lotado==1" ng-class="l.lotado==1?'botao-disabled':''">
 										<i class="fa fa-shopping-cart"></i> 
 										<span ng-class="l.cd_promocao>0?'vl-venda':''">
 											{{l.cd_promocao>0?('('+(l.vl_venda | currency:'R$')+')'):(l.vl_venda | currency:'R$')}}

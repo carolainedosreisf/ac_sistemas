@@ -41,6 +41,9 @@
                 <div class="alert alert-danger" role="alert" ng-show="form_cadastro.$invalid && form_cadastro.$submitted">
                     Preencha os campos destacados!
                 </div>
+                <div class="alert alert-danger" role="alert" ng-show="erro_idade">
+                    Você deve ter no mínimo 18 anos para se cadastrar!
+                </div>
                 <form id="contactform" name="form_cadastro" novalidate ng-submit="getVerificaColunas()">
                     <div class="form">
                         <div class="painel">
@@ -66,9 +69,9 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6" ng-class="form_cadastro.dt_nascto.$invalid && (form_cadastro.$submitted || form_cadastro.dt_nascto.$dirty)?'has-error':''">
+                                    <div class="col-sm-6" ng-class="form_cadastro.dt_nascto.$invalid && (form_cadastro.$submitted || form_cadastro.dt_nascto.$dirty) || erro_idade?'has-error':''">
                                         <label for="dt_nascto">Data Nascimento:</label>
-                                        <input type="text" data-provide="datepicker" class="date_picker" name="dt_nascto" autocomplete="off" data-date-format="dd/mm/yyyy" ng-model="cad.dt_nascto" ng-required="true">
+                                        <input type="text" data-provide="datepicker" class="date_picker" name="dt_nascto" autocomplete="off" data-date-format="dd/mm/yyyy" ng-model="cad.dt_nascto" ng-required="true" readonly ng-change="calculaIdade()">
                                     </div>
                                     <div class="col-sm-6" ng-class="form_cadastro.sexo.$invalid && (form_cadastro.$submitted || form_cadastro.sexo.$dirty)?'has-error':''">
                                         <label for="sexo">Sexo:</label>

@@ -5,17 +5,26 @@
     $sql = "SELECT 
                 cd_promossao
                 ,ds_promossao
-                ,DATE_FORMAT(dt_prazoini, '%d/%m/%Y') AS dt_prazoini
-                ,DATE_FORMAT(dt_prazofim, '%d/%m/%Y') AS dt_prazofim
+                ,DATE_FORMAT(dt_prazoini, '%d/%m/%Y') AS dt_prazoini_br
+                ,DATE_FORMAT(dt_prazofim, '%d/%m/%Y') AS dt_prazofim_br
                 ,vl_promossao
+                ,IF(
+                    IFNULL(CONCAT(dt_prazoini,' 00:00:00'),NOW()) > NOW(),
+                    'I',
+                    IF(IFNULL(CONCAT(dt_prazofim,' 23:59:59'),NOW()) >= NOW(),
+                    'A','I'
+                    )) AS status
             FROM promocao AS e
-            ORDER BY cd_promossao DESC";
+            ORDER BY status ASC,cd_promossao DESC";
 
     $query = mysqli_query($conexao, $sql);
     $lista = [];
-
+    $i = 0;
     while($item = mysqli_fetch_array($query, MYSQLI_ASSOC)){
-        $lista[] = $item;
+        $lista[$i] = $item;
+        $lista[$i]['dt_prazoini'] = $item['dt_prazoini_br'];
+        $lista[$i]['dt_prazofim'] = $item['dt_prazofim_br'];
+        $i++;
     } 
 
     echo json_encode($lista);

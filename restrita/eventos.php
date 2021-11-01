@@ -68,7 +68,8 @@
                         </td>
                         <td>{{l.ds_evento}} - {{l.dt_evento_br}} {{l.hr_evento}}
                             (<span ng-class="l.cd_promocao>0?'vl-venda':''">{{l.vl_venda | currency:'R$'}}</span>
-                            <span ng-class="l.cd_promocao>0?'vl-promocao':''" ng-show="l.cd_promocao>0">{{l.vl_promocao | currency:'R$'}}</span>)
+                            <span ng-class="l.cd_promocao>0?'vl-promocao':''" ng-show="l.cd_promocao>0">{{l.vl_promocao | currency:'R$'}}</span>) <br>
+                            <b>Lotação: </b>{{l.qtd_vendas}}/{{l.nr_lotacao}}
                         </td>
                         <td>{{l.nome_tipo_evento}}</td>
                         <td class="text-center">{{l.nome_cidade}} ({{l.uf_cidade}})</td>

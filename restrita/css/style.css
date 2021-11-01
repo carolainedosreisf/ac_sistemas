@@ -226,3 +226,7 @@ a.article, a.article:hover {
     font-weight: bold;
 }
 
+th,td{
+    vertical-align: middle !important;
+}
+

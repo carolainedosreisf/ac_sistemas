@@ -30,10 +30,17 @@
             </div>
         </div>
     </div>
-    <div class="row form-group" ng-show="erro_hora && form_evento.hr_evento.$valid">
+    <div class="row form-group" ng-show="erro_promocao">
         <div class="col-sm-12">
             <div class="alert alert-danger" role="alert">
-                Hora Inválida
+                Essa promoção é invalida para esse evento, pois o valor dela é igual ou superior ao valor da venda!
+            </div>
+        </div>
+    </div>
+    <div class="row form-group" ng-show="mensagem">
+        <div class="col-sm-12">
+            <div class="alert alert-danger" role="alert">
+                {{mensagem}}
             </div>
         </div>
     </div>
@@ -79,13 +86,13 @@
             </div>
             <div class="col-sm-2" ng-class="form_evento.vl_venda.$invalid && (form_evento.$submitted || form_evento.vl_venda.$dirty)?'has-error':''">
                 <label for="vl_venda">Valor de Venda:</label>
-                <input type="text" class="form-control" name="vl_venda" id="vl_venda" autocomplete="off" ng-model="cad.vl_venda" required="required" maxlength="22" ui-number-mask="2">
+                <input type="text" class="form-control" ng-change="erro_promocao=cad.vl_venda<=cad.vl_promocao?1:0" name="vl_venda" id="vl_venda" autocomplete="off" ng-model="cad.vl_venda" required="required" maxlength="22" ui-number-mask="2">
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4" ng-class="erro_promocao?'has-error':''">
                 <label for="cd_promocao">Promoção:</label>
                 <select class="form-control" name="cd_promocao" id="cd_promocao" autocomplete="off" ng-model="cad.cd_promocao" ng-change="setCampoPromocao()">
                     <option value="">Nenhuma</option>
-                    <option value="{{l.cd_promossao}}" ng-repeat="l in lista_promocoes">{{l.ds_promossao}}</option>
+                    <option value="{{l.cd_promossao}}" ng-repeat="l in lista_promocoes | filter: {status:'A'}">{{l.ds_promossao}}</option>
                 </select>
             </div>
             <div class="col-sm-2" ng-class="form_evento.vl_promocao.$invalid && (form_evento.$submitted || form_evento.vl_promocao.$dirty)?'has-error':''">
@@ -94,16 +101,21 @@
             </div>
         </div>
         <div class="row form-group">
-            <div class="col-sm-6" ng-class="form_evento.cd_cidade.$invalid && (form_evento.$submitted || form_evento.cd_cidade.$dirty)?'has-error':''">
+            <div class="col-sm-5" ng-class="form_evento.cd_cidade.$invalid && (form_evento.$submitted || form_evento.cd_cidade.$dirty)?'has-error':''">
                 <label for="cd_cidade">Cidade:</label>
                 <select class="form-control" name="cd_cidade" id="cd_cidade" autocomplete="off" ng-model="cad.cd_cidade" required="required">
                     <option value="">Selecione...</option>
                     <option value="{{l.cd_cidade}}" ng-repeat="l in lista_cidades">{{l.nm_cidade+ ' ('+ l.uf_cidade+')'}}</option>
                 </select>
             </div>
-            <div class="col-sm-6" ng-class="form_evento.ds_local.$invalid && (form_evento.$submitted || form_evento.ds_local.$dirty)?'has-error':''">
+            <div class="col-sm-5" ng-class="form_evento.ds_local.$invalid && (form_evento.$submitted || form_evento.ds_local.$dirty)?'has-error':''">
                 <label for="ds_local">Local:</label>
                 <input type="text" class="form-control" name="ds_local" id="ds_local" autocomplete="off" ng-model="cad.ds_local" required="required" maxlength="50">
+            </div>
+            <div class="col-sm-2" ng-class="form_evento.nr_lotacao.$invalid && (form_evento.$submitted || form_evento.nr_lotacao.$dirty)?'has-error':''">
+                <label for="nr_lotacao">Lotação:</label>
+                <input type="text" class="form-control" somentenumeros name="nr_lotacao" id="nr_lotacao" autocomplete="off" ng-model="cad.nr_lotacao" required="required" maxlength="11">
+
             </div>
         </div>
         <div class="row form-group">
