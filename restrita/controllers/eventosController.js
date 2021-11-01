@@ -189,6 +189,14 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
         }
     }
 
+    $scope.openRelatorio = function(){
+        window.open('relatorioEventos.php','_blank');
+    }
+
+    $scope.openVendas = function(id){
+        window.location = "vendasEvento.php?id="+btoa(id);
+    }
+
     var array_column_search = function(lista,coluna,id){
         var index = lista.map(e => e[coluna]).indexOf(id)
         return lista[index];

@@ -230,3 +230,8 @@ th,td{
     vertical-align: middle !important;
 }
 
+.padding-0{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+

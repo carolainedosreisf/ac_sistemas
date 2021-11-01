@@ -42,9 +42,17 @@
         
         
     </div>
-    
+
+    <div class="row form-group">
+        <div class="col-sm-2">
+            <button class="btn btn-primary form-control" ng-click="openRelatorio()">
+                <i class="glyphicon glyphicon-print"></i>
+                Imprimir
+            </button>
+        </div>
+    </div>
+
     <div class="row">
-        
         <div class="col-sm-12">
             <table class="table table-striped table-bordered table-eventos">
                 <thead>
@@ -54,6 +62,7 @@
                         <th>Evento</th>
                         <th width="15%">Tipo</th>
                         <th width="15%" class="text-center">Cidade</th>
+                        <th width="5%" class="text-center">Lotação</th>
                         <th width="5%" class="text-center">Editar</th>
                     </tr>
                 </thead>
@@ -66,15 +75,19 @@
                         <td class="text-center">
                             <img class="ft-evento-miniatura" src="../{{l.ft_caminho?l.ft_caminho:'arquivos/uploads_evento/sem-foto.jpg'}}" >
                         </td>
-                        <td>{{l.ds_evento}} - {{l.dt_evento_br}} {{l.hr_evento}}
-                            (<span ng-class="l.cd_promocao>0?'vl-venda':''">{{l.vl_venda | currency:'R$'}}</span>
-                            <span ng-class="l.cd_promocao>0?'vl-promocao':''" ng-show="l.cd_promocao>0">{{l.vl_promocao | currency:'R$'}}</span>) <br>
-                            <b>Lotação: </b>{{l.qtd_vendas}}/{{l.nr_lotacao}}
+                        <td>{{l.ds_evento}} - {{l.dt_evento_br}} {{l.hr_evento}} <br>
+                            <span ng-class="l.cd_promocao>0?'vl-venda':''">{{l.vl_venda | currency:'R$'}}</span>
+                            <span ng-class="l.cd_promocao>0?'vl-promocao':''" ng-show="l.cd_promocao>0">{{l.vl_promocao | currency:'R$'}}</span>
                         </td>
                         <td>{{l.nome_tipo_evento}}</td>
                         <td class="text-center">{{l.nome_cidade}} ({{l.uf_cidade}})</td>
                         <td class="text-center">
-                            <button ng-click="openSetEvento(l.cd_evento)" class="btn btn-primary btn-sm">
+                            <button class="btn btn-default" ng-click="openVendas(l.cd_evento)">
+                                {{l.qtd_vendas}}/{{l.nr_lotacao}} <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </td>
+                        <td class="text-center">
+                            <button ng-click="openSetEvento(l.cd_evento)" class="btn btn-primary">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </button>
                         </td>
