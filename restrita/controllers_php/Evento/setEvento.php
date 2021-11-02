@@ -19,7 +19,12 @@
         "nr_classifi" => isset($obj['nr_classifi'])?$obj['nr_classifi']:null,
         "cd_tipoevento" => $obj['cd_tipoevento'],
         "nr_lotacao" => $obj['nr_lotacao'],
+        "publica" => $obj['publica'],
     ];
+
+    if($obj['publica']=='S'){
+        $data['dt_publica'] =  date("Y-m-d H:i:s");
+    }
 
     if(isset($obj['ft_caminho_novo'])){
         if($obj['ft_caminho_novo']){

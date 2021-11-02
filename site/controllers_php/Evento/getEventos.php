@@ -47,6 +47,7 @@
             FROM evento AS e
             WHERE IFNULL(e.sn_cancelado,'N') = 'N'
             {$filtro}
+            AND publica = 'S'
             ORDER BY e.dt_evento DESC";
 
     $query = mysqli_query($conexao, $sql);

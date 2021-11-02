@@ -23,6 +23,7 @@
                 ,ft_caminho
                 ,nr_classifi
                 ,nr_lotacao
+                ,publica
             FROM evento AS e
             WHERE cd_evento = {$id}";
 

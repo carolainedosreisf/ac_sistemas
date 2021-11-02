@@ -94,7 +94,7 @@
                         </td>
                         <td class="text-center">
                             <button ng-click="openSetEvento(l.cd_evento)" class="btn btn-primary">
-                                <i class="glyphicon glyphicon-pencil"></i>
+                                <i class="glyphicon glyphicon-{{l.publica=='N'?'pencil':'search'}}"></i>
                             </button>
                         </td>
                     </tr>

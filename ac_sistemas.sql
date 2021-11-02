@@ -733,3 +733,13 @@ CREATE TABLE IF NOT EXISTS `album` (
 
 ALTER TABLE `album`
   ADD CONSTRAINT `fk10888` FOREIGN KEY (`cd_evento`) REFERENCES `evento` (`cd_evento`) ON UPDATE CASCADE;
+
+ALTER TABLE evento
+ADD publica CHAR(1) NOT NULL DEFAULT 'N';
+
+ALTER TABLE evento
+ADD dt_publica DATETIME NULL;
+
+
+UPDATE evento SET publica = 'S', dt_publica = now();
+

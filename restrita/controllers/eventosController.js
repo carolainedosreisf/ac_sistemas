@@ -5,8 +5,10 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
     $scope.lista_promocoes = [];
     $scope.filtro_status = "N";
     $scope.erro_promocao = 0;
+    $scope.disabled_ = 0;
 
     $scope.cad = {
+        publica:"N",
         // ds_evento:"Evento de incentivo a leitura",
         // dt_evento:"21/03/2022",
         // nr_classifi:"",
@@ -39,7 +41,9 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
             params:{id}
         }).then(function (retorno) {
             $scope.cad = retorno.data;
-               
+            if($scope.cad.publica=='S'){
+                $scope.disabled_ = 1;
+            }
             // var $option = $("<option selected></option>").val($scope.cad.cd_cidade).text($scope.cad.nome_cidade+" ("+$scope.cad.uf_cidade+")");
             // $('#cd_cidade').append($option).trigger('change');
             $scope.carregando = false;
@@ -93,42 +97,66 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
 
     $scope.setEvento = function(){
         if($scope.form_evento.$valid && !($scope.erro_hora) && $scope.erro_promocao==0){
-            var form_data = new FormData();  
-            angular.forEach($scope.files, function(file){  
-                form_data.append('file', file);  
-            });  
-            $http.post('controllers_php/Evento/upload.php', form_data,  
-            {  
-                transformRequest: angular.identity,  
-                headers: {'Content-Type': undefined,'Process-Data': false}  
-            }).success(function(response){ 
-                $scope.cad.ft_caminho_novo = response;
-                
-                $http({
-                    url: 'controllers_php/Evento/setEvento.php',
-                    method: 'POST',
-                    data: $scope.cad
-                }).then(function (retorno) {
-                    if(retorno.data == 1){
-                        window.location = "eventos.php";
-                    }else{
-                        $scope.carregando = false;
-                        swal({
-                            title: 'Erro ao salvar!',
-                            text: '',
-                            type: 'warning'
-                        });
-                    }
-                },
-                function (retorno) {
-                    console.log('Error: '+retorno.status);
+            if($scope.cad.publica=='S'){
+                swal({
+                    title: "Atenção",
+                    text: "Você esta colocando o campo 'Publicar' como 'Sim', ao comfirmar essa ação o evento será publicado no site e não será mais possivel edita-lo.\nDeseja realmente confirmar essa ação?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Sim",
+                    cancelButtonText: "Não"
+                  },
+                  function(){
+                    $scope.comfirmaSetEvento();
                 });
-                
-            });  
-            $scope.carregando = true;
+
+            }else{
+                $scope.comfirmaSetEvento();
+            }
+            
+            
             
         }
     }
+
+    $scope.comfirmaSetEvento = function(){
+        $scope.carregando = true;
+        var form_data = new FormData();  
+        angular.forEach($scope.files, function(file){  
+            form_data.append('file', file);  
+        });  
+        $http.post('controllers_php/Evento/upload.php', form_data,  
+        {  
+            transformRequest: angular.identity,  
+            headers: {'Content-Type': undefined,'Process-Data': false}  
+        }).success(function(response){ 
+            $scope.cad.ft_caminho_novo = response;
+            
+            $http({
+                url: 'controllers_php/Evento/setEvento.php',
+                method: 'POST',
+                data: $scope.cad
+            }).then(function (retorno) {
+                $scope.carregando = false;
+                if(retorno.data == 1){
+                    window.location = "eventos.php";
+                }else{
+                    $scope.carregando = false;
+                    swal({
+                        title: 'Erro ao salvar!',
+                        text: '',
+                        type: 'warning'
+                    });
+                }
+            },
+            function (retorno) {
+                console.log('Error: '+retorno.status);
+            });
+            
+        });  
+    }
+
     $scope.setCampoPromocao = function(){
         $scope.erro_promocao = 0;
         if($scope.cad.cd_promocao){
