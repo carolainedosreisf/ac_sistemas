@@ -84,7 +84,14 @@
                         <td class="text-center">
                             <img class="ft-evento-miniatura" src="../{{l.ft_caminho?l.ft_caminho:'arquivos/uploads_evento/sem-foto.jpg'}}" >
                         </td>
-                        <td>{{l.ds_evento}} ({{l.nome_tipo_evento}}) - {{l.dt_evento_br}} {{l.hr_evento}} <br>
+                        <td>
+                            <b ng-show="l.sn_cancelado=='S'" style="color:red;" >
+                                <i>Evento Cancelado</i>
+                                <button ng-click="openCancelamento(l)" class="btn btn-primary btn-xs">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button> <br>
+                            </b>
+                            {{l.ds_evento}} ({{l.nome_tipo_evento}}) - {{l.dt_evento_br}} {{l.hr_evento}} <br>
                             <span ng-class="l.cd_promocao>0?'vl-venda':''">{{l.vl_venda | currency:'R$'}}</span>
                             <span ng-class="l.cd_promocao>0?'vl-promocao':''" ng-show="l.cd_promocao>0">{{l.vl_promocao | currency:'R$'}}</span> <br>
                             {{l.nome_cidade}} ({{l.uf_cidade}})
@@ -98,7 +105,7 @@
                                 {{l.qtd_vendas}}/{{l.nr_lotacao}} <i class="glyphicon glyphicon-search"></i>
                             </button>
 
-                            <button ng-click="openAlbuns(l.cd_evento)" class="btn btn-default" ng-disabled="l.ocorrido==0" data-html="true" data-toggle="tooltip" tooltip data-placement="top" data-original-title="Álbum">
+                            <button ng-click="openAlbuns(l.cd_evento)" class="btn btn-default" ng-disabled="l.ocorrido=='N'" data-html="true" data-toggle="tooltip" tooltip data-placement="top" data-original-title="Álbum">
                                 <i class="glyphicon glyphicon-book"></i>
                             </button>
                       
@@ -106,7 +113,7 @@
                                 <i class="glyphicon glyphicon-{{l.publica=='N'?'pencil':'search'}}"></i>
                             </button>
 
-                            <button class="btn btn-danger" data-html="true" data-toggle="tooltip" tooltip data-placement="top" data-original-title="Cancelar Evento">
+                            <button class="btn btn-danger" ng-disabled="l.permite_cancela==0" ng-click="openCancelamento(l)"data-html="true" data-toggle="tooltip" tooltip data-placement="top" data-original-title="Cancelar Evento">
                                 <i class="glyphicon glyphicon-remove"></i>
                             </button>
                         </td>
@@ -120,6 +127,44 @@
                     boundary-links="true" 
                     pagination-id="pg_eventos">  
                 </dir-pagination-controls>  
+            </div>
+        </div>
+    </div>
+
+    <div id="cancelamento" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">{{objEvento.sn_cancelado=='S'?'Motivo do cancelamento':'Cancelar'}}: {{objEvento.ds_evento}} ({{objEvento.nome_tipo_evento}})</h4>
+                </div>
+                <div class="modal-body">
+                    <div ng-show="objEvento.sn_cancelado=='N'">
+                        <div class="row form-group" ng-show="form_cancelamento.$invalid && form_cancelamento.$submitted">
+                            <div class="col-sm-12">
+                                <div class="alert alert-danger" role="alert">
+                                    Preencha os campos destacados!
+                                </div>
+                            </div>
+                        </div>
+                        <form name="form_cancelamento" id="form_cancelamento" novalidate ng-submit="setCancelamento()">
+                        
+                            <div class="row form-group">
+                                <div class="col-sm-12" ng-class="form_cancelamento.motivo_cancelamento.$invalid && (form_cancelamento.$submitted || form_cancelamento.motivo_cancelamento.$dirty)?'has-error':''">
+                                    <label for="ds_promossao">Descrição:</label>
+                                    <textarea name="motivo_cancelamento" id="motivo_cancelamento" autocomplete="off" rows="4" class="form-control" maxlength="255" ng-model="cad.motivo_cancelamento " ng-required="true"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div ng-show="objEvento.sn_cancelado=='S'">
+                        <p>{{objEvento.motivo_cancelamento}}</p>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer" ng-show="objEvento.sn_cancelado=='N'">
+                    <button type="submit" class="btn btn-danger" form="form_cancelamento">Cancelar Evento</button>
+                </div>
             </div>
         </div>
     </div>

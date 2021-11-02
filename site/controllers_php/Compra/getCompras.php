@@ -40,6 +40,8 @@
                             ,e.ds_local
                             ,IFNULL(e.nr_classifi,0) AS nr_classifi
                             ,a.qt_compra
+                            ,IFNULL(e.sn_cancelado,'N') AS sn_cancelado
+                            ,e.motivo_cancelamento
                         FROM comprait AS a
                         INNER JOIN evento AS e
                         ON e.cd_evento = (SELECT b.cd_evento 

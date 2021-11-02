@@ -233,6 +233,53 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
         var index = lista.map(e => e[coluna]).indexOf(id)
         return lista[index];
     }
+
+    $scope.openCancelamento = function(dados)
+    {
+        $scope.objEvento = angular.copy(dados);
+        $('#cancelamento').modal('show');
+    }
+
+    $scope.setCancelamento = function(){
+        if($scope.form_cancelamento.$valid){
+            swal({
+                title: "Atenção",
+                text: "Ao cancelar todos os clientes que compram serão notificados e reembolsados. Deseja realmente cancelar esse evento?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Sim",
+                cancelButtonText: "Não"
+              },
+              function(){
+                $scope.carregando = true;
+                $scope.cad.cd_evento = $scope.objEvento.cd_evento;
+                $http({
+                    url: 'controllers_php/Evento/setCancelamento.php',
+                    method: 'POST',
+                    data: $scope.cad
+                }).then(function (retorno) {
+                    $scope.carregando = false;
+                    if(retorno.data == 1){
+                        $('#cancelamento').modal('hide');
+                        $scope.getEventos();
+                    }else{
+                        $scope.carregando = false;
+                        swal({
+                            title: 'Erro ao salvar!',
+                            text: '',
+                            type: 'warning'
+                        });
+                    }
+                },
+                function (retorno) {
+                    console.log('Error: '+retorno.status);
+                });
+            });
+            
+        }
+      
+    }
     
     if(cadastro==1){
         $scope.getTiposEventos();

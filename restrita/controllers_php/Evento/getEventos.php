@@ -27,6 +27,9 @@
                 ,IF(CONCAT(dt_evento,' ',e.hr_evento) < NOW(),1,0) ocorrido
                 ,publica
                 ,(IF(CONCAT(dt_evento,' ',e.hr_evento) < NOW(),'S','N')) AS ocorrido
+                ,IF(DATE_SUB(CONCAT(dt_evento,' ',e.hr_evento),INTERVAL 7 DAY) > NOW() AND IFNULL(sn_cancelado,'N')='N',1,0 ) AS permite_cancela
+                ,IFNULL(sn_cancelado,'N') AS sn_cancelado
+                ,motivo_cancelamento
             FROM evento AS e
             ORDER BY cd_evento DESC";
 

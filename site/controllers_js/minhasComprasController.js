@@ -5,6 +5,7 @@ app.controller('minhasComprasController', ['$scope', '$http','$filter','$locatio
     $scope.lista_carrinho = JSON.parse(carrinho);
     $scope.qtd_carrinho = qtd;
     $scope.valor_carrinho = valor;
+    $scope.objEvento = {};
     
     $scope.getCompras = function(){
         $scope.carregando = true;
@@ -18,6 +19,11 @@ app.controller('minhasComprasController', ['$scope', '$http','$filter','$locatio
         function (retorno) {
             console.log('Error: '+retorno.status);
         });
+    }
+
+    $scope.openCancelamento = function(dados){
+        $scope.objEvento = angular.copy(dados);
+        $('#cancelamento').modal('show');
     }
 
     $scope.getCompras();

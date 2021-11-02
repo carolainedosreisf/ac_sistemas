@@ -42,6 +42,12 @@
                                     </td>
                                     <td width="40%">
                                         <div class="informacoes">
+                                            <b ng-show="e.sn_cancelado=='S'" style="color:red;" >
+                                                <i>Evento Cancelado</i>
+                                                <button ng-click="openCancelamento(e)" class="btn btn-primary btn-xs">
+                                                    <i class="glyphicon glyphicon-search"></i>
+                                                </button> <br>
+                                            </b>
                                             <span class="titulo-evento">{{e.ds_evento}} ({{e.nome_tipo_evento}})</span>
                                             <span class="text"> <b>Local: </b> {{e.ds_local}} / {{e.nome_cidade}} ({{e.uf_cidade}})</span>
                                             <span class="text"><b>Data Evento: </b>{{e.dt_evento_br}} {{e.hr_evento}}</span>
@@ -67,6 +73,30 @@
                 </div>
             </div>
         </div>
+
+        <div id="cancelamento" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Atenção </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div ng-show="objEvento.sn_cancelado=='S'">
+                            <p>
+                                <b>O evento {{objEvento.ds_evento}} ({{objEvento.nome_tipo_evento}}), você será reembolsado em breve!</b><br>
+                                <b>Motivo Cancelamento:</b> {{objEvento.motivo_cancelamento}}
+                            </p>
+                        </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 </section>
