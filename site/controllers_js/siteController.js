@@ -9,6 +9,7 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
     $scope.lista_tipos_eventos = [];
     $scope.lista_formas_pagamento = [];
     $scope.parcelas = [];
+    $scope.lista_albuns = [];
     $scope.contato = {};
     $scope.cad_compra = {};
 
@@ -18,9 +19,11 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
     };
 
     $scope.getEventos = function(){ 
+        var ocorrido = pagina=='ALBUM'?1:0;
         $http({
             url: 'controllers_php/Evento/getEventos.php',
             method: 'GET',
+            params:{ocorrido}
         }).then(function (retorno) {
             $scope.lista_lancamentos = retorno.data;
             if($scope.lista_lancamentos.length >0){
@@ -31,6 +34,21 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
                 }, 500);
             }
             
+        },
+        function (retorno) {
+            console.log('Error: '+retorno.status);
+        });
+    }
+
+    $scope.getAlbuns = function(dados){ 
+        $scope.objEvento = angular.copy(dados);
+        $http({
+            url: 'controllers_php/Evento/getAlbunsEvento.php',
+            method: 'GET',
+            params:{cd_evento:dados.cd_evento}
+        }).then(function (retorno) {
+            $scope.lista_albuns = retorno.data;
+            $('#album').modal('show');
         },
         function (retorno) {
             console.log('Error: '+retorno.status);
@@ -265,7 +283,7 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
         $scope.verificaItens();
     }
 
-    if(pagina=='HOME'){
+    if(pagina=='HOME' || pagina=='ALBUM'){
         $scope.getEventos();
     }
 

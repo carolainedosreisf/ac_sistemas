@@ -102,7 +102,7 @@
 					<li class="propClone"><a href="">Promoções</a></li>
 					<li class="propClone"><a href="">Eventos</a></li>
 					<li class="propClone"><a href="">Agenda</a></li>
-					<li class="propClone"><a href="">Albuns</a></li>
+					<li class="propClone"><a href="eventosoCorridos.php">Albuns</a></li>
 					<li class="propClone"><a href="contato.php">Contato</a></li>
 					<li class="propClone"><a href="minhasCompras.php" ng-show="usuario && usuario.cd_permissao != 1">Minhas Compras</a></li>
 					<li class="propClone"><a href="logout.php" ng-show="usuario && usuario.cd_permissao != 1">Sair</a></li>

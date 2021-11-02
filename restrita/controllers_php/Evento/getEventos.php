@@ -24,6 +24,7 @@
                                                             FROM ingresso AS i 
                                                             WHERE i.cd_evento = e.cd_evento))
                         ,0) AS qtd_vendas
+                ,IF(CONCAT(dt_evento,' ',e.hr_evento) < NOW(),1,0) ocorrido
             FROM evento AS e
             ORDER BY cd_evento DESC";
 

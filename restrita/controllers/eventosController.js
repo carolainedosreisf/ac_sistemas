@@ -197,6 +197,10 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
         window.location = "vendasEvento.php?id="+btoa(id);
     }
 
+    $scope.openAlbuns = function(id){
+        window.location = "albunsEvento.php?id="+btoa(id);
+    }
+
     var array_column_search = function(lista,coluna,id){
         var index = lista.map(e => e[coluna]).indexOf(id)
         return lista[index];

@@ -2,6 +2,16 @@
     require '../../conexao.php';
     require '../../funcoes.php';
     
+    $ocorrido = $_GET['ocorrido'];
+    $filtro = "";
+
+    if($ocorrido){
+        $filtro .= " AND IF(CONCAT(dt_evento,' ',e.hr_evento) < NOW(),1,0) = 1";
+    }else{
+        $filtro .= " AND dt_evento > NOW()";
+
+    }
+
     $sql = "SELECT 
                 e.cd_evento
                 ,e.cd_cidade
@@ -36,7 +46,7 @@
                         ,0) AS qtd_vendas
             FROM evento AS e
             WHERE IFNULL(e.sn_cancelado,'N') = 'N'
-            and dt_evento > NOW()
+            {$filtro}
             ORDER BY e.dt_evento DESC";
 
     $query = mysqli_query($conexao, $sql);

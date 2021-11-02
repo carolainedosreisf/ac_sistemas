@@ -63,6 +63,7 @@
                         <th width="15%">Tipo</th>
                         <th width="15%" class="text-center">Cidade</th>
                         <th width="5%" class="text-center">Lotação</th>
+                        <th width="5%" class="text-center">Álbuns</th>
                         <th width="5%" class="text-center">Editar</th>
                     </tr>
                 </thead>
@@ -84,6 +85,11 @@
                         <td class="text-center">
                             <button class="btn btn-default" ng-click="openVendas(l.cd_evento)">
                                 {{l.qtd_vendas}}/{{l.nr_lotacao}} <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </td>
+                        <td class="text-center">
+                            <button ng-click="openAlbuns(l.cd_evento)" class="btn btn-default" ng-disabled="l.ocorrido==0">
+                                <i class="glyphicon glyphicon-book"></i>
                             </button>
                         </td>
                         <td class="text-center">

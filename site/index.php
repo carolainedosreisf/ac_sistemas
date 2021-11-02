@@ -49,15 +49,6 @@
 				<div class="col-md-4" pagination-id="pg_lancamentos" dir-paginate="l in lista_lancamentos| filter:filtrar |filter:{nome_cidade:filtros.nome_cidade} | filter:{nome_tipo_evento:filtros.nome_tipo_evento} | itemsPerPage:6">
 					<div class="productbox">
 						<div class="fadeshop" ng-mouseover="aparece='evento-car-'+l.cd_evento">
-							<div class="captionshop text-center" id="evento-car-{{l.cd_evento}}" ng-show="aparece=='evento-car-'+l.cd_evento">
-								<h3>Estádio Old Trafford</h3>
-								<p>
-									It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software ...
-								</p>
-								<p>
-									<a href="#" class="learn-more detailslearn"><i class="fa fa-link"></i> Ver Mais</a>
-								</p>
-							</div>
 							<span class="maxproduct card-evento" style="width: 100% !important">
 							<img 
 								id="evento-id-{{$index}}" 

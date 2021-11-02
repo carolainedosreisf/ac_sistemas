@@ -715,3 +715,21 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+--
+-- Estrutura da tabela `album`
+--
+
+DROP TABLE IF EXISTS `album`;
+CREATE TABLE IF NOT EXISTS `album` (
+  `cd_album` int(11) NOT NULL AUTO_INCREMENT,
+  `cd_evento` int(11) NOT NULL,
+  `ds_album` varchar(50) NULL,
+  `ft_caminho` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`cd_album`),
+  KEY `fk1044_idx` (`cd_album`),
+  KEY `fk10444_idx` (`cd_evento`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+ALTER TABLE `album`
+  ADD CONSTRAINT `fk10888` FOREIGN KEY (`cd_evento`) REFERENCES `evento` (`cd_evento`) ON UPDATE CASCADE;
