@@ -26,6 +26,7 @@
                         ,0) AS qtd_vendas
                 ,IF(CONCAT(dt_evento,' ',e.hr_evento) < NOW(),1,0) ocorrido
                 ,publica
+                ,(IF(CONCAT(dt_evento,' ',e.hr_evento) < NOW(),'S','N')) AS ocorrido
             FROM evento AS e
             ORDER BY cd_evento DESC";
 

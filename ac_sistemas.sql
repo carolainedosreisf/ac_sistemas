@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 31-Out-2021 às 17:00
+-- Tempo de geração: 02-Nov-2021 às 18:24
 -- Versão do servidor: 5.7.31
 -- versão do PHP: 7.3.21
 
@@ -20,6 +20,34 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `ac_sistemas`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `album`
+--
+
+DROP TABLE IF EXISTS `album`;
+CREATE TABLE IF NOT EXISTS `album` (
+  `cd_album` int(11) NOT NULL AUTO_INCREMENT,
+  `cd_evento` int(11) NOT NULL,
+  `ds_album` varchar(50) DEFAULT NULL,
+  `ft_caminho` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`cd_album`),
+  KEY `fk1044_idx` (`cd_album`),
+  KEY `fk10444_idx` (`cd_evento`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `album`
+--
+
+INSERT INTO `album` (`cd_album`, `cd_evento`, `ds_album`, `ft_caminho`) VALUES
+(1, 1, 'Imagem 1', 'arquivos/uploads_evento_albuns/1510375231274726496202111021550.jpg'),
+(2, 1, 'Imagem 2', 'arquivos/uploads_evento_albuns/2198345797870268860202111021550.jpg'),
+(3, 1, 'Imagem 3', 'arquivos/uploads_evento_albuns/303907835771163116202111021550.jpg'),
+(4, 1, 'Imagem 4', 'arquivos/uploads_evento_albuns/244124258179582326202111021550.jpg'),
+(5, 1, 'Imagem 5', 'arquivos/uploads_evento_albuns/1331717015177671590202111021550jpeg');
 
 -- --------------------------------------------------------
 
@@ -55,16 +83,16 @@ CREATE TABLE IF NOT EXISTS `cadastro` (
 --
 
 INSERT INTO `cadastro` (`cd_cadastro`, `nm_cadastro`, `dt_nascto`, `sexo`, `co_complemento`, `nr_endereco`, `ba_cadastro`, `cd_cidade`, `ed_cadastro`, `nr_cep`, `nr_cpf`, `nr_rg`, `ed_email`, `nr_telefone`, `nr_contato`) VALUES
-(1, 'Vitor Souza', '1990-05-11', 'M', NULL, '111', 'bairro teste', 70, 'teste endereco', '88810563', '88072590014', '55555554', 'vitorsouza@gmail.com', NULL, NULL),
-(2, 'Maria Augusta', '1997-08-10', 'F', NULL, '111', 'bairro teste', 70, 'teste endereco', '88810563', '10842255907', '55555g54', 'mariaaugusta@gmail.com', NULL, NULL),
-(3, 'Alfredo Neves', '2021-11-05', 'M', NULL, '111', 'bairro teste', 70, 'teste endereco', '88810563', '431.298.700-91', '55555c54', 'alfredoneves@gmail.com', NULL, NULL),
-(4, 'Ricardo da Silva', '2021-10-22', 'M', NULL, '111', 'bairro teste', 70, 'teste endereco', '88810563', '14838921071', '55555c52', 'ricardosilva@gmail.com', NULL, NULL),
-(5, 'Patricia Lemos', '2021-10-21', 'F', NULL, 'sdd', 'dsasda', 4, 'asdfdfdf', '88815320', '02778306056', '027.783.0', 'patricialemos@gmail.com', NULL, NULL),
+(1, 'Vitor Souza', '1990-05-11', 'M', NULL, '111', 'bairro teste', 70, 'teste endereco', '88810563', '88072590014', '55555554', 'vitorsouza@gmail.com', '4812345678', '48123456789'),
+(2, 'Maria Augusta', '1997-08-10', 'F', NULL, '111', 'bairro teste', 70, 'teste endereco', '88810563', '10842255907', '55555g54', 'mariaaugusta@gmail.com', '4812345678', NULL),
+(3, 'Alfredo Neves', '1995-05-27', 'M', NULL, '111', 'bairro teste', 70, 'teste endereco', '88810563', '431.298.700-91', '55555c54', 'alfredoneves@gmail.com', NULL, '48123456789'),
+(4, 'Ricardo da Silva', '1995-05-27', 'M', NULL, '111', 'bairro teste', 70, 'teste endereco', '88810563', '14838921071', '55555c52', 'ricardosilva@gmail.com', NULL, NULL),
+(5, 'Patricia Lemos', '1995-05-27', 'F', NULL, 'sdd', 'dsasda', 4, 'asdfdfdf', '88815320', '02778306056', '027.783.0', 'patricialemos@gmail.com', NULL, NULL),
 (6, 'Jose antonio', '1997-06-11', 'M', NULL, '275', 'bairro teste', 10, 'endereÃ§o teste', '88818300', '70650449045', '42.062.11', 'joseantonio@gmail.com', NULL, NULL),
 (7, 'Pedro Paulo', '1990-11-05', 'M', NULL, '111', 'bairro teste', 70, 'teste endereco', '88810563', '43129870091', '55555c544', 'pedropaulo@gmail.com', NULL, NULL),
-(8, 'Vitoria Reis', '2021-10-22', 'F', NULL, '275', 'hfhhfg', 5, 'sdfsdfd', '72450160', '55252444030', '22.278.40', 'vitoriareis@gmail.com', NULL, NULL),
-(9, 'Maria Eduarda', '2021-10-22', 'F', NULL, '344', 'sdfsdf', 6, 'fsdfsdf', '74391291', '45200316057', '21.322.60', 'mariaeduarda@gmail.com', NULL, NULL),
-(10, 'Ana Paula Souza', '2021-10-07', 'F', NULL, 'fggd', 'dgdfg', 5, 'dgfdgf', '59090615', '30627636047', 'gdfgdfg', 'anapaulasouza@gmail.com', NULL, NULL),
+(8, 'Vitoria Reis', '1995-05-27', 'F', NULL, '275', 'hfhhfg', 5, 'sdfsdfd', '72450160', '55252444030', '22.278.40', 'vitoriareis@gmail.com', NULL, NULL),
+(9, 'Maria Eduarda', '1995-05-27', 'F', NULL, '344', 'sdfsdf', 6, 'fsdfsdf', '74391291', '45200316057', '21.322.60', 'mariaeduarda@gmail.com', NULL, NULL),
+(10, 'Ana Paula Souza', '1995-05-27', 'F', NULL, 'fggd', 'dgdfg', 5, 'dgfdgf', '59090615', '30627636047', 'gdfgdfg', 'anapaulasouza@gmail.com', NULL, NULL),
 (11, 'AdmnistraÃ§Ã£o Blablabla', '1990-07-14', 'M', NULL, '000', 'Centro', 70, 'teste', '88818120', '34173818009', '23.884.92', 'admblablabla@gmail.com', NULL, NULL);
 
 -- --------------------------------------------------------
@@ -391,11 +419,24 @@ CREATE TABLE IF NOT EXISTS `compra` (
   PRIMARY KEY (`cd_compra`),
   KEY `fk103_idx` (`cd_cadastro`),
   KEY `fk203` (`cd_fpagto`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `compra`
 --
+
+INSERT INTO `compra` (`cd_cadastro`, `cd_compra`, `cd_fpagto`, `dt_compra`, `vl_total`) VALUES
+(6, 12, 2, '2021-10-31 20:05:46', '250.00'),
+(6, 13, 3, '2021-10-31 20:07:12', '130.00'),
+(1, 14, 3, '2021-10-31 23:40:45', '20.00'),
+(8, 15, 3, '2021-11-01 03:18:53', '80.00'),
+(1, 16, 2, '2021-11-01 04:24:19', '160.00'),
+(2, 17, 2, '2021-11-01 04:25:22', '240.00'),
+(3, 18, 3, '2021-11-01 04:25:56', '160.00'),
+(4, 19, 2, '2021-11-01 04:26:49', '320.00'),
+(5, 20, 3, '2021-11-01 04:27:36', '80.00'),
+(9, 21, 3, '2021-11-01 04:28:07', '160.00'),
+(7, 22, 1, '2021-11-01 04:28:47', '400.00');
 
 -- --------------------------------------------------------
 
@@ -412,6 +453,25 @@ CREATE TABLE IF NOT EXISTS `comprait` (
   PRIMARY KEY (`cd_compra`,`cd_ingresso`),
   KEY `cd_ingresso_idx` (`cd_ingresso`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `comprait`
+--
+
+INSERT INTO `comprait` (`cd_compra`, `cd_ingresso`, `qt_compra`, `vl_compra`) VALUES
+(12, 2, 2, '100.00'),
+(12, 3, 2, '25.00'),
+(13, 5, 2, '20.00'),
+(13, 6, 3, '30.00'),
+(14, 1, 1, '20.00'),
+(15, 4, 1, '80.00'),
+(16, 4, 2, '80.00'),
+(17, 4, 3, '80.00'),
+(18, 4, 2, '80.00'),
+(19, 4, 4, '80.00'),
+(20, 4, 1, '80.00'),
+(21, 4, 2, '80.00'),
+(22, 4, 5, '80.00');
 
 -- --------------------------------------------------------
 
@@ -458,6 +518,9 @@ CREATE TABLE IF NOT EXISTS `evento` (
   `nr_classifi` int(11) DEFAULT NULL,
   `cd_tipoevento` int(11) NOT NULL,
   `hr_evento` time NOT NULL,
+  `nr_lotacao` int(11) NOT NULL,
+  `publica` char(1) NOT NULL DEFAULT 'N',
+  `dt_publica` datetime DEFAULT NULL,
   PRIMARY KEY (`cd_evento`),
   KEY `fk104_idx` (`cd_cidade`),
   KEY `fk204_idx` (`cd_promocao`),
@@ -468,15 +531,15 @@ CREATE TABLE IF NOT EXISTS `evento` (
 -- Extraindo dados da tabela `evento`
 --
 
-INSERT INTO `evento` (`cd_evento`, `cd_cidade`, `cd_promocao`, `ds_evento`, `ds_local`, `dt_evento`, `ft_caminho`, `ft_evento`, `sn_cancelado`, `vl_venda`, `vl_promocao`, `nr_classifi`, `cd_tipoevento`, `hr_evento`) VALUES
-(1, 70, NULL, 'Show Gusttavo Lima', 'Ginasio', '2021-10-14', 'arquivos/uploads_evento/225962606625243596202110192345.jpg', NULL, NULL, '90.00', NULL, NULL, 4, '22:00:00'),
-(2, 61, NULL, 'Show Ivete Sangalo', 'Ginasio', '2022-03-21', 'arquivos/uploads_evento/1089548478331145980202110180119.png', NULL, NULL, '100.00', NULL, 10, 4, '13:00:00'),
-(3, 70, NULL, 'Palestra motivacional', 'Ginasio 2', '2022-03-21', 'arquivos/uploads_evento/1157140418406253351202110180120.jpg', NULL, NULL, '25.00', NULL, 14, 5, '20:00:00'),
-(4, 72, 3, 'Evento de incentivo a leitura', 'Ginasio', '2022-03-25', NULL, NULL, NULL, '50.00', '20.00', NULL, 3, '12:00:00'),
-(5, 69, 3, 'Curso bÃ¡sico de programaÃ§Ã£o web', 'Ginasio', '2022-03-16', 'arquivos/uploads_evento/435655679279669125202110180122.png', NULL, NULL, '70.00', '20.00', NULL, 1, '08:00:00'),
-(6, 1, NULL, 'Curso de mÃ¡gica', 'Ginasio', '2021-11-06', 'arquivos/uploads_evento/52839379419850508202110180130.jpg', NULL, NULL, '30.00', NULL, NULL, 3, '15:00:00'),
-(7, 3, NULL, 'Show Wesley safadÃ£o', 'Ginasio', '2022-01-29', 'arquivos/uploads_evento/863015299628290534202110180123.jpg', NULL, NULL, '80.00', NULL, NULL, 4, '19:00:00'),
-(11, 37, 3, 'evento de teste', 'local teste', '2021-12-22', NULL, NULL, NULL, '100.00', '20.00', 10, 5, '14:00:00');
+INSERT INTO `evento` (`cd_evento`, `cd_cidade`, `cd_promocao`, `ds_evento`, `ds_local`, `dt_evento`, `ft_caminho`, `ft_evento`, `sn_cancelado`, `vl_venda`, `vl_promocao`, `nr_classifi`, `cd_tipoevento`, `hr_evento`, `nr_lotacao`, `publica`, `dt_publica`) VALUES
+(1, 70, NULL, 'Show Gusttavo Lima', 'Ginasio', '2021-11-02', 'arquivos/uploads_evento/225962606625243596202110192345.jpg', NULL, NULL, '90.00', NULL, NULL, 4, '12:00:00', 1000, 'S', '2021-11-02 13:00:24'),
+(2, 61, NULL, 'Show Ivete Sangalo', 'Ginasio', '2022-03-21', 'arquivos/uploads_evento/1089548478331145980202110180119.png', NULL, NULL, '100.00', NULL, 10, 4, '13:00:00', 2, 'S', '2021-11-02 13:00:24'),
+(3, 70, 2, 'Palestra motivacional', 'Ginasio 2', '2022-03-21', 'arquivos/uploads_evento/1157140418406253351202110180120.jpg', NULL, NULL, '25.00', '15.00', 14, 5, '20:00:00', 2, 'S', '2021-11-02 13:00:24'),
+(4, 72, 3, 'Evento de incentivo a leitura', 'Ginasio', '2022-03-25', NULL, NULL, NULL, '50.00', '20.00', NULL, 3, '12:00:00', 1000, 'S', '2021-11-02 13:00:24'),
+(5, 69, 3, 'Curso bÃ¡sico de programaÃ§Ã£o web', 'Ginasio', '2022-03-16', 'arquivos/uploads_evento/848097837731818151202111021413.jpg', NULL, NULL, '70.00', '20.00', NULL, 1, '08:00:00', 1000, 'S', '2021-11-02 13:00:24'),
+(6, 1, NULL, 'Curso de mÃ¡gica', 'Ginasio', '2021-11-06', 'arquivos/uploads_evento/52839379419850508202110180130.jpg', NULL, NULL, '30.00', NULL, NULL, 3, '15:00:00', 3, 'S', '2021-11-02 13:00:24'),
+(7, 3, NULL, 'Show Wesley safadÃ£o', 'Ginasio', '2022-01-29', 'arquivos/uploads_evento/863015299628290534202110180123.jpg', NULL, NULL, '80.00', NULL, NULL, 4, '19:00:00', 1000, 'S', '2021-11-02 13:00:24'),
+(11, 37, 3, 'evento de teste', 'local teste', '2021-12-22', NULL, NULL, NULL, '100.00', '20.00', 10, 5, '14:00:00', 2, 'S', '2021-11-02 16:27:39');
 
 -- --------------------------------------------------------
 
@@ -626,7 +689,7 @@ CREATE TABLE IF NOT EXISTS `promocao` (
 INSERT INTO `promocao` (`cd_promossao`, `ds_promossao`, `vl_promossao`, `dt_prazoini`, `dt_prazofim`) VALUES
 (1, 'Idoso 80+', '15.00', NULL, NULL),
 (2, 'CrianÃ§a 2021, crianÃ§a atÃ© 13 anos', '15.00', '2021-10-01', '2021-10-31'),
-(3, 'Estudante 2022', '20.00', '2022-01-02', '2022-12-31');
+(3, 'Estudante 2022', '20.00', '2022-01-01', '2022-12-31');
 
 -- --------------------------------------------------------
 
@@ -657,6 +720,12 @@ INSERT INTO `tipoevento` (`cd_tipoevento`, `ds_evento`) VALUES
 --
 -- Restrições para despejos de tabelas
 --
+
+--
+-- Limitadores para a tabela `album`
+--
+ALTER TABLE `album`
+  ADD CONSTRAINT `fk10888` FOREIGN KEY (`cd_evento`) REFERENCES `evento` (`cd_evento`) ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `cadastro`
@@ -715,31 +784,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
---
--- Estrutura da tabela `album`
---
-
-DROP TABLE IF EXISTS `album`;
-CREATE TABLE IF NOT EXISTS `album` (
-  `cd_album` int(11) NOT NULL AUTO_INCREMENT,
-  `cd_evento` int(11) NOT NULL,
-  `ds_album` varchar(50) NULL,
-  `ft_caminho` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`cd_album`),
-  KEY `fk1044_idx` (`cd_album`),
-  KEY `fk10444_idx` (`cd_evento`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
-
-ALTER TABLE `album`
-  ADD CONSTRAINT `fk10888` FOREIGN KEY (`cd_evento`) REFERENCES `evento` (`cd_evento`) ON UPDATE CASCADE;
-
-ALTER TABLE evento
-ADD publica CHAR(1) NOT NULL DEFAULT 'N';
-
-ALTER TABLE evento
-ADD dt_publica DATETIME NULL;
-
-
-UPDATE evento SET publica = 'S', dt_publica = now();
-

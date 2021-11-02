@@ -209,7 +209,7 @@ a.article, a.article:hover {
 }
 
 .ft-evento-miniatura{
-    width: 50px !important;
+    width: 70px !important;
 }
 
 .ft-evento-miniatura-media{
@@ -237,5 +237,40 @@ th,td{
 
 .ft-album-miniatura{
     width:50%;
+}
+
+.fundo_impressao_rodape_relatorio {
+    background-image: url(../img/btn_lib_imprimir.png);
+    width: 138px;
+    height: 42px;
+    display: block;
+    float: left;
+    margin-right: 20px;
+}
+
+.centralizar{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tooltip-inner{
+    max-width: 400px;
+    font-size: 1.21em;
+    background-color: #343a40;
+    color: white;
+    text-align:justify!important;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2) !important;
+    padding:15px !important;
+    font-weight: bold;
+
+}
+
+.tooltip.top .tooltip-arrow {
+    border-top-color: #343a40;
+    width: 1em;
 }
 

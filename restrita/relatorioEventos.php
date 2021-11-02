@@ -28,29 +28,27 @@
 
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" type="text/css" href="css/datepicker.css">
-        <link rel="stylesheet" href="css/sweetalert.css"/>
 
         <script src="js/jquery-.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/angular.min.js"></script>
 
 	    <script src="js/jquery.inputmask.bundle.min.js"></script>
-        <script src="js/masks.js"></script>
-	    <script src="js/ui-mask.js"></script>
 	    <script src="js/angular-locale_pt-br.js"></script>
-	    <script src="js/bootstrap-datepicker.js"></script>
 
         <script src="js/dirPagination.js" language="javascript" type="text/javascript"></script>
         
         <script src="controllers/vendasEventoController.js"></script>
-        <script src="js/angular-input-masks-standalone.min.js"></script>
-        <script src="js/sweetalert.min.js"></script>
 
     </head>
     <body ng-app="app" ng-controller="vendasEventoController">
         <script>var pagina = 'RELATORIO';</script>
         <div id="content" class="container" style="width:100%;">
+            <div class="row">
+                <div class="col-sm-12 centralizar">
+                    <a href="javascript:void(0);" onclick="window.print()" class="fundo_impressao_rodape_relatorio"></a>
+                </div>
+            </div>
             <div class="row form-group" ng-repeat="e in lista" style="margin-top:40px;">
                 <div class="col-sm-12">
                     <table class="table table-striped table-bordered">

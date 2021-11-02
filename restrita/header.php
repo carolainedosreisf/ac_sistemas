@@ -24,7 +24,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
         <title>Administração - Blablabla</title>
-
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/datepicker.css">
@@ -73,6 +73,7 @@
                     <li><a href="tiposEventos.php">Tipos de Eventos</a></li>
                     <li><a href="eventos.php">Eventos</a></li>
                     <li><a href="formasPagamento.php">Formas de Pagamento</a></li>
+                    <li><a href="clientes.php">Clientes</a></li>
                     <li><a href="logout.php">Sair</a></li>
                 </ul>
             </nav>
