@@ -25,9 +25,10 @@
                     ,(SELECT ds_evento FROM tipoevento AS c WHERE c.cd_tipoevento = e.cd_tipoevento) AS nome_tipo_evento
                     ,e.ds_evento
                     ,e.motivo_cancelamento
+                    ,item.qt_compra
                 FROM comprait AS item
                 INNER JOIN cadastro AS c ON c.cd_cadastro = (SELECT cd_cadastro FROM compra AS i WHERE i.cd_compra = item.cd_compra)
-                INNER JOIN evento as e ON cd_evento = (SELECT cd_evento FROM ingresso AS i WHERE i.cd_ingresso = item.cd_ingresso) 
+                INNER JOIN evento as e ON e.cd_evento = item.cd_evento
                 WHERE e.cd_evento = {$cd_evento}";
 
         $query = mysqli_query($conexao, $sql);
@@ -55,7 +56,7 @@
                     <span>
                         <i>Olá {$item['nm_cadastro']}, o evento que voce comprou foi cancelado, EM BREVE VOCÊ SERÁ REEMBOLSADO!</i><br><br>
                         <b>Evento: </b>{$item['ds_evento']} ({$item['nome_tipo_evento']}) <br>
-                        <b>Data: </b>{$item['dt_evento']}<br>
+                        <b>Data Evento: </b>{$item['dt_evento']}<br>
                         <b>Valor a ser reembolsado: </b>R$ {$valor} <br>
                         <b>Motivo do cancelamento: </b>{$item['motivo_cancelamento']}
                     </span>

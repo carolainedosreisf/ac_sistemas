@@ -16,19 +16,34 @@
                 ,item.qt_compra
                 ,item.vl_compra
                 ,(SELECT DATE_FORMAT(dt_compra, '%d/%m/%Y %H:%i') FROM compra AS i WHERE i.cd_compra = item.cd_compra) AS dt_compra_br
+                ,(item.qt_compra * item.vl_compra) AS vl_reembolso
+                ,IFNULL(item.consciencia_cancelamento,0) AS consciencia_cancelamento
+                ,c.nr_contato
+                ,c.nr_telefone
+                ,c.ed_email
             FROM comprait AS item
             INNER JOIN cadastro AS c ON c.cd_cadastro = (SELECT cd_cadastro FROM compra AS i WHERE i.cd_compra = item.cd_compra)
-            WHERE (SELECT cd_evento FROM ingresso AS i WHERE i.cd_ingresso = item.cd_ingresso) = {$id}
-            ORDER BY (SELECT dt_compra FROM compra AS i WHERE i.cd_compra = item.cd_compra) DESC";
+            WHERE item.cd_evento = {$id}
+            ORDER BY item.cd_compra DESC";
 
     $query = mysqli_query($conexao, $sql);
     $lista = [];
     $qtd = 0;
     $valor = 0;
+    $i = 0;
+
     while($item = mysqli_fetch_array($query, MYSQLI_ASSOC)){
-        $lista[] = $item;
+        $lista[$i] = $item;
         $qtd += $item['qt_compra'];
         $valor += $item['qt_compra'] * $item['vl_compra'];
+
+        $lista[$i]['nr_telefone'] = formatar_telefone($item['nr_telefone']);
+        $lista[$i]['nr_contato'] = formatar_telefone($item['nr_contato']);
+
+        $lista[$i]['br_email'] = $item['nr_telefone'] || $item['nr_contato']?1:0;
+        $lista[$i]['br_contato'] = $item['nr_telefone']?1:0;
+
+        $i++;
     } 
     
     echo json_encode(['lista'=>$lista,'qtd'=>$qtd,'valor'=>$valor]);

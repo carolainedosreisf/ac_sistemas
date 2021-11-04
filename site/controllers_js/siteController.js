@@ -10,6 +10,7 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
     $scope.lista_formas_pagamento = [];
     $scope.parcelas = [];
     $scope.lista_albuns = [];
+    $scope.lista_cancelados = [];
     $scope.contato = {};
     $scope.cad_compra = {};
 
@@ -17,6 +18,27 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
         nome_cidade:'',
         nome_tipo_evento:''
     };
+
+    $scope.getComprasCanceladas = function(){
+        $scope.carregando = true;
+        $http({
+            url: 'controllers_php/Compra/getCompras.php',
+            method: 'GET',
+            params:{filtro:1}
+        }).then(function (retorno) {
+            $scope.lista_cancelados = retorno.data;
+            if((retorno.data).length > 0){
+                $('#avisoCancelamento').modal('show');
+            }else{
+                $('#avisoCancelamento').modal('hide');
+            }
+
+            $scope.carregando = false;
+        },
+        function (retorno) {
+            console.log('Error: '+retorno.status);
+        });
+    }
 
     $scope.getEventos = function(){ 
         var ocorrido = pagina=='ALBUM'?1:0;
@@ -293,6 +315,25 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
         });
     }
 
+    $scope.setConscienciaCancelamento = function(dados){
+        $scope.carregando = true;
+        var data = {
+            cd_evento:dados.cd_evento,
+            cd_compra:dados.cd_compra
+        }
+        $http({
+            url: 'controllers_php/Evento/setConscienciaCancelamento.php',
+            method: 'POST',
+            data: data
+        }).then(function (retorno) {
+            $scope.carregando = false;
+            $scope.getComprasCanceladas();
+        },
+        function (retorno) {
+            console.log('Error: '+retorno.status);
+        });
+    }
+
     var array_column_search = function(lista,coluna,id){
         var index = lista.map(e => e[coluna]).indexOf(id);
         return lista[index];
@@ -308,6 +349,9 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
 
     if(pagina=='HOME' || pagina=='ALBUM'){
         $scope.getEventos();
+        if(pagina=='HOME' && usuario !=0){
+            $scope.getComprasCanceladas();
+        }
     }
 
     

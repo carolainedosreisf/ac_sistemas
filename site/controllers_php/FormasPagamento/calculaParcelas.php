@@ -2,7 +2,7 @@
     require '../../funcoes.php';
 
     $qtd = $_GET['qtd'];
-    $valor = 67.70;//$_GET['valor'];
+    $valor = $_GET['valor'];
     $parcelas = [];
     $total = 0;
 

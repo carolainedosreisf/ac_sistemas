@@ -49,7 +49,7 @@ app.controller('vendasEventoController', ['$scope', '$http','$filter','$window',
             console.log('Error: '+retorno.status);
         });
     }
-    if(pagina=='VENDAS'){
+    if(pagina=='VENDAS' || pagina=='CONSCIENCIA'){
         $scope.getVendasEvento();
         $scope.getEvento();
     }else if(pagina=='RELATORIO'){

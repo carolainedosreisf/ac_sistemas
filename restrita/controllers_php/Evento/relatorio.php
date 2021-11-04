@@ -15,9 +15,7 @@
                 ,nr_lotacao
                 ,IFNULL((SELECT SUM(qt_compra) 
                             FROM comprait 
-                            WHERE comprait.cd_ingresso = (SELECT cd_ingresso 
-                                                            FROM ingresso AS i 
-                                                            WHERE i.cd_evento = e.cd_evento))
+                            WHERE comprait.cd_evento = e.cd_evento)
                         ,0) AS qtd_vendas
             FROM evento AS e
             ORDER BY cd_evento DESC";
@@ -29,21 +27,21 @@
     while($item = mysqli_fetch_array($query, MYSQLI_ASSOC)){
         $cd_evento = $item['cd_evento'];
         $sql_clientes = "SELECT 
-                c.nm_cadastro
-                ,c.sexo
-                ,DATE_FORMAT(c.dt_nascto, '%d/%m/%Y') AS dt_nascto
-                ,(SELECT nm_cidade FROM cidade AS b WHERE c.cd_cidade = b.cd_cidade) AS nome_cidade
-                ,(SELECT uf_cidade FROM cidade AS b WHERE c.cd_cidade = b.cd_cidade) AS uf_cidade
-                ,c.ed_email
-                ,c.nr_telefone
-                ,c.nr_contato
-                ,item.qt_compra
-                ,item.vl_compra
-                ,(SELECT DATE_FORMAT(dt_compra, '%d/%m/%Y %H:%i') FROM compra AS i WHERE i.cd_compra = item.cd_compra) AS dt_compra_br
-            FROM comprait AS item
-            INNER JOIN cadastro AS c ON c.cd_cadastro = (SELECT cd_cadastro FROM compra AS i WHERE i.cd_compra = item.cd_compra)
-            WHERE (SELECT cd_evento FROM ingresso AS i WHERE i.cd_ingresso = item.cd_ingresso) = {$cd_evento}
-            ORDER BY (SELECT dt_compra FROM compra AS i WHERE i.cd_compra = item.cd_compra) DESC";
+                            c.nm_cadastro
+                            ,c.sexo
+                            ,DATE_FORMAT(c.dt_nascto, '%d/%m/%Y') AS dt_nascto
+                            ,(SELECT nm_cidade FROM cidade AS b WHERE c.cd_cidade = b.cd_cidade) AS nome_cidade
+                            ,(SELECT uf_cidade FROM cidade AS b WHERE c.cd_cidade = b.cd_cidade) AS uf_cidade
+                            ,c.ed_email
+                            ,c.nr_telefone
+                            ,c.nr_contato
+                            ,item.qt_compra
+                            ,item.vl_compra
+                            ,(SELECT DATE_FORMAT(dt_compra, '%d/%m/%Y %H:%i') FROM compra AS i WHERE i.cd_compra = item.cd_compra) AS dt_compra_br
+                        FROM comprait AS item
+                        INNER JOIN cadastro AS c ON c.cd_cadastro = (SELECT cd_cadastro FROM compra AS i WHERE i.cd_compra = item.cd_compra)
+                        WHERE item.cd_evento  = {$cd_evento}
+                        ORDER BY item.cd_compra DESC";
 
         $lista[$i] = $item;
 

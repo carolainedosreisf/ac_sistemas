@@ -12,6 +12,7 @@ app.controller('minhasComprasController', ['$scope', '$http','$filter','$locatio
         $http({
             url: 'controllers_php/Compra/getCompras.php',
             method: 'GET',
+            params:{filtro:0}
         }).then(function (retorno) {
             $scope.lista_compras = retorno.data;
             $scope.carregando = false;

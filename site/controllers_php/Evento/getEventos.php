@@ -33,16 +33,12 @@
                 ,e.dt_evento
                 ,IF ((IFNULL((SELECT SUM(qt_compra) 
                             FROM comprait 
-                            WHERE comprait.cd_ingresso = (SELECT cd_ingresso 
-                                                            FROM ingresso AS i 
-                                                            WHERE i.cd_evento = e.cd_evento))
+                            WHERE comprait.cd_evento = e.cd_evento)
                         ,0) >= e.nr_lotacao),1,0) AS lotado
-                ,(SELECT cd_ingresso FROM ingresso AS i WHERE i.cd_evento = e.cd_evento) AS cd_ingresso
+                ,e.cd_evento
                 ,IFNULL((SELECT SUM(qt_compra) 
                             FROM comprait 
-                            WHERE comprait.cd_ingresso = (SELECT cd_ingresso 
-                                                            FROM ingresso AS i 
-                                                            WHERE i.cd_evento = e.cd_evento))
+                            WHERE comprait.cd_evento = e.cd_evento)
                         ,0) AS qtd_vendas
             FROM evento AS e
             WHERE IFNULL(e.sn_cancelado,'N') = 'N'

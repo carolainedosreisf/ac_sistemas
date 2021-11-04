@@ -38,17 +38,6 @@ CREATE TABLE IF NOT EXISTS `album` (
   KEY `fk10444_idx` (`cd_evento`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
---
--- Extraindo dados da tabela `album`
---
-
-INSERT INTO `album` (`cd_album`, `cd_evento`, `ds_album`, `ft_caminho`) VALUES
-(1, 1, 'Imagem 1', 'arquivos/uploads_evento_albuns/1510375231274726496202111021550.jpg'),
-(2, 1, 'Imagem 2', 'arquivos/uploads_evento_albuns/2198345797870268860202111021550.jpg'),
-(3, 1, 'Imagem 3', 'arquivos/uploads_evento_albuns/303907835771163116202111021550.jpg'),
-(4, 1, 'Imagem 4', 'arquivos/uploads_evento_albuns/244124258179582326202111021550.jpg'),
-(5, 1, 'Imagem 5', 'arquivos/uploads_evento_albuns/1331717015177671590202111021550jpeg');
-
 -- --------------------------------------------------------
 
 --
@@ -419,24 +408,7 @@ CREATE TABLE IF NOT EXISTS `compra` (
   PRIMARY KEY (`cd_compra`),
   KEY `fk103_idx` (`cd_cadastro`),
   KEY `fk203` (`cd_fpagto`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `compra`
---
-
-INSERT INTO `compra` (`cd_cadastro`, `cd_compra`, `cd_fpagto`, `dt_compra`, `vl_total`) VALUES
-(6, 12, 2, '2021-10-31 20:05:46', '250.00'),
-(6, 13, 3, '2021-10-31 20:07:12', '130.00'),
-(1, 14, 3, '2021-10-31 23:40:45', '20.00'),
-(8, 15, 3, '2021-11-01 03:18:53', '80.00'),
-(1, 16, 2, '2021-11-01 04:24:19', '160.00'),
-(2, 17, 2, '2021-11-01 04:25:22', '240.00'),
-(3, 18, 3, '2021-11-01 04:25:56', '160.00'),
-(4, 19, 2, '2021-11-01 04:26:49', '320.00'),
-(5, 20, 3, '2021-11-01 04:27:36', '80.00'),
-(9, 21, 3, '2021-11-01 04:28:07', '160.00'),
-(7, 22, 1, '2021-11-01 04:28:47', '400.00');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -447,31 +419,13 @@ INSERT INTO `compra` (`cd_cadastro`, `cd_compra`, `cd_fpagto`, `dt_compra`, `vl_
 DROP TABLE IF EXISTS `comprait`;
 CREATE TABLE IF NOT EXISTS `comprait` (
   `cd_compra` int(11) NOT NULL,
-  `cd_ingresso` int(11) NOT NULL,
+  `cd_evento` int(11) NOT NULL,
   `qt_compra` int(11) NOT NULL,
   `vl_compra` decimal(18,2) NOT NULL,
-  PRIMARY KEY (`cd_compra`,`cd_ingresso`),
-  KEY `cd_ingresso_idx` (`cd_ingresso`)
+  PRIMARY KEY (`cd_compra`,`cd_evento`),
+  KEY `cd_ingresso_idx` (`cd_evento`),
+  KEY `cd_compra_idx` (`cd_compra`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `comprait`
---
-
-INSERT INTO `comprait` (`cd_compra`, `cd_ingresso`, `qt_compra`, `vl_compra`) VALUES
-(12, 2, 2, '100.00'),
-(12, 3, 2, '25.00'),
-(13, 5, 2, '20.00'),
-(13, 6, 3, '30.00'),
-(14, 1, 1, '20.00'),
-(15, 4, 1, '80.00'),
-(16, 4, 2, '80.00'),
-(17, 4, 3, '80.00'),
-(18, 4, 2, '80.00'),
-(19, 4, 4, '80.00'),
-(20, 4, 1, '80.00'),
-(21, 4, 2, '80.00'),
-(22, 4, 5, '80.00');
 
 -- --------------------------------------------------------
 
@@ -584,32 +538,16 @@ CREATE TABLE IF NOT EXISTS `fpagamentoit` (
 --
 -- Estrutura da tabela `ingresso`
 --
-
 DROP TABLE IF EXISTS `ingresso`;
 CREATE TABLE IF NOT EXISTS `ingresso` (
-  `cd_ingresso` int(11) NOT NULL AUTO_INCREMENT,
-  `ds_ingresso` varchar(50) NOT NULL,
+  `cd_compra` int(11) NOT NULL,
   `cd_evento` int(11) NOT NULL,
-  `dt_prazoini` date DEFAULT NULL,
-  `dt_prazofim` date DEFAULT NULL,
+  `seq` int(11) NOT NULL,
   `nr_lote` varchar(20) NOT NULL,
-  `vl_venda` decimal(18,2) NOT NULL,
-  PRIMARY KEY (`cd_ingresso`,`cd_evento`),
-  KEY `fk105_idx` (`cd_evento`)
+  PRIMARY KEY (`cd_compra`,`cd_evento`,`seq`),
+  KEY `fk105_idx1` (`cd_compra`),
+  KEY `fk105_idx11` (`cd_evento`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `ingresso`
---
-
-INSERT INTO `ingresso` (`cd_ingresso`, `ds_ingresso`, `cd_evento`, `dt_prazoini`, `dt_prazofim`, `nr_lote`, `vl_venda`) VALUES
-(1, 'Ingresso do Evento: Evento de incentivo a leitura', 4, NULL, NULL, '2915b939c5a6440d2358', '20.00'),
-(2, 'Ingresso do Evento: Show Ivete Sangalo', 2, NULL, NULL, '7cd3d83f4178a598930e', '100.00'),
-(3, 'Ingresso do Evento: Palestra motivacional', 3, NULL, NULL, '5db996a8b3612fb5f5f9', '25.00'),
-(4, 'Ingresso do Evento: Show Wesley safadÃ£o', 7, NULL, NULL, '45cdf1d7b48a1fa85cca', '80.00'),
-(5, 'Ingresso do Evento: evento de teste', 11, NULL, NULL, 'c961836aba9ffeea2fd5', '20.00'),
-(6, 'Ingresso do Evento: Curso de mÃ¡gica', 6, NULL, NULL, '27285be7d824413227bd', '30.00'),
-(7, 'Ingresso do Evento: Show Gusttavo Lima', 1, NULL, NULL, '535be723be7555321b0e', '90.00');
 
 -- --------------------------------------------------------
 
@@ -745,7 +683,7 @@ ALTER TABLE `compra`
 --
 ALTER TABLE `comprait`
   ADD CONSTRAINT `fk106` FOREIGN KEY (`cd_compra`) REFERENCES `compra` (`cd_compra`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk206` FOREIGN KEY (`cd_ingresso`) REFERENCES `ingresso` (`cd_ingresso`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk206` FOREIGN KEY (`cd_evento`) REFERENCES `evento` (`cd_evento`) ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `empresa`
@@ -771,7 +709,9 @@ ALTER TABLE `fpagamentoit`
 -- Limitadores para a tabela `ingresso`
 --
 ALTER TABLE `ingresso`
-  ADD CONSTRAINT `fk105` FOREIGN KEY (`cd_evento`) REFERENCES `evento` (`cd_evento`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk1055` FOREIGN KEY (`cd_evento`) REFERENCES `evento` (`cd_evento`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk1066` FOREIGN KEY (`cd_compra`) REFERENCES `compra` (`cd_compra`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk1077` FOREIGN KEY (`cd_compra`,`cd_evento`) REFERENCES `comprait` (`cd_compra`,`cd_evento`) ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `login`

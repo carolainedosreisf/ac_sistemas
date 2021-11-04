@@ -236,8 +236,13 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
 
     $scope.openCancelamento = function(dados)
     {
-        $scope.objEvento = angular.copy(dados);
-        $('#cancelamento').modal('show');
+        if(dados.sn_cancelado == 'N'){
+            $scope.objEvento = angular.copy(dados);
+            $('#cancelamento').modal('show');
+        }else{
+            window.location = "cienciasCancelamento.php?id="+btoa(dados.cd_evento);
+        }
+        
     }
 
     $scope.setCancelamento = function(){

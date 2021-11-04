@@ -2,7 +2,7 @@
 <?php $controller = "vendasEventoController"; ?>
 
 <?php include 'header.php' ?>
-<script>var pagina = 'VENDAS';</script>
+<script>var pagina = 'CONSCIENCIA';</script>
 <div id="content" class="container" style="width:100%;">
     <div class="row">
         <div class="col-sm-12">
@@ -16,57 +16,57 @@
         </div>
     </div>
 
-    <h2>Vendas do Evento: {{objEvento.ds_evento}} ({{objEvento.nome_tipo_evento}})</h2><br>
-
-    <div class="row form-group">
-        <div class="col-sm-8"></div>
-        <div class="col-sm-4">
-            <input type="text" class="form-control" placeholder="Pesquisar..." ng-model="filtrar">
-        </div>
+    <h2>Clientes e Ciencias do calcelamento do enveto</h2><br>
+    <div class="row">
+        <div class="col-sm-7">
+            <span><b>Evento: </b>{{objEvento.ds_evento}} ({{objEvento.nome_tipo_evento}})</span><br>
+            <span><b>Data Evento: </b>{{objEvento.dt_evento}} {{objEvento.hr_evento}}</span><br>
+            <span><b>Valor Evento: </b>{{objEvento.vl_mostrar | currency:'R$'}}</span><br>
+            <span><b>Motivo Cancelamento: </b>{{objEvento.motivo_cancelamento}}</span><br><br>
+            </div>
     </div>
+    
+
     <div class="row">
         <div class="col-sm-12">
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>Cliente</th>
-                        <th>Email</th>
-                        <th width="10%" class="text-center">Sexo</th>
-                        <th width="10%" class="text-center">Dt. Nascimento</th>
+                        <th>Contato</th>
                         <th width="10%" class="text-center">Quantidade</th>
-                        <th width="10%" class="text-center">Valor Total</th>
+                        <th width="10%" class="text-center">Valor Reembolso</th>
                         <th width="10%" class="text-center">Dt. Compra</th>
-
+                        <th width="10%" class="text-center">Consciente?</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-show="(lista_vendas | filter:filtrar ).length <=0">
-                        <td class="text-center" colspan="7">Nenhum resgistro encontrado.</td>
+                    <tr ng-show="(lista_vendas).length <=0">
+                        <td class="text-center" colspan="6">Nenhum resgistro encontrado.</td>
                     </tr>
-                    <tr pagination-id="pg_promocoes" dir-paginate="l in lista_vendas| filter:filtrar | itemsPerPage:20">
+                    <tr pagination-id="pg_conciencia" dir-paginate="l in lista_vendas | itemsPerPage:20">
                         <td>{{l.nm_cadastro}}</td>
-                        <td>{{l.ed_email}}</td>
-                        <td class="text-center">{{l.sexo=='F'?'Feminino':'Masculino'}}</td>
-                        <td class="text-center">{{l.dt_nascto}}</td>
+                        <td>
+                            {{l.ed_email}} <br ng-show="l.br_email">
+                            {{l.nr_telefone}} <br ng-show="l.br_contato">
+                            {{l.nr_contato}}
+
+                        </td>
                         <td class="text-center">{{l.qt_compra}}</td>
-                        <td class="text-center">{{(l.vl_compra*l.qt_compra) | currency:'R$'}}</td>
+                        <td class="text-center">{{l.vl_reembolso | currency:'R$'}}</td>
                         <td class="text-center">{{l.dt_compra_br}}</td>
+                        <td class="text-center">{{l.consciencia_cancelamento==1?'Sim':'Não'}}</td>
                     </tr>
                 </tbody>
             </table>
-            <div class="col-sm-6 padding-0">
-                <p>
-                    <b>Qtd. de Vendas: </b>{{qtd}}&nbsp;&nbsp;&nbsp;&nbsp;
-                    <b>Valor Total: </b>{{valor | currency:'R$'}}
-                </p>
-            </div>
+            <div class="col-sm-6"></div>
             <div class="col-sm-6 padding-0">
                 <div class="pull-right">
                     <dir-pagination-controls 
                         max-size="7" 
                         direction-links="true" 
                         boundary-links="true" 
-                        pagination-id="pg_promocoes">  
+                        pagination-id="pg_conciencia">  
                     </dir-pagination-controls>  
                 </div>
             </div>

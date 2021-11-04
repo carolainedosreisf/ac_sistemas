@@ -86,5 +86,21 @@
         return floor($val * $mult) / $mult;
     }
 
+    function montaUpdate($obj,$semAspa = [])
+    {
+        $txt = "";
+        foreach ($obj as $key => $value) {
+            if($value){
+                if(array_search($key,$semAspa) === false){
+                    $txt .= $key." = '".$value."', ";
+                }else{
+                    $txt .= $key." = ".$value.", ";
+                }
+            }else{
+                $txt .= $key." = null, ";
+            }
+        }
+        return substr($txt,0, strlen($txt) -2);
+    }
 
 ?>
