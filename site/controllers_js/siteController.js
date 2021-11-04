@@ -1,5 +1,5 @@
 var app = angular.module('app', ['ngSanitize','idf.br-filters','ui.utils.masks','ui.mask','angularUtils.directives.dirPagination']);
-app.controller('siteController', ['$scope', '$http','$filter','$location','$anchorScroll','$timeout', function($scope,$http,$filter,$location,$anchorScroll,$timeout) {
+app.controller('siteController', ['$scope', '$http','$filter','$location','$anchorScroll','$timeout','$window', function($scope,$http,$filter,$location,$anchorScroll,$timeout,$window) {
     $scope.lista_lancamentos = [];
     $scope.usuario = JSON.parse(usuario);
     $scope.lista_carrinho = JSON.parse(carrinho);
@@ -155,12 +155,35 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
     }
 
     $scope.setContato = function(){
+
         if($scope.form_contato.$valid){
+            $scope.carregando = true;
             $http({
                 url: 'controllers_php/Contato/sendEmail.php',
                 method: 'POST',
                 data: $scope.contato
             }).then(function (retorno) {
+                $scope.carregando = false;
+                if(retorno.data==1){
+                    swal({
+                        title: "Contato enviado sucesso!",
+                        text: "",
+                        type: "success",
+                        showCancelButton: false,
+                        confirmButtonClass: "btn-success",
+                        confirmButtonText: "Ok",
+                      },
+                      function(){
+                        $window.location.reload();
+                    });
+                }else{
+                    console.log(retorno.data);
+                    swal({
+                        title: 'Erro ao salvar!',
+                        text: '',
+                        type: 'warning'
+                    });
+                }
                 
             },
             function (retorno) {

@@ -98,10 +98,7 @@
 			</div>
 			<div id="navbar-collapse-02" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="propClone"><a href="index.php">Lançamentos</a></li>
-					<li class="propClone"><a href="">Promoções</a></li>
-					<li class="propClone"><a href="">Eventos</a></li>
-					<li class="propClone"><a href="">Agenda</a></li>
+					<li class="propClone"><a href="index.php">Eventos</a></li>
 					<li class="propClone"><a href="eventosoCorridos.php">Albuns</a></li>
 					<li class="propClone"><a href="contato.php">Contato</a></li>
 					<li class="propClone"><a href="minhasCompras.php" ng-show="usuario && usuario.cd_permissao != 1">Minhas Compras</a></li>

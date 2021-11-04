@@ -1,6 +1,7 @@
 <?php
     require '../../conexao.php';
     require '../../funcoes.php';
+    require '../../../envia_email.php';
 
     $obj = getPostAngular();
     $cd_evento = $obj['cd_evento'];
@@ -20,7 +21,7 @@
                     c.nm_cadastro
                     ,c.ed_email
                     ,(item.qt_compra * item.vl_compra) AS vl_reembolso
-                    ,CONCAT(DATE_FORMAT(e.dt_evento, '%d/%m/%Y'),DATE_FORMAT(hr_evento, '%H:%i')) AS dt_evento
+                    ,CONCAT(DATE_FORMAT(e.dt_evento, '%d/%m/%Y'),' ',DATE_FORMAT(hr_evento, '%H:%i')) AS dt_evento
                     ,(SELECT ds_evento FROM tipoevento AS c WHERE c.cd_tipoevento = e.cd_tipoevento) AS nome_tipo_evento
                     ,e.ds_evento
                     ,e.motivo_cancelamento
@@ -33,9 +34,43 @@
 
         while($item = mysqli_fetch_array($query, MYSQLI_ASSOC)){
             $clientes[] = $item;
+            $valor = number_format($item['vl_reembolso'],2,",",".");
+            //$to = 'caroldosreis97@gmail.com'; 
+            $to = $item['ed_email']; 
+            $email_subject = utf8_decode("Blablabla Eventos avisa: O evento {$item['ds_evento']} ({$item['nome_tipo_evento']}) foi cancelado");
+            $texto = utf8_decode("<!DOCTYPE html>
+            <html lang='en'>
+            <head>
+                <meta charset='UTF-8'>
+                <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                <link rel='preconnect' href='https://fonts.googleapis.com'>
+                <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+                <link href='https://fonts.googleapis.com/css2?family=Zen+Antique&display=swap' rel='stylesheet'>
+                <link href='https://fonts.googleapis.com/css2?family=Roboto&family=Zen+Antique&display=swap' rel='stylesheet'>
+            </head>
+            <body style='font-size: 16px;line-height: 1.42857143;color: #777;font-family: 'Roboto', sans-serif'>
+                <div class='bs-callout-default' style='width:70%;padding: 20px;margin: 20px 0;border: 1px solid #eee;border-left-color: #d9534f;border-left-width: 5px;border-radius: 3px;'>
+                    <h3 style='text-align:center;font-family: 'Zen Antique', serif;'>Aviso!</h3>
+                    <span>
+                        <i>Olá {$item['nm_cadastro']}, o evento que voce comprou foi cancelado, EM BREVE VOCÊ SERÁ REEMBOLSADO!</i><br><br>
+                        <b>Evento: </b>{$item['ds_evento']} ({$item['nome_tipo_evento']}) <br>
+                        <b>Data: </b>{$item['dt_evento']}<br>
+                        <b>Valor a ser reembolsado: </b>R$ {$valor} <br>
+                        <b>Motivo do cancelamento: </b>{$item['motivo_cancelamento']}
+                    </span>
+                </div>
+            </body>
+            </html>
+            ");
+
+            $mail->addAddress($to, 'Empresa contato pelo site');
+            $mail->Subject = $email_subject;
+            $mail->msgHTML($texto);
+            $mail->send();
         } 
     }
-    
+
     echo $query_;
 
 ?>

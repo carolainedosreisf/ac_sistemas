@@ -787,3 +787,6 @@ COMMIT;
 
 ALTER TABLE evento
 ADD motivo_cancelamento VARCHAR(255) NULL;
+
+ALTER TABLE comprait
+ADD consciencia_cancelamento INTEGER(1);
