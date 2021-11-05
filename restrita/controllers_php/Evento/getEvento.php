@@ -26,6 +26,7 @@
                 ,nr_lotacao
                 ,publica
                 ,motivo_cancelamento
+                ,carga
             FROM evento AS e
             WHERE cd_evento = {$id}";
 

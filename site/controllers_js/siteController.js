@@ -45,7 +45,7 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
         $http({
             url: 'controllers_php/Evento/getEventos.php',
             method: 'GET',
-            params:{ocorrido}
+            params:{ocorrido,cd_cadastro:$scope.usuario.cd_cadastro}
         }).then(function (retorno) {
             $scope.lista_lancamentos = retorno.data;
             if($scope.lista_lancamentos.length >0){
@@ -117,6 +117,27 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
                 window.location = "login.php"
               });
         }else{
+            if(dados.bloq_academico==1){
+                $scope.msgAcademico();
+                return;
+            }
+
+            if(dados.cd_tipoevento==1 && tipo==2){
+                $scope.msgAcademico();
+                return;
+            }
+
+            if(dados.cd_tipoevento==1 && tipo==4){
+                var objEvento = array_column_search($scope.lista_carrinho,'cd_evento',dados.cd_evento);
+                if( typeof objEvento != 'undefined'){
+                    if(objEvento.cd_tipoevento=='1'){
+                        $scope.msgAcademico();
+                        return;
+                    }
+                }
+            }
+
+            console.log($scope.lista_carrinho)
             dados.tipo = tipo;
             if(!(tipo==1 && dados.qtd <=1)){
                 if(tipo==3){
@@ -334,6 +355,17 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
         });
     }
 
+    $scope.msgAcademico = function(){
+        swal({
+            title: "",
+            text: "Esse evento é um evento do tipo acadêmico, por tanto só é permitido uma compra por cliente.",
+            type: "warning",
+            showCancelButton: false,
+            confirmButtonClass: "btn-info",
+            confirmButtonText: "Ok",
+          });
+    }
+    
     var array_column_search = function(lista,coluna,id){
         var index = lista.map(e => e[coluna]).indexOf(id);
         return lista[index];

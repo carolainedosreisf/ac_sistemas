@@ -77,18 +77,22 @@
             </div>
         </div>
         <div class="row form-group">
-            <div class="col-sm-4" ng-class="form_evento.cd_tipoevento.$invalid && (form_evento.$submitted || form_evento.cd_tipoevento.$dirty)?'has-error':''">
+            <div class="col-sm-3" ng-class="form_evento.cd_tipoevento.$invalid && (form_evento.$submitted || form_evento.cd_tipoevento.$dirty)?'has-error':''">
                 <label for="cd_tipoevento">Tipo:</label>
                 <select class="form-control" name="cd_tipoevento" id="cd_tipoevento" autocomplete="off" ng-model="cad.cd_tipoevento" required="required" ng-disabled="disabled_">
                     <option value="">Selecione...</option>
                     <option value="{{l.cd_tipoevento}}" ng-repeat="l in lista_tipos_eventos">{{l.ds_evento}}</option>
                 </select>
             </div>
+            <div class="col-sm-2" ng-class="form_evento.carga.$invalid && (form_evento.$submitted || form_evento.carga.$dirty)?'has-error':''">
+                <label for="carga">CH:</label>
+                <input type="text" class="form-control" name="carga" id="carga" autocomplete="off" ng-model="cad.carga" ng-required="cad.cd_tipoevento==1" maxlength="22" ui-number-mask="2" ng-disabled="disabled_">
+            </div>
             <div class="col-sm-2" ng-class="form_evento.vl_venda.$invalid && (form_evento.$submitted || form_evento.vl_venda.$dirty)?'has-error':''">
                 <label for="vl_venda">Valor de Venda:</label>
                 <input type="text" class="form-control" ng-change="erro_promocao=cad.vl_venda<=cad.vl_promocao?1:0" name="vl_venda" id="vl_venda" autocomplete="off" ng-model="cad.vl_venda" required="required" maxlength="22" ui-number-mask="2" ng-disabled="disabled_">
             </div>
-            <div class="col-sm-4" ng-class="erro_promocao?'has-error':''">
+            <div class="col-sm-3" ng-class="erro_promocao?'has-error':''">
                 <label for="cd_promocao">Promoção:</label>
                 <select class="form-control" name="cd_promocao" id="cd_promocao" autocomplete="off" ng-model="cad.cd_promocao" ng-change="setCampoPromocao()" ng-disabled="disabled_">
                     <option value="">Nenhuma</option>

@@ -72,7 +72,7 @@
                         <th width="5%" class="text-center">#</th>
                         <th width="5%" class="text-center">Imagem</th>
                         <th>Evento</th>
-                        <th width="25%" class="text-center">Ingresso/Lotação/Álbm/Ver/Cancelar</th>
+                        <th width="25%" class="text-center">Lotação/Álbm/Ver/Cancelar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -95,12 +95,13 @@
                             <span ng-class="l.cd_promocao>0?'vl-venda':''">{{l.vl_venda | currency:'R$'}}</span>
                             <span ng-class="l.cd_promocao>0?'vl-promocao':''" ng-show="l.cd_promocao>0">{{l.vl_promocao | currency:'R$'}}</span> <br>
                             {{l.nome_cidade}} ({{l.uf_cidade}})
+                            <span ng-show="l.cd_tipoevento==1">
+                                <br>
+                                <a ng-click="openCertificado(l)" style="margin-top:10px;" class="btn btn-primary btn-sm">Cerificado <i class="fa fa-graduation-cap"></i></a>
+                            </span>
+                            
                         </td>
                         <td class="text-center">
-                            <button class="btn btn-primary" data-html="true" data-toggle="tooltip" tooltip data-placement="top" data-original-title="Ingresso">
-                                <i class="fa fa-ticket"></i>
-                            </button>
-
                             <button class="btn btn-default" ng-click="openVendas(l.cd_evento)" data-html="true" data-toggle="tooltip" tooltip data-placement="top" data-original-title="Lotação">
                                 {{l.qtd_vendas}}/{{l.nr_lotacao}} <i class="glyphicon glyphicon-search"></i>
                             </button>

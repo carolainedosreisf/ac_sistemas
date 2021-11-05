@@ -39,14 +39,16 @@
                                 <tr>
                                     <td class="text-center" width="10%">
                                         <img src="../{{e.ft_caminho?e.ft_caminho:'arquivos/uploads_evento/sem-foto.jpg'}}">
+                                        <a  ng-show="e.cd_tipoevento==1 && e.mostra_certificado==1"ng-click="openCertificado(e)" style="margin-top:10px;" class="btn btn-primary btn-sm">Cerificado <i class="fa fa-graduation-cap"></i></a>
+
                                     </td>
                                     <td width="40%">
                                         <div class="informacoes">
                                             <b ng-show="e.sn_cancelado=='S'" style="color:red;" >
                                                 <i>Evento Cancelado</i>
-                                                <button ng-click="openCancelamento(e)" class="btn btn-primary btn-xs">
+                                                <a ng-click="openCancelamento(e)" class="btn btn-primary btn-xs">
                                                     <i class="glyphicon glyphicon-search"></i>
-                                                </button> <br>
+                                                </a> <br>
                                             </b>
                                             <span class="titulo-evento">{{e.ds_evento}} ({{e.nome_tipo_evento}})</span>
                                             <span class="text"> <b>Local: </b> {{e.ds_local}} / {{e.nome_cidade}} ({{e.uf_cidade}})</span>

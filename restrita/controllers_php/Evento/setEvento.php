@@ -11,6 +11,7 @@
         "cd_cidade" => $obj['cd_cidade'],
         "cd_promocao" => isset($obj['cd_promocao'])?$obj['cd_promocao']:null,
         "vl_promocao" => isset($obj['vl_promocao'])?$obj['vl_promocao']:null,
+        "carga" => isset($obj['carga'])?$obj['carga']:null,
         "ds_evento" => $obj['ds_evento'],
         "ds_local" => $obj['ds_local'],
         "dt_evento" => formataData($obj['dt_evento'],1),

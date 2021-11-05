@@ -730,3 +730,6 @@ ADD motivo_cancelamento VARCHAR(255) NULL;
 
 ALTER TABLE comprait
 ADD consciencia_cancelamento INTEGER(1);
+
+ALTER TABLE evento
+ADD carga decimal(18,2);

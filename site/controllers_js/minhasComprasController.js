@@ -27,5 +27,15 @@ app.controller('minhasComprasController', ['$scope', '$http','$filter','$locatio
         $('#cancelamento').modal('show');
     }
 
+    $scope.openCertificado = function(dados){
+        var data = {
+            cd_evento:dados.cd_evento,
+            cd_compra:dados.cd_compra
+        }
+
+        window.open('../gerar_certificado/gerador.php?t='+btoa(JSON.stringify(data)),'_blank');
+        console.log(data)
+    }
+
     $scope.getCompras();
 }]);

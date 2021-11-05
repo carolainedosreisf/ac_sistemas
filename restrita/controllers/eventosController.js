@@ -285,6 +285,14 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
         }
       
     }
+
+    $scope.openCertificado = function(dados){
+        var data = {
+            cd_evento:dados.cd_evento
+        }
+        window.open('../gerar_certificado/gerador.php?t='+btoa(JSON.stringify(data)),'_blank');
+        console.log(data)
+    }
     
     if(cadastro==1){
         $scope.getTiposEventos();
