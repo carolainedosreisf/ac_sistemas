@@ -9,7 +9,7 @@
             <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
                 <i class="glyphicon glyphicon-align-left"></i>
             </button>
-            <a type="button" href="eventos" class="btn btn-default">
+            <a type="button" href="index" class="btn btn-default">
                 <i class="glyphicon glyphicon-arrow-left"></i>
                 Voltar
             </a>

@@ -140,7 +140,7 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
             }).then(function (retorno) {
                 $scope.carregando = false;
                 if(retorno.data == 1){
-                    window.location = "eventos.php";
+                    window.location = "index.php";
                 }else{
                     $scope.carregando = false;
                     swal({

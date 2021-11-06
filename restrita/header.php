@@ -71,7 +71,7 @@
                     </li> -->
                     <li><a href="promocoes.php">Promoções</a></li>
                     <li><a href="tiposEventos.php">Tipos de Eventos</a></li>
-                    <li><a href="eventos.php">Eventos</a></li>
+                    <li><a href="index.php">Eventos</a></li>
                     <li><a href="checkIngressos.php">Check Ingressos</a></li>
                     <li><a href="formasPagamento.php">Formas de Pagamento</a></li>
                     <li><a href="clientes.php">Clientes</a></li>

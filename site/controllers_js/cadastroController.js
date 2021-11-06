@@ -63,7 +63,7 @@ app.controller('cadastroController', ['$scope', '$http','$filter','$timeout','$l
             data: $scope.login
         }).then(function (retorno) {
             if(retorno.data==1){
-                window.location = "../restrita/eventos.php";
+                window.location = "../restrita/index.php";
             }else if(retorno.data==2){
                 window.location = "index.php";
             }else{
