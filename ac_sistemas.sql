@@ -733,3 +733,7 @@ ADD consciencia_cancelamento INTEGER(1);
 
 ALTER TABLE evento
 ADD carga decimal(18,2);
+
+
+ALTER TABLE ingresso
+ADD check_presenca INTEGER(1);

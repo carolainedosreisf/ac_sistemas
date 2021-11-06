@@ -45,7 +45,7 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
         $http({
             url: 'controllers_php/Evento/getEventos.php',
             method: 'GET',
-            params:{ocorrido,cd_cadastro:$scope.usuario.cd_cadastro}
+            params:{ocorrido,cd_cadastro:$scope.usuario!=0?$scope.usuario.cd_cadastro:0}
         }).then(function (retorno) {
             $scope.lista_lancamentos = retorno.data;
             if($scope.lista_lancamentos.length >0){

@@ -28,6 +28,7 @@
                 ,IF(DATE_SUB(CONCAT(dt_evento,' ',e.hr_evento),INTERVAL 7 DAY) > NOW() AND IFNULL(sn_cancelado,'N')='N',1,0 ) AS permite_cancela
                 ,IFNULL(sn_cancelado,'N') AS sn_cancelado
                 ,motivo_cancelamento
+                ,if((CONCAT(dt_evento,' 00:00:00') >= NOW()),1,0) AS permite_check
             FROM evento AS e
             ORDER BY cd_evento DESC";
 

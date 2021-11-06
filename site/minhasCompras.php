@@ -39,8 +39,6 @@
                                 <tr>
                                     <td class="text-center" width="10%">
                                         <img src="../{{e.ft_caminho?e.ft_caminho:'arquivos/uploads_evento/sem-foto.jpg'}}">
-                                        <a  ng-show="e.cd_tipoevento==1 && e.mostra_certificado==1"ng-click="openCertificado(e)" style="margin-top:10px;" class="btn btn-primary btn-sm">Cerificado <i class="fa fa-graduation-cap"></i></a>
-
                                     </td>
                                     <td width="40%">
                                         <div class="informacoes">
@@ -61,6 +59,10 @@
                                         <span class="text"><b>Valor Unitário: </b>{{e.vl_venda | currency:'R$'}} </span>
                                         <span class="text"><b>Valor Total: </b>{{e.vl_venda*e.qt_compra | currency:'R$'}}</span>
                                         <span class="text"><b>Quantidade: </b>{{e.qt_compra}}</span>
+                                    </td>
+                                    <td width="10%">
+                                        <a ng-click="openIngressos(e)" style="margin:5px auto;" class="btn btn-success btn-sm">Ingresso(s) <i class="fa fa-ticket"></i></a>
+                                        <a  ng-show="e.cd_tipoevento==1 && e.mostra_certificado==1"ng-click="openCertificado(e)" style="margin:5px auto;" class="btn btn-primary btn-sm">Cerificado <i class="fa fa-graduation-cap"></i></a>
                                     </td>
                                 </tr>
                             </table>
@@ -91,6 +93,25 @@
                             </p>
                         </div>
                         
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="ingressos" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Ingresso(s): {{objEvento.ds_evento}} ({{objEvento.nome_tipo_evento}}) </h4>
+                    </div>
+                    <div class="modal-body">
+                       
+                        <p ng-repeat="l in  lista_ingressos" style="margin-left:20px"><b>&bull;</b> {{l.nr_lote}}</p>
+                        <i>Observação: Esses são os códigos dos seus ingressos apresente eles na entrada do evento.</i>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>

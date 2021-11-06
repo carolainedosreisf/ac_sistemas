@@ -37,8 +37,8 @@
             $clientes[] = $item;
             $valor = number_format($item['vl_reembolso'],2,",",".");
             //$to = 'caroldosreis97@gmail.com'; 
-            $to = $item['ed_email']; 
-            $email_subject = utf8_decode("Blablabla Eventos avisa: O evento {$item['ds_evento']} ({$item['nome_tipo_evento']}) foi cancelado");
+            //$to = $item['ed_email']; 
+            $email_subject = utf8_decode("Blablabla Eventos avisa: O evento {$item['ds_evento']} ({$item['nome_tipo_evento']}) foi cancelado -----");
             $texto = utf8_decode("<!DOCTYPE html>
             <html lang='en'>
             <head>

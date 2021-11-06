@@ -3,7 +3,7 @@
     require '../../funcoes.php';
     
     $ocorrido = $_GET['ocorrido'];
-    $cd_cadastro = $_GET['cd_cadastro'];
+    $cd_cadastro = isset($_GET['cd_cadastro'])?$_GET['cd_cadastro']:0;
     $filtro = "";
 
     if($ocorrido){
@@ -11,6 +11,15 @@
     }else{
         $filtro .= " AND dt_evento > NOW()";
 
+    }
+    $coluna = "";
+    if($cd_cadastro){
+        $coluna .= ",IFNULL(((SELECT 1 
+                        FROM comprait AS i
+                        WHERE i.cd_evento = e.cd_evento
+                    AND (SELECT cd_cadastro 
+                            FROM compra AS c 
+                            WHERE c.cd_compra = i.cd_compra) = {$cd_cadastro}) AND e.cd_tipoevento = 1),0) AS bloq_academico";
     }
 
     $sql = "SELECT 
@@ -41,12 +50,7 @@
                             FROM comprait 
                             WHERE comprait.cd_evento = e.cd_evento)
                         ,0) AS qtd_vendas
-                ,IFNULL(((SELECT 1 
-                             FROM comprait AS i
-                             WHERE i.cd_evento = e.cd_evento
-                            AND (SELECT cd_cadastro 
-                                    FROM compra AS c 
-                                    WHERE c.cd_compra = i.cd_compra) = {$cd_cadastro}) AND e.cd_tipoevento = 1),0) AS bloq_academico
+                {$coluna}
             FROM evento AS e
             WHERE IFNULL(e.sn_cancelado,'N') = 'N'
             {$filtro}

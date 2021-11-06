@@ -86,8 +86,8 @@
                     <div class="corpo-painel">
                         <div class="row form-group">
                             <div class="col-sm-6">
-                                <label for="nm_usuario">Nome:</label>
-                                <input type="text" id="nm_usuario" class="form-control" ng-value="usuario.nm_usuario" ng-disabled="true">
+                                <label for="nm_cadastro">Nome:</label>
+                                <input type="text" id="nm_cadastro" class="form-control" ng-value="usuario.nm_cadastro" ng-disabled="true">
                             </div>
                             <div class="col-sm-6">
                                 <label for="ed_email">Email:</label>
