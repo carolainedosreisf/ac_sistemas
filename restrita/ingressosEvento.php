@@ -7,7 +7,17 @@
     var id = "<?php echo $_GET['id']; ?>";
 </script>
 <div id="content" class="container" style="width:100%;">
-
+    <div class="row">
+        <div class="col-sm-12">
+            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                <i class="glyphicon glyphicon-align-left"></i>
+            </button>
+            <a type="button" href="checkIngressos" class="btn btn-default">
+                <i class="glyphicon glyphicon-arrow-left"></i>
+                Voltar
+            </a>
+        </div>
+    </div>
     <h2>Check Ingressos: {{objEvento.ds_evento}} ({{objEvento.nome_tipo_evento}})</h2><br>
 
     <div class="row form-group">

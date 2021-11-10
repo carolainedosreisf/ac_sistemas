@@ -48,14 +48,6 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
             params:{ocorrido,cd_cadastro:$scope.usuario!=0?$scope.usuario.cd_cadastro:0}
         }).then(function (retorno) {
             $scope.lista_lancamentos = retorno.data;
-            if($scope.lista_lancamentos.length >0){
-                setTimeout(() => {
-                    var img = document.getElementById('evento-id-0'); 
-                    var img_esgotado = document.querySelector('.imagem-esgotado'); 
-                    $scope.top_esgotado = parseInt(((img.clientHeight>300?300:img.clientHeight) - img_esgotado.clientHeight)/2);
-                }, 500);
-            }
-            
         },
         function (retorno) {
             console.log('Error: '+retorno.status);
@@ -207,26 +199,19 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
                 data: $scope.contato
             }).then(function (retorno) {
                 $scope.carregando = false;
-                if(retorno.data==1){
-                    swal({
-                        title: "Contato enviado sucesso!",
-                        text: "",
-                        type: "success",
-                        showCancelButton: false,
-                        confirmButtonClass: "btn-success",
-                        confirmButtonText: "Ok",
-                      },
-                      function(){
-                        $window.location.reload();
-                    });
-                }else{
-                    console.log(retorno.data);
-                    swal({
-                        title: 'Erro ao salvar!',
-                        text: '',
-                        type: 'warning'
-                    });
-                }
+                
+                swal({
+                    title: "Contato enviado sucesso!",
+                    text: "",
+                    type: "success",
+                    showCancelButton: false,
+                    confirmButtonClass: "btn-success",
+                    confirmButtonText: "Ok",
+                    },
+                    function(){
+                    $window.location.reload();
+                });
+                
                 
             },
             function (retorno) {

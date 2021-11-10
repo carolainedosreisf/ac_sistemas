@@ -28,7 +28,7 @@
             </div>
         </div>");
         
-
+    $mail->addReplyTo($email, $nome);
     $mail->addAddress($to, 'Empresa contato pelo site');
     $mail->Subject = $email_subject;
     $mail->msgHTML($texto);

@@ -66,7 +66,7 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <table class="table table-striped table-bordered table-eventos">
+            <table class="table table-striped table-bordered table-eventos table-responsive">
                 <thead>
                     <tr>
                         <th width="5%" class="text-center">#</th>

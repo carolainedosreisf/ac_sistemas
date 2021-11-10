@@ -57,8 +57,8 @@
 								alt="">
 							<img 
 								class="imagem-esgotado"  
+								id="esgotado-evento-{{l.cd_evento}}"
 								ng-class="l.lotado==0?'esconder-lotado':''"
-								style="top: {{top_esgotado}}px;" 
 								src="images/esgotado.png" />
 						</span>
 						</div>

@@ -35,7 +35,7 @@
                     
                     <div class="padding-item" ng-repeat="e in l.eventos">
                         <div class="item">
-                            <table>
+                            <table class="table-compras-pc">
                                 <tr>
                                     <td class="text-center" width="10%">
                                         <img src="../{{e.ft_caminho?e.ft_caminho:'arquivos/uploads_evento/sem-foto.jpg'}}">
@@ -64,6 +64,36 @@
                                         <a ng-click="openIngressos(e)" style="margin:5px auto;" class="btn btn-success btn-sm">Ingresso(s) <i class="fa fa-ticket"></i></a>
                                         <a  ng-show="e.cd_tipoevento==1 && e.mostra_certificado==1"ng-click="openCertificado(e)" style="margin:5px auto;" class="btn btn-primary btn-sm">Cerificado <i class="fa fa-graduation-cap"></i></a>
                                     </td>
+                                </tr>
+                            </table>
+                            <table class="table-compras-cel">
+                                <tr>
+                                    <td width="100%">
+                                        <div class="col-cel-5">
+                                            <img style="width:100%" src="../{{e.ft_caminho?e.ft_caminho:'arquivos/uploads_evento/sem-foto.jpg'}}">
+                                        </div>
+                                        <div class="informacoes col-cel-7">
+                                            <b ng-show="e.sn_cancelado=='S'" style="color:red;" >
+                                                <i>Evento Cancelado</i>
+                                                <a ng-click="openCancelamento(e)" class="btn btn-primary btn-xs">
+                                                    <i class="glyphicon glyphicon-search"></i>
+                                                </a> <br>
+                                            </b>
+                                            <br>
+                                            <span class="titulo-evento">{{e.ds_evento}} ({{e.nome_tipo_evento}})</span>
+                                            <span class="text"> <b>Local: </b> {{e.ds_local}} / {{e.nome_cidade}} ({{e.uf_cidade}})</span>
+                                            <span class="text"><b>Data Evento: </b>{{e.dt_evento_br}} {{e.hr_evento}}</span>
+                                            <span class="text"><b>Classificação: </b>{{e.nr_classifi==0?'Livre':e.nr_classifi}}</span>
+
+                                            <span class="text"><b>Valor Unitário: </b>{{e.vl_venda | currency:'R$'}} </span>
+                                            <span class="text"><b>Valor Total: </b>{{e.vl_venda*e.qt_compra | currency:'R$'}}</span>
+                                            <span class="text"><b>Quantidade: </b>{{e.qt_compra}}</span>
+
+                                            <a ng-click="openIngressos(e)" style="margin:5px auto;" class="btn btn-success btn-sm">Ingresso(s) <i class="fa fa-ticket"></i></a>
+                                            <a  ng-show="e.cd_tipoevento==1 && e.mostra_certificado==1"ng-click="openCertificado(e)" style="margin:5px auto;" class="btn btn-primary btn-sm">Cerificado <i class="fa fa-graduation-cap"></i></a>
+                                        </div>
+                                    </td>
+                                    
                                 </tr>
                             </table>
                         </div>

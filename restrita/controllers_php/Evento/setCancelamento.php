@@ -64,7 +64,7 @@
             </body>
             </html>
             ");
-
+            $mail->addReplyTo('blablablaeventosempresa@gmail.com', 'Blablabla Eventos');
             $mail->addAddress($to, 'Empresa contato pelo site');
             $mail->Subject = $email_subject;
             $mail->msgHTML($texto);

@@ -51,7 +51,7 @@
             </div>
             <div class="row form-group" ng-repeat="e in lista" style="margin-top:40px;">
                 <div class="col-sm-12">
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered table-responsive">
                         <thead>
                             <tr>
                                 <th colspan="7" class="text-center">

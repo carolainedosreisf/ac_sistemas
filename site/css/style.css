@@ -210,7 +210,7 @@ img {
 }
 /*Product Box*/
 .maxproduct {
-	max-height:300px;
+	/* max-height:300px; */
 	overflow:hidden;
 	display:inline-block;
 }
@@ -288,7 +288,7 @@ img {
 }
 .fadeshop {
 	position:relative;
-	 max-height:300px;
+	 /* max-height:300px; */
 }
 .properties-box {
 	padding:20px 20px 15px 20px;
@@ -940,13 +940,13 @@ button.main_bt {
     color: #c5c5c5;
 }
 
-.carrinho-acoes span{
+.carrinho-acoes .span_{
 	border:1px solid #28a745;
 	color: #28a745;
 	padding:5px 9px;
 	width: 15px;
 }
-.carrinho-acoes span i{
+.carrinho-acoes .span_ i{
 	font-size: 10px;
 }
 
@@ -1086,6 +1086,105 @@ button.main_bt {
     opacity: .65 !important;
     color: #DCDCDC !important;
     cursor: not-allowed !important;
+}
+
+@media (max-width:350px) {
+	.saudacao-usuario{
+		display: none;
+	}
+}
+
+
+@media (max-width:500px) {
+	.saudacao-usuario{
+		font-size: 15px;
+	}
+}
+
+@media (max-width:600px) {
+	.text-homeimage{
+		font-size: 30px;
+		line-height: 30px;
+		padding-top: 20px;
+		padding-bottom: 15px;
+	}
+}
+
+.pagination-album .pagination>li>a, .pagination>li>span {
+    padding: 6px 12px !important;
+}
+
+.table-compras-cel, .table-cart-cel, .table-compra-cel{
+	display: none;
+}
+
+@media (max-width:1000px) {
+	.table-compras-pc{
+		display: none;
+	}
+	.table-compras-cel{
+		display: block;
+	}
+}
+
+@media (max-width:800px) {
+	.table-cart-pc{
+		display: none;
+	}
+	.table-cart-cel{
+		display: block;
+	}
+}
+
+@media (max-width:700px) {
+	.table-compra-pc{
+		display: none;
+	}
+	.table-compra-cel{
+		display: block;
+	}
+}
+
+
+	.img-compra{
+		width: 100% !important;
+	}
+
+
+.btn-outline-danger {
+    color: #dc3545;
+    background-color: transparent;
+    background-image: none;
+    border-color: #dc3545;
+}
+
+.carrinho-acoes .apagar_{
+	border:1px solid #dc3545;
+	color: #dc3545;
+	padding:5px 9px;
+	width: 15px;
+}
+
+@media (min-width:600px) {
+	.col-cel-5{
+		width: 40%;
+		float: left;
+	}
+	.col-cel-7{
+		width: 60%;
+		float: left;
+	}
+}
+
+@media (max-width:599px) {
+	.col-cel-5{
+		width: 100%;
+		float: left;
+	}
+	.col-cel-7{
+		width: 100%;
+		float: left;
+	}
 }
 
 

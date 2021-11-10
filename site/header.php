@@ -93,7 +93,7 @@
 						<i class="fa fa-shopping-cart"></i>
 						<span class="qtd-carrinho">{{qtd_carrinho}}</span>
 					</span>
-					Bem vind{{usuario.sexo=='F'?'a':'o'}} {{usuario.nm_cadastro}}
+					<span class="saudacao-usuario">Bem vind{{usuario.sexo=='F'?'a':'o'}} {{usuario.nm_cadastro}}</span>
 				</a>
 			</div>
 			<div id="navbar-collapse-02" class="collapse navbar-collapse">

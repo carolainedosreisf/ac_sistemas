@@ -46,10 +46,10 @@
                     <div class="corpo-painel">
                         <div class="padding-item" ng-repeat="l in lista_carrinho">
                             <div class="item">
-                                <table>
+                                <table class="table-compra-pc">
                                     <tr>
                                         <td class="text-center" width="10%">
-                                            <img src="../{{l.ft_caminho?l.ft_caminho:'arquivos/uploads_evento/sem-foto.jpg'}}">
+                                            <img class="img-compra" src="../{{l.ft_caminho?l.ft_caminho:'arquivos/uploads_evento/sem-foto.jpg'}}">
                                         </td>
                                         <td width="70%">
                                             <div class="informacoes">
@@ -60,15 +60,37 @@
                                                 </span>
                                                 <span class="text"> <b>Local: </b> {{l.ds_local}} / {{l.nome_cidade}} ({{l.uf_cidade}})</span>
                                                 <span class="text"><b>Data: </b>{{l.dt_evento_br}} {{l.hr_evento}}</span>
-                                                
+                                                <span>
+                                                    <b>Valor: </b>
+                                                    <span ng-show="l.cd_promocao==0">{{l.vl_venda*l.qtd | currency:'R$'}}</span>
+                                                    <span ng-show="l.cd_promocao>0">{{l.vl_promocao*l.qtd | currency:'R$'}}</span>
+                                                </span>
                                             </div>
                                         </td>
-                                        <td class="text-center" width="10%">
-                                            <span>
-                                                <b ng-show="l.cd_promocao==0">{{l.vl_venda*l.qtd | currency:'R$'}}</b>
-                                                <b ng-show="l.cd_promocao>0">{{l.vl_promocao*l.qtd | currency:'R$'}}</b>
-                                            </span>
+                                    </tr>
+                                </table>
+                                <table class="table-compra-cel">
+                                    <tr>
+                                        <td width="100%">
+                                            <div class="col-cel-5">
+                                                <img  style="width: 100%;" src="../{{l.ft_caminho?l.ft_caminho:'arquivos/uploads_evento/sem-foto.jpg'}}">
+                                            </div>
+                                            <div class="informacoes col-cel-7">
+                                                <span class="titulo-evento">{{l.ds_evento}} ({{l.nome_tipo_evento}})</span>
+                                                <span class="text">
+                                                    <b>Valor Unitário: </b>{{(l.cd_promocao>0?l.vl_promocao:l.vl_venda) | currency:'R$'}}
+                                                    &nbsp;&nbsp;<b>Quantidade: </b>{{l.qtd}}
+                                                </span>
+                                                <span class="text"> <b>Local: </b> {{l.ds_local}} / {{l.nome_cidade}} ({{l.uf_cidade}})</span>
+                                                <span class="text"><b>Data: </b>{{l.dt_evento_br}} {{l.hr_evento}}</span>
+                                                <span>
+                                                    <b>Valor: </b>
+                                                    <span ng-show="l.cd_promocao==0">{{l.vl_venda*l.qtd | currency:'R$'}}</span>
+                                                    <span ng-show="l.cd_promocao>0">{{l.vl_promocao*l.qtd | currency:'R$'}}</span>
+                                                </span>
+                                            </div>
                                         </td>
+                                        
                                     </tr>
                                 </table>
                             </div>

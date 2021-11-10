@@ -12,5 +12,5 @@
     $mail->Username = "blablablaeventosempresa@gmail.com";
     $mail->Password = "12345678*a";
     $mail->setFrom('blablablaeventosempresa@gmail.com', 'Blablabla Eventos');
-    $mail->addReplyTo('blablablaeventosempresa@gmail.com', 'Blablabla Eventos');
+    //$mail->addReplyTo('blablablaeventosempresa@gmail.com', 'Blablabla Eventos');
 ?>

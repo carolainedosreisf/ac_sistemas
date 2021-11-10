@@ -110,7 +110,7 @@ include 'header.php';
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-12 text-center">
+                        <div class="col-sm-12 text-center pagination-album">
                             <dir-pagination-controls 
                                 max-size="1" 
                                 direction-links="true" 

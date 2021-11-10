@@ -4,7 +4,13 @@
 <?php include 'header.php' ?>
 <script>var cadastro = 0;</script>
 <div id="content" class="container" style="width:100%;">
-
+    <div class="row">
+        <div class="col-sm-12">
+            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                <i class="glyphicon glyphicon-align-left"></i>
+            </button>
+        </div>
+    </div>
     <h2>Clientes</h2><br>
 
     <div class="row form-group">
@@ -16,7 +22,7 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <table class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered table-responsive">
                 <thead>
                     <tr>
                         <th>Cliente</th>

@@ -4,7 +4,13 @@
 <?php include 'header.php' ?>
 <script>var pagina = 'EVENTO';</script>
 <div id="content" class="container" style="width:100%;">
-
+    <div class="row">
+        <div class="col-sm-12">
+            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                <i class="glyphicon glyphicon-align-left"></i>
+            </button>
+        </div>
+    </div>
     <h2>Check Ingressos</h2><br>
 
     <div class="row form-group">
@@ -21,7 +27,7 @@
                     <tr>
                         <th width="5%" class="text-center">#</th>
                         <th width="10%" class="text-center">Imagem</th>
-                        <th>Evento</th>
+                        <th width="75%">Evento</th>
                         <th width="10%" class="text-center">Abrir</th>
                     </tr>
                 </thead>
