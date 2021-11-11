@@ -31,7 +31,7 @@
 		<div class="container">
 			<div class="underlined-title">
 				<div class="editContent">
-					<h1 class="text-center latestitems">Lançamentos</h1>
+					<h1 class="text-center latestitems">Eventos</h1>
 				</div>
 				<div class="wow-hr type_short">
 					<span class="wow-hr-h">

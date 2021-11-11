@@ -35,7 +35,7 @@
                 </select>
             </div>
             <div class="col-sm-2">
-                <label for="ocorrido">Evento já ocorrido?</label>
+                <label for="ocorrido">Ocorrido?</label>
                 <select class="form-control" name="ocorrido" id="ocorrido" autocomplete="off" ng-model="filtro_ocorrido">
                     <option value="">Todos</option>
                     <option value="N">Não</option>
