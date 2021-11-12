@@ -48,7 +48,15 @@
                         ,IFNULL(e.sn_cancelado,'N') AS sn_cancelado
                         ,e.motivo_cancelamento
                         ,(a.qt_compra * a.vl_compra) AS vl_reembolso
-                        ,IF((SELECT DATE_ADD(concat(e.dt_evento,' ',e.hr_evento), INTERVAL 1 DAY) <= NOW()),1,0)  AS mostra_certificado
+                        ,IF(
+                            (SELECT DATE_ADD(concat(e.dt_evento,' ',e.hr_evento), INTERVAL 1 DAY) <= NOW()) 
+                            AND IFNULL((SELECT check_presenca 
+                                            FROM ingresso AS i 
+                                            WHERE i.cd_compra = a.cd_compra 
+                                            AND i.cd_evento = a.cd_evento 
+                                            ORDER BY seq 
+                                            LIMIT 1),0) = 1
+                            ,1,0)  AS mostra_certificado
                         ,IF(e.cd_tipoevento=1,(SELECT nr_lote FROM ingresso AS i WHERE i.cd_compra = a.cd_compra AND i.cd_evento = a.cd_evento ORDER BY seq LIMIT 1),'') AS nr_lote
                     FROM comprait AS a
                     INNER JOIN evento AS e

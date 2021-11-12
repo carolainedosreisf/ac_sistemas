@@ -1,7 +1,9 @@
 <?php 
     session_start();
     if(isset($_SESSION['usuario'])){
-        header('Location: index.php');
+        if($_SESSION['usuario']['cd_permissao']==2){
+            header('Location: index.php');
+        }
     }
     $controller = "cadastroController";
 ?>

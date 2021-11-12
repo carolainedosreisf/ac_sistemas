@@ -151,6 +151,15 @@
                                 </div>
                             </div>
                         </div>
+                        <div ng-show="lista_error.length > 0">
+                            <div class="row form-group" ng-repeat="l in lista_error">
+                                <div class="col-sm-12">
+                                    <div class="alert alert-danger" role="alert">
+                                        O evento <b>'{{l.ds_evento}}'</b> só possui <b>{{l.qtd_disp}}</b> {{l.qtd_disp> 1?'ingressos disponiveis':'ingresso disponivel'}} e você inseriu <b>{{l.qtd_cart}}</b> no seu carrinho, ajuste a quantidade para finalizar a compra.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row form-group">
                             <div class="col-sm-6" ng-class="form_compra.cd_fpagto.$invalid && (form_compra.$submitted || form_compra.cd_fpagto.$dirty)?'has-error':''">
                                 <label for="cd_fpagto">Forma de pagamento:</label>

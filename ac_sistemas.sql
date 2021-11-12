@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 06-Nov-2021 às 04:12
+-- Tempo de geração: 12-Nov-2021 às 15:52
 -- Versão do servidor: 5.7.31
 -- versão do PHP: 7.3.21
 
@@ -36,7 +36,18 @@ CREATE TABLE IF NOT EXISTS `album` (
   PRIMARY KEY (`cd_album`),
   KEY `fk1044_idx` (`cd_album`),
   KEY `fk10444_idx` (`cd_evento`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `album`
+--
+
+INSERT INTO `album` (`cd_album`, `cd_evento`, `ds_album`, `ft_caminho`) VALUES
+(1, 6, 'Imagem 1', 'arquivos/uploads_evento_albuns/123656564413496998202111100152.jpg'),
+(2, 6, 'Imagem 2', 'arquivos/uploads_evento_albuns/977734227416250997202111100153.jpg'),
+(3, 6, 'Imagem 3', 'arquivos/uploads_evento_albuns/1547244803622760182202111100153.jpg'),
+(4, 6, 'Imagem 4', 'arquivos/uploads_evento_albuns/3261893022927436240202111100153.jpg'),
+(5, 6, 'Imagem 5', 'arquivos/uploads_evento_albuns/388740376332729440202111100153.jpg');
 
 -- --------------------------------------------------------
 
@@ -408,7 +419,7 @@ CREATE TABLE IF NOT EXISTS `compra` (
   PRIMARY KEY (`cd_compra`),
   KEY `fk103_idx` (`cd_cadastro`),
   KEY `fk203` (`cd_fpagto`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `compra`
@@ -421,7 +432,8 @@ INSERT INTO `compra` (`cd_cadastro`, `cd_compra`, `cd_fpagto`, `dt_compra`, `vl_
 (2, 4, 3, '2021-11-05 05:48:51', '70.00'),
 (6, 5, 3, '2021-11-05 05:50:05', '70.00'),
 (10, 6, 2, '2021-11-06 04:37:55', '200.00'),
-(10, 7, 2, '2021-11-06 04:43:34', '180.00');
+(10, 7, 2, '2021-11-06 04:43:34', '180.00'),
+(1, 8, 2, '2021-11-12 03:19:03', '240.00');
 
 -- --------------------------------------------------------
 
@@ -455,7 +467,9 @@ INSERT INTO `comprait` (`cd_compra`, `cd_evento`, `qt_compra`, `vl_compra`, `con
 (4, 12, 1, '70.00', NULL),
 (5, 12, 1, '70.00', NULL),
 (6, 2, 2, '100.00', NULL),
-(7, 1, 2, '90.00', NULL);
+(7, 1, 2, '90.00', NULL),
+(8, 2, 2, '100.00', NULL),
+(8, 4, 2, '20.00', NULL);
 
 -- --------------------------------------------------------
 
@@ -519,7 +533,7 @@ CREATE TABLE IF NOT EXISTS `evento` (
 
 INSERT INTO `evento` (`cd_evento`, `cd_cidade`, `cd_promocao`, `ds_evento`, `ds_local`, `dt_evento`, `ft_caminho`, `ft_evento`, `sn_cancelado`, `vl_venda`, `vl_promocao`, `nr_classifi`, `cd_tipoevento`, `hr_evento`, `nr_lotacao`, `publica`, `dt_publica`, `motivo_cancelamento`, `carga`) VALUES
 (1, 70, NULL, 'Show Gusttavo Lima', 'Ginasio', '2021-11-23', 'arquivos/uploads_evento/225962606625243596202110192345.jpg', NULL, NULL, '90.00', NULL, NULL, 4, '12:00:00', 1000, 'S', '2021-11-02 13:00:24', NULL, NULL),
-(2, 61, NULL, 'Show Ivete Sangalo', 'Ginasio', '2022-03-21', 'arquivos/uploads_evento/1089548478331145980202110180119.png', NULL, NULL, '100.00', NULL, 10, 4, '13:00:00', 2, 'S', '2021-11-02 13:00:24', NULL, NULL),
+(2, 61, NULL, 'Show Ivete Sangalo', 'Ginasio', '2022-03-21', 'arquivos/uploads_evento/1089548478331145980202110180119.png', NULL, NULL, '100.00', NULL, 10, 4, '13:00:00', 5, 'S', '2021-11-02 13:00:24', NULL, NULL),
 (3, 70, 2, 'Palestra motivacional', 'Ginasio 2', '2022-03-21', 'arquivos/uploads_evento/1157140418406253351202110180120.jpg', NULL, NULL, '25.00', '15.00', 14, 5, '20:00:00', 2, 'S', '2021-11-02 13:00:24', NULL, NULL),
 (4, 72, 3, 'Evento de incentivo a leitura', 'Ginasio', '2022-03-25', 'arquivos/uploads_evento/48027062486993442202111042350.jpg', NULL, NULL, '50.00', '20.00', NULL, 3, '12:00:00', 1000, 'S', '2021-11-06 01:52:55', NULL, NULL),
 (5, 69, 3, 'Show Luan Santana', 'Ginasio', '2022-03-16', 'arquivos/uploads_evento/2782980288758537495202111042359.jpg', NULL, NULL, '70.00', '20.00', NULL, 4, '08:00:00', 1000, 'S', '2021-11-06 01:52:48', NULL, NULL),
@@ -604,7 +618,11 @@ INSERT INTO `ingresso` (`cd_compra`, `cd_evento`, `seq`, `nr_lote`, `check_prese
 (6, 2, 1, '322f82caa8', NULL),
 (6, 2, 2, '130ce7b205', NULL),
 (7, 1, 1, 'f2c8b5da8d', NULL),
-(7, 1, 2, '52971ea861', NULL);
+(7, 1, 2, '52971ea861', NULL),
+(8, 2, 1, 'd17a9adc80', NULL),
+(8, 2, 2, '95d9a36daf', NULL),
+(8, 4, 1, '932f3b70e8', NULL),
+(8, 4, 2, '3e98532a64', NULL);
 
 -- --------------------------------------------------------
 

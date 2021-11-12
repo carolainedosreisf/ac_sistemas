@@ -111,13 +111,13 @@
 				</div>
 				<div class="modal-body">
 					<div class="alert alert-danger" role="alert" ng-repeat="l in lista_cancelados">
-						<i>Olá {{usuario.nm_cadastro}}, informamos que o evento que você comprou foi cancelado, EM BREVE VOCÊ SERÁ REEMBOLSADO!</i><br><br>
+						<i>Olá {{usuario.nm_cadastro}}, informamos que o evento que você comprou foi cancelado, EM BREVE VOCÊ SERÁ {{usuario.sexo=='F'?'REEMBOLSADA':REEMBOLSADO}}!</i><br><br>
 						<b>O evento: </b>{{l.ds_evento}} ({{l.nome_tipo_evento}})<br>
 						<b>Data Evento: </b> {{l.dt_evento_br}} {{l.hr_evento}}<br>
 						<b>Valor a ser reembolsado: </b> {{l.vl_reembolso | currency:'R$'}} <br>
 						<b>Motivo Cancelamento:</b> {{l.motivo_cancelamento}} <br><br>
-						<i>Para nos confirmar que recebeu e leu essa mensagem clique no botão a baixo, para mais detalhes acesse o menu "MINHAS COMPRAS".</i><br><br>
-						<button class="btn btn-primary" ng-click="setConscienciaCancelamento(l)">Ok, Estou ciente</button>
+						<i>Para nós confirmar que recebeu e leu essa mensagem clique no botão a baixo, para mais detalhes acesse o menu "MINHAS COMPRAS".</i><br><br>
+						<button class="btn btn-primary" ng-click="setConscienciaCancelamento(l)">Ok. Estou ciente</button>
 					</div>
 				</div>
 				<div class="modal-footer">

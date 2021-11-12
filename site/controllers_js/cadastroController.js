@@ -26,7 +26,7 @@ app.controller('cadastroController', ['$scope', '$http','$filter','$timeout','$l
 
     $scope.setCadastro = function(){ 
         $scope.mensagem = "";
-        if($scope.form_cadastro.$valid && $scope.cad.senha == $scope.cad.confirm_senha && $scope.erro_idade==0){
+        if($scope.form_cadastro.$valid && $scope.cad.senha == $scope.cad.confirm_senha && $scope.erro_idade==0 && !($scope.erro_cep)){
             $scope.carregando = true;
             $scope.cadastro = 1;
             $http({
@@ -88,6 +88,19 @@ app.controller('cadastroController', ['$scope', '$http','$filter','$timeout','$l
         });
     }
 
+    $scope.getCidadeCep = function(cidade,uf){ 
+        $http({
+            url: 'controllers_php/Cidade/getCidadeCep.php',
+            method: 'GET',
+            params:{cidade,uf}
+        }).then(function (retorno) {
+            $scope.cad.cd_cidade = retorno.data;
+        },
+        function (retorno) {
+            console.log('Error: '+retorno.status);
+        });
+    }
+
     $scope.getVerificaColunas = function(dados,coluna,tabela){ 
         if($scope.form_cadastro.$valid && $scope.cad.senha == $scope.cad.confirm_senha){
             $scope.lista_msg = [];
@@ -132,6 +145,49 @@ app.controller('cadastroController', ['$scope', '$http','$filter','$timeout','$l
             }
         } 
         $scope.erro_idade = idade <18?1:0;
+    }
+
+    $scope.buscaCep = function(){
+        if ($scope.cad.nr_cep != undefined) {
+            if ($scope.cad.nr_cep.length==8) {
+                $scope.carregando = true;
+                $http({
+                    url: `https://viacep.com.br/ws/${$scope.cad.nr_cep}/json/`,
+                    method: 'GET'
+                }).then(function (retorno) {
+                    console.log(retorno.data);
+                    if(!(retorno.data.erro)){
+                        $scope.erro_cep = false;
+                        $scope.cad.ed_cadastro = retorno.data.logradouro;
+                        $scope.cad.ba_cadastro = retorno.data.bairro;
+
+                        if(retorno.data.localidade){
+                            $scope.getCidadeCep(retorno.data.localidade,retorno.data.uf);
+                            
+                            $scope.cad.bairro = "";
+                        }else{
+                            zerarEndereco();
+                        }
+                    }else{
+                        zerarEndereco();
+                        $scope.erro_cep = true;
+                    }
+                    $scope.carregando = false;
+                },
+                function (retorno) {
+                    //alert('Erro ao carregar CEP.');
+                    $scope.carregando = false;
+                });
+            }else{
+                zerarEndereco();
+            }
+        }
+    }
+
+    var zerarEndereco = function(){
+        $scope.cad.cd_cidade = null;
+        $scope.cad.ed_cadastro = "";
+        $scope.cad.ba_cadastro = "";
     }
 
     if(cadastro==1){

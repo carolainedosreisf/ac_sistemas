@@ -1,4 +1,5 @@
 <?php
+    require '../../check_login.php';
     require '../../conexao.php';
     
     $cd_evento = $_GET['cd_evento'];

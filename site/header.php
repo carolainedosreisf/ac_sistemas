@@ -79,7 +79,29 @@
 			</div>
 		</div>
 	</div>
-	
+	<style>
+		figure.carrinho {
+			display:inline-block;
+			position: relative;
+			border: 2px solid #3D566E;
+			border-radius: 50%;
+			padding: 7px;
+			margin-right: 15px;
+		}
+		
+		figure.carrinho figcaption {
+			position: absolute;
+			top: 17px;
+			left:28px;
+		}
+		figure.carrinho figcaption .qtd-carrinho{
+			font-size: 15px;
+			color: white;
+			background: orange;
+			border-radius: 50%;
+			padding: 2px 4px 1px 4px;
+		}
+	</style>
 	<div class="wrapper">
 		<nav role="navigation" class="navbar navbar-white navbar-embossed navbar-lg bg-light">
 		<div class="">
@@ -89,10 +111,16 @@
 					<span class="sr-only"></span>
 				</button>
 				<a class="navbar-brand brand cursor-pointer" href="carrinho.php" ng-show="usuario && usuario.cd_permissao != 1"> 
-					<span class="carrinho">
+					<!-- <span class="carrinho">
 						<i class="fa fa-shopping-cart"></i>
 						<span class="qtd-carrinho">{{qtd_carrinho}}</span>
-					</span>
+					</span> -->
+					<figure class="carrinho">
+						<i class="fa fa-shopping-cart"></i>
+						<figcaption>
+							<span class="qtd-carrinho">{{qtd_carrinho}}</span>
+						</figcaption>
+					</figure>
 					<span class="saudacao-usuario">Bem vind{{usuario.sexo=='F'?'a':'o'}} {{usuario.nm_cadastro}}</span>
 				</a>
 			</div>

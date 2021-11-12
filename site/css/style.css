@@ -828,14 +828,14 @@ button.main_bt {
 	border: 1px solid #b94a48 !important;
 }
 
-.carrinho {
+/* .carrinho {
     border: 2px solid#3D566E;
     border-radius: 50%;
     padding: 7px 7px 7px 10px;
     margin-right: 15px;
-}
+} */
 
-.qtd-carrinho{
+/* .qtd-carrinho{
 	font-size: 15px;
     color: white;
     background: orange;
@@ -844,7 +844,7 @@ button.main_bt {
     position: absolute;
     top: 35px;
     left: 45px;
-}
+} */
 
 .loading {
     position: fixed;
@@ -1185,6 +1185,28 @@ button.main_bt {
 		width: 100%;
 		float: left;
 	}
+}
+
+figure.carrinho {
+	display:inline-block;
+	position: relative;
+	border: 2px solid #3D566E;
+	border-radius: 50%;
+	padding: 7px;
+	margin-right: 15px;
+}
+
+figure.carrinho figcaption {
+	position: absolute;
+	top: 17px;
+	left:28px;
+}
+figure.carrinho figcaption .qtd-carrinho{
+	font-size: 15px;
+	color: white;
+	background: orange;
+	border-radius: 50%;
+	padding: 2px 4px 1px 4px;
 }
 
 

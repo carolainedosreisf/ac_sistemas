@@ -11,6 +11,7 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
     $scope.parcelas = [];
     $scope.lista_albuns = [];
     $scope.lista_cancelados = [];
+    $scope.lista_error  = [];
     $scope.contato = {};
     $scope.cad_compra = {};
 
@@ -94,63 +95,64 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
     }
 
     $scope.setCarrinho = function(dados,tipo=4){
-        if($scope.usuario==0 || $scope.usuario.cd_permissao ==1){
-            swal({
-                title: "",
-                text: "Você deve logar para adicionar ao carrinho!",
-                type: "warning",
-                showCancelButton: true,
-                cancelButtonClass: "btn-warning",
-                confirmButtonClass: "btn-success",
-                confirmButtonText: "Logar",
-                cancelButtonText: "Cancelar"
-              },
-              function(){
-                window.location = "login.php"
-              });
-        }else{
-            if(dados.bloq_academico==1){
-                $scope.msgAcademico();
-                return;
-            }
+        
+        if(dados.bloq_academico==1){
+            $scope.msgAcademico();
+            return;
+        }
 
-            if(dados.cd_tipoevento==1 && tipo==2){
-                $scope.msgAcademico();
-                return;
-            }
+        if(dados.cd_tipoevento==1 && tipo==2){
+            $scope.msgAcademico();
+            return;
+        }
 
-            if(dados.cd_tipoevento==1 && tipo==4){
-                var objEvento = array_column_search($scope.lista_carrinho,'cd_evento',dados.cd_evento);
-                if( typeof objEvento != 'undefined'){
-                    if(objEvento.cd_tipoevento=='1'){
-                        $scope.msgAcademico();
-                        return;
-                    }
-                }
-            }
-
-            console.log($scope.lista_carrinho)
-            dados.tipo = tipo;
-            if(!(tipo==1 && dados.qtd <=1)){
-                if(tipo==3){
-                    swal({
-                        title: "",
-                        text: "Deseja realmente excluir esse item do carrinho?",
-                        type: "warning",
-                        showCancelButton: true,
-                        cancelButtonClass: "btn-info",
-                        confirmButtonClass: "btn-danger",
-                        confirmButtonText: "Sim",
-                        cancelButtonText: "Cancelar"
-                      },
-                      function(){
-                        postCarrinho(dados);
-                      });
-                }else{
-                    postCarrinho(dados);
+        if(dados.cd_tipoevento==1 && tipo==4){
+            var objEvento = array_column_search($scope.lista_carrinho,'cd_evento',dados.cd_evento);
+            if( typeof objEvento != 'undefined'){
+                if(objEvento.cd_tipoevento=='1'){
+                    $scope.msgAcademico();
+                    return;
                 }
             }
         }
+
+        dados.tipo = tipo;
+        if(!(tipo==1 && dados.qtd <=1)){
+            if(tipo==3){
+                swal({
+                    title: "",
+                    text: "Deseja realmente excluir esse item do carrinho?",
+                    type: "warning",
+                    showCancelButton: true,
+                    cancelButtonClass: "btn-info",
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Sim",
+                    cancelButtonText: "Cancelar"
+                    },
+                    function(){
+                    postCarrinho(dados);
+                    });
+            }else{
+                postCarrinho(dados);
+            }
+        }
+        
+    }
+
+    $scope.msgLogar = function(){
+        swal({
+            title: "",
+            text: "Você deve logar primerio!",
+            type: "warning",
+            showCancelButton: true,
+            cancelButtonClass: "btn-warning",
+            confirmButtonClass: "btn-success",
+            confirmButtonText: "Logar",
+            cancelButtonText: "Cancelar"
+          },
+          function(){
+            window.location = "login.php"
+          });
     }
 
     var postCarrinho = function(dados){
@@ -163,14 +165,18 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
             $scope.qtd_carrinho = retorno.data.qtd;
             $scope.valor_carrinho = retorno.data.valor;
             if(dados.tipo==4){
-                swal({
-                    title: 'Adicionado com sucesso!',
-                    text: '',
-                    type: 'success',
-                    timer: 1500,
-                    showCancelButton: false,
-                    showConfirmButton: false
-                })
+                if(retorno.data.erro_login){
+                    $scope.msgLogar();
+                }else{
+                    swal({
+                        title: 'Adicionado com sucesso!',
+                        text: '',
+                        type: 'success',
+                        timer: 1500,
+                        showCancelButton: false,
+                        showConfirmButton: false
+                    });
+                }
             }
             
         },
@@ -274,6 +280,7 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
     $scope.setCompra = function(){
         
         if($scope.form_compra.$valid){
+            $scope.lista_error  = [];
             swal({
                 title: "",
                 text: "Deseja realmente finalizar sua compra?",
@@ -296,7 +303,11 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
                     method: 'POST',
                     data: data
                 }).then(function (retorno) {
-                    $scope.error = retorno.data;
+                    if(retorno.data.error){
+                        $scope.lista_error = retorno.data.error;
+                    }else{
+                        $scope.error = retorno.data;
+                    }
                     if(retorno.data==1){
                         $scope.setToken(1);
                     }

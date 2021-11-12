@@ -1,6 +1,7 @@
 <?php
     require '../../funcoes.php';
-    session_start();
+    require '../../check_login.php';
+    //session_start();
     //session_destroy();
 
     $obj = getPostAngular();

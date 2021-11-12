@@ -20,6 +20,11 @@
                             FROM comprait 
                             WHERE comprait.cd_evento = e.cd_evento)
                         ,0) >= e.nr_lotacao),1,0) AS lotado
+                ,nr_lotacao - (IFNULL((SELECT SUM(qt_compra) 
+                            FROM comprait 
+                            WHERE comprait.cd_evento = e.cd_evento
+                        )
+                        ,0)) AS qtd_disponivel
             FROM evento AS e
             WHERE IFNULL(e.sn_cancelado,'N') = 'N'
             and dt_evento > NOW()
@@ -33,9 +38,31 @@
 
     $query = mysqli_query($conexao, $sql);
     $qtd_validos =  mysqli_num_rows($query);
+    while($item = mysqli_fetch_array($query, MYSQLI_ASSOC)){
+        $lista[] = $item;
+    }
+    
   
     if(count($carrinho) != $qtd_validos){
         echo 2;
+        exit;
+    }
+    $error = [];
+    $i = 0;
+    foreach ($carrinho as $key => $value) {
+        $index =  array_search($value['cd_evento'],array_column($lista,'cd_evento'));
+        $qtd_disp = $lista[$index]['qtd_disponivel'];
+        $qtd_cart = $value['qtd'];
+        if($qtd_disp < $qtd_cart){
+            $error[$i]['ds_evento'] = $value['ds_evento'];
+            $error[$i]['qtd_disp'] = $qtd_disp;
+            $error[$i]['qtd_cart'] = $qtd_cart;
+            $i++;
+        }
+    }
+
+    if(count($error) > 0){
+        echo json_encode(['error'=>$error]);
         exit;
     }
     

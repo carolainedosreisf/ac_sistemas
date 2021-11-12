@@ -1,7 +1,9 @@
 <?php 
     session_start();
     if(isset($_SESSION['usuario'])){
-        //header('Location: index.php');
+        if($_SESSION['usuario']['cd_permissao']==2){
+            header('Location: index.php');
+        }
     }
     $controller = "cadastroController";
 ?>
@@ -43,6 +45,9 @@
                 </div>
                 <div class="alert alert-danger" role="alert" ng-show="erro_idade">
                     Você deve ter no mínimo 18 anos para se cadastrar!
+                </div>
+                <div class="alert alert-danger" role="alert" ng-show="erro_cep">
+                    CEP Inválido!
                 </div>
                 <form id="contactform" name="form_cadastro" novalidate ng-submit="getVerificaColunas()">
                     <div class="form">
@@ -99,9 +104,9 @@
                             </div>
                             <div class="corpo-painel">
                                 <div class="row">
-                                    <div class="col-sm-6" ng-class="form_cadastro.nr_cep.$invalid && (form_cadastro.$submitted || form_cadastro.nr_cep.$dirty)?'has-error':''">
+                                    <div class="col-sm-6" ng-class="erro_cep || form_cadastro.nr_cep.$invalid && (form_cadastro.$submitted || form_cadastro.nr_cep.$dirty)?'has-error':''">
                                         <label for="nr_cep">CEP:</label>
-                                        <input type="text" ui-mask="99999-999" name="nr_cep" autocomplete="off" ng-model="cad.nr_cep" required="required">
+                                        <input type="text" ui-mask="99999-999" name="nr_cep" autocomplete="off" ng-model="cad.nr_cep" required="required" ng-change="buscaCep()">
                                     </div>
                                     <div class="col-sm-6" ng-class="form_cadastro.cd_cidade.$invalid && (form_cadastro.$submitted || form_cadastro.cd_cidade.$dirty)?'has-error':''">
                                         <label for="cidade">Cidade:</label>
