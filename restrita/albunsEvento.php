@@ -31,17 +31,17 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <table class="table table-striped table-bordered table-eventos table-responsive">
+            <table class="table table-striped table-bordered table-eventos">
                 <thead>
                     <tr>
                         <th width="30%" class="text-center">Imagem</th>
-                        <th>Descrição</th>
-                        <th width="8%" class="text-center">Excluir</th>
+                        <th width="60%">Descrição</th>
+                        <th width="10%" class="text-center">Excluir</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-show="(lista_albuns | filter:filtrar).length <=0">
-                        <td class="text-center" colspan="6">Nenhum resgistro encontrado.</td>
+                        <td class="text-center" colspan="3">Nenhum resgistro encontrado.</td>
                     </tr>
                     <tr pagination-id="pg_albuns" dir-paginate="l in lista_albuns | filter:filtrar| itemsPerPage:20">
                         <td class="text-center">

@@ -122,6 +122,7 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
 
     $scope.comfirmaSetEvento = function(){
         $scope.carregando = true;
+        $scope.mensagem = "";
         var form_data = new FormData();  
         angular.forEach($scope.files, function(file){  
             form_data.append('file', file);  
@@ -131,29 +132,31 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
             transformRequest: angular.identity,  
             headers: {'Content-Type': undefined,'Process-Data': false}  
         }).success(function(response){ 
-            $scope.cad.ft_caminho_novo = response;
-            
-            $http({
-                url: 'controllers_php/Evento/setEvento.php',
-                method: 'POST',
-                data: $scope.cad
-            }).then(function (retorno) {
-                $scope.carregando = false;
-                if(retorno.data == 1){
-                    window.location = "index.php";
-                }else{
+            $scope.carregando = false;
+            if(response.erro_tipo){
+                $scope.mensagem = "Extensão de imagem inválida!";
+            }else{
+                $scope.cad.ft_caminho_novo = response;
+                $http({
+                    url: 'controllers_php/Evento/setEvento.php',
+                    method: 'POST',
+                    data: $scope.cad
+                }).then(function (retorno) {
                     $scope.carregando = false;
-                    swal({
-                        title: 'Erro ao salvar!',
-                        text: '',
-                        type: 'warning'
-                    });
-                }
-            },
-            function (retorno) {
-                console.log('Error: '+retorno.status);
-            });
-            
+                    if(retorno.data == 1){
+                        window.location = "index.php";
+                    }else{
+                        swal({
+                            title: 'Erro ao salvar!',
+                            text: '',
+                            type: 'warning'
+                        });
+                    }
+                },
+                function (retorno) {
+                    console.log('Error: '+retorno.status);
+                });
+            }
         });  
     }
 
@@ -265,17 +268,8 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
                     data: $scope.cad
                 }).then(function (retorno) {
                     $scope.carregando = false;
-                    if(retorno.data == 1){
-                        $('#cancelamento').modal('hide');
-                        $scope.getEventos();
-                    }else{
-                        $scope.carregando = false;
-                        swal({
-                            title: 'Erro ao salvar!',
-                            text: '',
-                            type: 'warning'
-                        });
-                    }
+                    $('#cancelamento').modal('hide');
+                    $scope.getEventos();
                 },
                 function (retorno) {
                     console.log('Error: '+retorno.status);

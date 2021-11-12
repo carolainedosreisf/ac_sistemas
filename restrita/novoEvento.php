@@ -23,13 +23,6 @@
             </div>
         </div>
     </div>
-    <div class="row form-group" ng-show="mensagem">
-        <div class="col-sm-12">
-            <div class="alert alert-danger" role="alert">
-                {{mensagem}}
-            </div>
-        </div>
-    </div>
     <div class="row form-group" ng-show="erro_promocao">
         <div class="col-sm-12">
             <div class="alert alert-danger" role="alert">

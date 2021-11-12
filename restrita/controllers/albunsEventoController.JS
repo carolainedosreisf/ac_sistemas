@@ -48,27 +48,32 @@ app.controller('albunsEventoController', ['$scope', '$http','$filter','$window',
                 transformRequest: angular.identity,  
                 headers: {'Content-Type': undefined,'Process-Data': false}  
             }).success(function(response){ 
-                $scope.cad.ft_caminho = response;
-                $scope.cad.cd_evento = id;
-                $http({
-                    url: 'controllers_php/Evento/setAlbum.php',
-                    method: 'POST',
-                    data: $scope.cad
-                }).then(function (retorno) {
-                    if(retorno.data == 1){
-                        $window.location.reload();
-                    }else{
-                        $scope.carregando = false;
-                        swal({
-                            title: 'Erro ao salvar!',
-                            text: '',
-                            type: 'warning'
-                        });
-                    }
-                },
-                function (retorno) {
-                    console.log('Error: '+retorno.status);
-                });
+                $scope.carregando = false;
+                if(response.erro_tipo){
+                    $scope.mensagem = "Extensão de imagem inválida!";
+                }else{
+                    $scope.cad.ft_caminho = response;
+                    $scope.cad.cd_evento = id;
+                    $http({
+                        url: 'controllers_php/Evento/setAlbum.php',
+                        method: 'POST',
+                        data: $scope.cad
+                    }).then(function (retorno) {
+                        if(retorno.data == 1){
+                            $window.location.reload();
+                        }else{
+                            $scope.carregando = false;
+                            swal({
+                                title: 'Erro ao salvar!',
+                                text: '',
+                                type: 'warning'
+                            });
+                        }
+                    },
+                    function (retorno) {
+                        console.log('Error: '+retorno.status);
+                    });
+                }
                 
             });  
             $scope.carregando = true;
