@@ -4,17 +4,16 @@
 
     $obj = getPostAngular();
     $cd_evento = $obj['cd_evento'];
-    $cd_compra = $obj['cd_compra'];
-    $seq = $obj['seq'];
+    $cd_ingresso = $obj['cd_ingresso'];
 
     $data = [
-        "check_presenca" => 1,
+        "sn_presenca" => 'S',
     ];
 
-    $update = montaUpdate($data,['check_presenca']);
-    $sql = "UPDATE ingresso SET {$update} WHERE cd_evento = {$cd_evento} AND cd_compra = {$cd_compra} AND seq = {$seq}";
+    $update = montaUpdate($data);
+    $sql = "UPDATE ingresso SET {$update} WHERE cd_evento = {$cd_evento} AND cd_ingresso = '{$cd_ingresso}'";
     $query = mysqli_query($conexao, $sql);
     
-    echo $query;
+    echo $sql;
 
 ?>

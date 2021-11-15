@@ -6,8 +6,8 @@
     $cd_compra = $_GET['cd_compra'];
  
     $sql = "SELECT 
-                    nr_lote
-                FROM ingresso AS a
+                    cd_ingresso AS nr_lote
+                FROM comprait AS a
                 WHERE a.cd_compra = {$cd_compra}
                 AND a.cd_evento = {$cd_evento}";
 

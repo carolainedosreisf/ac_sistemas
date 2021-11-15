@@ -27,7 +27,6 @@ app.controller('formasPagamentoController', ['$scope', '$http','$filter', functi
     $scope.setFormaPagamento = function(){
         if($scope.form_forma_pagamento.$valid){
             $scope.carregando = true;
-
             $http({
                 url: 'controllers_php/FormasPagamento/setFormaPagamento.php',
                 method: 'POST',

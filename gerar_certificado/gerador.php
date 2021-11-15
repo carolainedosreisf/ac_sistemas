@@ -12,10 +12,10 @@
     if($cd_compra){
         $sql = "SELECT 
                 DATE_FORMAT(e.dt_evento, '%d/%m/%Y') AS dt_evento_br
-                ,(SELECT DATE_ADD(e.dt_evento, INTERVAL 1 DAY))  AS dt_geracao_certificado
-                ,e.ds_evento AS ds_evento
-                ,e.carga AS carga
-                ,(SELECT nr_lote FROM ingresso AS ing WHERE i.cd_compra = ing.cd_compra AND i.cd_evento = ing.cd_evento ORDER BY seq LIMIT 1) AS nr_lote
+                , (SELECT DATE_ADD(e.dt_evento, INTERVAL 1 DAY))  AS dt_geracao_certificado
+                , e.ds_evento AS ds_evento
+                , e.carga_horaria AS carga
+                , cd_ingresso AS nr_lote
                 , (SELECT nm_cadastro FROM cadastro AS c WHERE c.cd_cadastro = (SELECT cd_cadastro FROM compra AS co WHERE i.cd_compra = co.cd_compra)) AS nome
                 , (SELECT nr_cpf FROM cadastro AS c WHERE c.cd_cadastro = (SELECT cd_cadastro FROM compra AS co WHERE i.cd_compra = co.cd_compra)) AS cpf
             FROM comprait AS i
@@ -28,12 +28,11 @@
                 ,DATE_FORMAT(e.dt_evento, '%d/%m/%Y') AS dt_evento_br
                 ,(SELECT DATE_ADD(e.dt_evento, INTERVAL 1 DAY))  AS dt_geracao_certificado
                 ,e.ds_evento AS ds_evento
-                ,e.carga AS carga
+                ,e.carga_horaria AS carga
             FROM evento AS e 
             WHERE e.cd_evento = {$cd_evento}";
 
     }
-    
 
     $query = mysqli_query($conexao, $sql);
     $item = mysqli_fetch_array($query, MYSQLI_ASSOC);

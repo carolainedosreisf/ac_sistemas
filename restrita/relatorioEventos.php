@@ -51,7 +51,7 @@
             </div>
             <div class="row form-group" ng-repeat="e in lista" style="margin-top:40px;">
                 <div class="col-sm-12">
-                    <table class="table table-striped table-bordered table-responsive">
+                    <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th colspan="7" class="text-center">
@@ -67,8 +67,7 @@
                                 <th>Email</th>
                                 <th width="10%" class="text-center">Sexo</th>
                                 <th width="10%" class="text-center">Dt. Nascimento</th>
-                                <th width="10%" class="text-center">Quantidade</th>
-                                <th width="10%" class="text-center">Valor Unitário</th>
+                                <th width="10%" class="text-center">Valor</th>
                                 <th width="10%" class="text-center">Dt. Compra</th>
 
                             </tr>
@@ -82,7 +81,6 @@
                                 <td>{{l.ed_email}}</td>
                                 <td class="text-center">{{l.sexo=='F'?'Feminino':'Masculino'}}</td>
                                 <td class="text-center">{{l.dt_nascto}}</td>
-                                <td class="text-center">{{l.qt_compra}}</td>
                                 <td class="text-center">{{l.vl_compra | currency:'R$'}}</td>
                                 <td class="text-center">{{l.dt_compra_br}}</td>
                             </tr>

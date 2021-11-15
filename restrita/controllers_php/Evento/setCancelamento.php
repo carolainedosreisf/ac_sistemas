@@ -20,23 +20,23 @@
         $sql = "SELECT 
                     c.nm_cadastro
                     ,c.ed_email
-                    ,(item.qt_compra * item.vl_compra) AS vl_reembolso
-                    ,CONCAT(DATE_FORMAT(e.dt_evento, '%d/%m/%Y'),' ',DATE_FORMAT(hr_evento, '%H:%i')) AS dt_evento
+                    ,SUM(item.vl_compra) AS vl_reembolso
+                    ,CONCAT(DATE_FORMAT(e.dt_evento, '%d/%m/%Y'),' ',DATE_FORMAT(e.hr_evento, '%H:%i')) AS dt_evento
                     ,(SELECT ds_evento FROM tipoevento AS c WHERE c.cd_tipoevento = e.cd_tipoevento) AS nome_tipo_evento
                     ,e.ds_evento
                     ,e.motivo_cancelamento
-                    ,item.qt_compra
                 FROM comprait AS item
                 INNER JOIN cadastro AS c ON c.cd_cadastro = (SELECT cd_cadastro FROM compra AS i WHERE i.cd_compra = item.cd_compra)
                 INNER JOIN evento as e ON e.cd_evento = item.cd_evento
-                WHERE e.cd_evento = {$cd_evento}";
-
+                WHERE e.cd_evento = {$cd_evento}
+                GROUP BY c.nm_cadastro,c.ed_email,item.vl_compra,e.dt_evento,e.hr_evento,e.cd_tipoevento,e.ds_evento,e.motivo_cancelamento,  c.cd_cadastro, item.cd_evento";
+        
         $query = mysqli_query($conexao, $sql);
 
         while($item = mysqli_fetch_array($query, MYSQLI_ASSOC)){
             $clientes[] = $item;
             $valor = number_format($item['vl_reembolso'],2,",",".");
-            //$to = 'caroldosreis97@gmail.com'; 
+            $to = 'caroldosreis97@gmail.com'; 
             //$to = $item['ed_email']; 
             $email_subject = utf8_decode("Blablabla Eventos avisa: O evento {$item['ds_evento']} ({$item['nome_tipo_evento']}) foi cancelado -----");
             $texto = utf8_decode("<!DOCTYPE html>

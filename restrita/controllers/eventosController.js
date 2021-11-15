@@ -8,13 +8,13 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
     $scope.disabled_ = 0;
 
     $scope.cad = {
-        publica:"N",
+        sn_publica:"N",
         // ds_evento:"Evento de incentivo a leitura",
         // dt_evento:"21/03/2022",
         // nr_classifi:"",
         // cd_tipoevento:"3",
         // vl_venda:"5",
-        // cd_promossao:"",
+        // cd_promocao:"",
         // cd_cidade:"70",
         // ds_local:"Ginasio"
     };
@@ -41,7 +41,7 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
             params:{id}
         }).then(function (retorno) {
             $scope.cad = retorno.data;
-            if($scope.cad.publica=='S'){
+            if($scope.cad.sn_publica=='S'){
                 $scope.disabled_ = 1;
             }
             // var $option = $("<option selected></option>").val($scope.cad.cd_cidade).text($scope.cad.nome_cidade+" ("+$scope.cad.uf_cidade+")");
@@ -97,7 +97,7 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
 
     $scope.setEvento = function(){
         if($scope.form_evento.$valid && !($scope.erro_hora) && $scope.erro_promocao==0){
-            if($scope.cad.publica=='S'){
+            if($scope.cad.sn_publica=='S'){
                 swal({
                     title: "Atenção",
                     text: "Você esta colocando o campo 'Publicar' como 'Sim', ao comfirmar essa ação o evento será publicado no site e não será mais possivel edita-lo.\nDeseja realmente confirmar essa ação?",
@@ -163,11 +163,11 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
     $scope.setCampoPromocao = function(){
         $scope.erro_promocao = 0;
         if($scope.cad.cd_promocao){
-            var obj = array_column_search($scope.lista_promocoes,'cd_promossao',$scope.cad.cd_promocao);
-            if($scope.cad.vl_venda <= obj.vl_promossao){
+            var obj = array_column_search($scope.lista_promocoes,'cd_promocao',$scope.cad.cd_promocao);
+            if($scope.cad.vl_venda <= obj.vl_promocao){
                 $scope.erro_promocao = 1;
             }
-            $scope.cad.vl_promocao = obj.vl_promossao;
+            $scope.cad.vl_promocao = obj.vl_promocao;
         }else{
             $scope.cad.vl_promocao = "";
         }
@@ -268,6 +268,7 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
                     data: $scope.cad
                 }).then(function (retorno) {
                     $scope.carregando = false;
+                    $scope.cad = {};
                     $('#cancelamento').modal('hide');
                     $scope.getEventos();
                 },

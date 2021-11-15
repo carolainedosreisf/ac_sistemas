@@ -12,6 +12,8 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
     $scope.lista_albuns = [];
     $scope.lista_cancelados = [];
     $scope.lista_error  = [];
+    $scope.lista_error_academico = [];
+
     $scope.contato = {};
     $scope.cad_compra = {};
 
@@ -23,9 +25,8 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
     $scope.getComprasCanceladas = function(){
         $scope.carregando = true;
         $http({
-            url: 'controllers_php/Compra/getCompras.php',
+            url: 'controllers_php/Compra/getComprasCanceladas.php',
             method: 'GET',
-            params:{filtro:1}
         }).then(function (retorno) {
             $scope.lista_cancelados = retorno.data;
             if((retorno.data).length > 0){
@@ -95,8 +96,7 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
     }
 
     $scope.setCarrinho = function(dados,tipo=4){
-        
-        if(dados.bloq_academico==1){
+        if(dados.bloq_academico==1 && tipo != 3){
             $scope.msgAcademico();
             return;
         }
@@ -281,6 +281,7 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
         
         if($scope.form_compra.$valid){
             $scope.lista_error  = [];
+            $scope.lista_error_academico = [];
             swal({
                 title: "",
                 text: "Deseja realmente finalizar sua compra?",
@@ -303,12 +304,13 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
                     method: 'POST',
                     data: data
                 }).then(function (retorno) {
-                    if(retorno.data.error){
+                    if(((retorno.data.error).length > 0) || ((retorno.data.error_academico).length > 0)){
                         $scope.lista_error = retorno.data.error;
+                        $scope.lista_error_academico = retorno.data.error_academico;
                     }else{
                         $scope.error = retorno.data;
                     }
-                    if(retorno.data==1){
+                    if(((retorno.data.error).length <= 0) && ((retorno.data.error_academico).length <= 0)){
                         $scope.setToken(1);
                     }
                 },
@@ -336,7 +338,7 @@ app.controller('siteController', ['$scope', '$http','$filter','$location','$anch
         $scope.carregando = true;
         var data = {
             cd_evento:dados.cd_evento,
-            cd_compra:dados.cd_compra
+            cd_cadastro:$scope.usuario.cd_cadastro
         }
         $http({
             url: 'controllers_php/Evento/setConscienciaCancelamento.php',

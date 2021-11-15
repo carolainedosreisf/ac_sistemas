@@ -19,14 +19,14 @@
                 ,sn_cancelado
                 ,IFNULL(cd_promocao,0) AS cd_promocao
                 ,IF(IFNULL(cd_promocao,0) > 0,vl_promocao,vl_venda) as vl_mostrar
-                ,(SELECT ds_promossao FROM promocao AS c WHERE c.cd_promossao = e.cd_promocao) AS nome_promocao
+                ,(SELECT ds_promocao FROM promocao AS c WHERE c.cd_promocao = e.cd_promocao) AS nome_promocao
                 ,ds_local
                 ,ft_caminho
                 ,nr_classifi
                 ,nr_lotacao
-                ,publica
+                ,sn_publica
                 ,motivo_cancelamento
-                ,carga
+                ,carga_horaria
             FROM evento AS e
             WHERE cd_evento = {$id}";
 

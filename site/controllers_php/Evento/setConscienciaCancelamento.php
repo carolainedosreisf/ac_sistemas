@@ -3,16 +3,17 @@
     require '../../funcoes.php';
 
     $dados = getPostAngular();
-    $cd_compra = $dados['cd_compra'];
+    $cd_cadastro = $dados['cd_cadastro'];
     $cd_evento = $dados['cd_evento'];
+  
 
     $data = [
-        "consciencia_cancelamento" => 1
+        "sn_cancelado" => 'S'
     ];
 
-    $update = montaUpdate($data,['consciencia_cancelamento']);
-    $sql = "UPDATE comprait SET {$update} WHERE cd_compra = {$cd_compra} AND cd_evento = {$cd_evento}";
+    $update = montaUpdate($data);
+    $sql = "UPDATE comprait SET {$update} WHERE (SELECT cd_cadastro FROM compra AS c WHERE c.cd_compra = comprait.cd_compra) = {$cd_cadastro} AND cd_evento = {$cd_evento}";
     $query = mysqli_query($conexao, $sql);
 
-    echo $sql;
+    echo $query;
 ?>

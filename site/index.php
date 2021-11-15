@@ -115,6 +115,7 @@
 						<b>O evento: </b>{{l.ds_evento}} ({{l.nome_tipo_evento}})<br>
 						<b>Data Evento: </b> {{l.dt_evento_br}} {{l.hr_evento}}<br>
 						<b>Valor a ser reembolsado: </b> {{l.vl_reembolso | currency:'R$'}} <br>
+						<b>Qtd. Ingresso(s): </b> {{l.qt_compra}}<br>
 						<b>Motivo Cancelamento:</b> {{l.motivo_cancelamento}} <br><br>
 						<i>Para nós confirmar que recebeu e leu essa mensagem clique no botão a baixo, para mais detalhes acesse o menu "MINHAS COMPRAS".</i><br><br>
 						<button class="btn btn-primary" ng-click="setConscienciaCancelamento(l)">Ok. Estou ciente</button>

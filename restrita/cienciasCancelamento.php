@@ -53,9 +53,9 @@
 
                         </td>
                         <td class="text-center">{{l.qt_compra}}</td>
-                        <td class="text-center">{{l.vl_reembolso | currency:'R$'}}</td>
+                        <td class="text-center">{{l.vl_compra | currency:'R$'}}</td>
                         <td class="text-center">{{l.dt_compra_br}}</td>
-                        <td class="text-center">{{l.consciencia_cancelamento==1?'Sim':'Não'}}</td>
+                        <td class="text-center">{{l.consciencia_cancelamento=='S'?'Sim':'Não'}}</td>
                     </tr>
                 </tbody>
             </table>

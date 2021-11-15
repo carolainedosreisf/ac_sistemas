@@ -13,17 +13,15 @@
                 ,c.ed_email
                 ,c.nr_telefone
                 ,c.nr_contato
-                ,item.qt_compra
-                ,item.vl_compra
-                ,(SELECT DATE_FORMAT(dt_compra, '%d/%m/%Y %H:%i') FROM compra AS i WHERE i.cd_compra = item.cd_compra) AS dt_compra_br
-                ,(item.qt_compra * item.vl_compra) AS vl_reembolso
-                ,IFNULL(item.consciencia_cancelamento,0) AS consciencia_cancelamento
-                ,c.nr_contato
-                ,c.nr_telefone
-                ,c.ed_email
+                ,count(*) AS qt_compra
+                ,SUM(item.vl_compra) AS vl_compra
+                ,(SELECT DATE_FORMAT(CONCAT(dt_compra,' ',hr_compra), '%d/%m/%Y %H:%i') FROM compra AS i WHERE i.cd_compra = item.cd_compra) AS dt_compra_br
+                ,sum(item.vl_compra) AS vl_reembolso
+                ,IFNULL(item.sn_cancelado,'N') AS consciencia_cancelamento
             FROM comprait AS item
             INNER JOIN cadastro AS c ON c.cd_cadastro = (SELECT cd_cadastro FROM compra AS i WHERE i.cd_compra = item.cd_compra)
             WHERE item.cd_evento = {$id}
+            GROUP BY c.nm_cadastro,c.sexo,c.dt_nascto,c.cd_cidade,c.ed_email,c.nr_telefone,c.nr_contato,item.vl_compra,sn_cancelado,item.cd_evento,c.cd_cadastro
             ORDER BY item.cd_compra DESC";
 
     $query = mysqli_query($conexao, $sql);
@@ -35,7 +33,7 @@
     while($item = mysqli_fetch_array($query, MYSQLI_ASSOC)){
         $lista[$i] = $item;
         $qtd += $item['qt_compra'];
-        $valor += $item['qt_compra'] * $item['vl_compra'];
+        $valor += $item['vl_compra'];
 
         $lista[$i]['nr_telefone'] = formatar_telefone($item['nr_telefone']);
         $lista[$i]['nr_contato'] = formatar_telefone($item['nr_contato']);

@@ -14,7 +14,7 @@
                 ,sexo
                 ,(SELECT nm_cidade FROM cidade AS c WHERE c.cd_cidade = e.cd_cidade) AS nome_cidade
                 ,(SELECT uf_cidade FROM cidade AS c WHERE c.cd_cidade = e.cd_cidade) AS uf_cidade
-                ,IFNULL((SELECT SUM(qt_compra) 
+                ,IFNULL((SELECT count(*) 
 					FROM comprait AS b
 					WHERE (SELECT cd_cadastro 
                            	FROM compra AS c 

@@ -18,12 +18,12 @@
                 ,IFNULL(sn_cancelado,'N') AS sn_cancelado
                 ,ft_caminho
                 ,nr_lotacao
-                ,IFNULL((SELECT SUM(qt_compra) 
+                ,IFNULL((SELECT count(*) 
                          FROM comprait 
                          WHERE comprait.cd_evento = e.cd_evento)
                         ,0) AS qtd_vendas
                 ,IF(CONCAT(dt_evento,' ',e.hr_evento) < NOW(),1,0) ocorrido
-                ,publica
+                ,sn_publica
                 ,(IF(CONCAT(dt_evento,' ',e.hr_evento) < NOW(),'S','N')) AS ocorrido
                 ,IF(DATE_SUB(CONCAT(dt_evento,' ',e.hr_evento),INTERVAL 7 DAY) > NOW() AND IFNULL(sn_cancelado,'N')='N',1,0 ) AS permite_cancela
                 ,IFNULL(sn_cancelado,'N') AS sn_cancelado

@@ -54,11 +54,11 @@ app.controller('checkIngressosController', ['$scope', '$http','$filter','$window
     }
 
     $scope.setCheckIngresso = function(dados){
-        console.log($scope.check_presenca);
-        $scope.check_presenca[dados.nr_lote] = 0;
+        console.log(dados);
+        $scope.check_presenca[dados.cd_ingresso] = 0;
         swal({
             title: "",
-            text: "Deseja realmente confirmar presença nesse ingresso: "+dados.nr_lote+"?",
+            text: "Deseja realmente confirmar presença nesse ingresso: "+dados.cd_ingresso+"?",
             type: "warning",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
@@ -68,9 +68,8 @@ app.controller('checkIngressosController', ['$scope', '$http','$filter','$window
           function(){
             $scope.carregando = true;
             var data  = {
-                cd_compra:dados.cd_compra,
+                cd_ingresso:dados.cd_ingresso,
                 cd_evento:dados.cd_evento,
-                seq:dados.seq
             };
             $http({
                 url: 'controllers_php/Evento/setCheckIngresso.php',

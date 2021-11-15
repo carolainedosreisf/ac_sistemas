@@ -14,12 +14,12 @@
     }
     $coluna = "";
     if($cd_cadastro){
-        $coluna .= ",IFNULL(((SELECT 1 
-                        FROM comprait AS i
-                        WHERE i.cd_evento = e.cd_evento
-                    AND (SELECT cd_cadastro 
-                            FROM compra AS c 
-                            WHERE c.cd_compra = i.cd_compra) = {$cd_cadastro}) AND e.cd_tipoevento = 1),0) AS bloq_academico";
+        $coluna .= ",IFNULL((EXISTS(SELECT 1 
+                                FROM comprait AS i
+                                WHERE i.cd_evento = e.cd_evento
+                                AND (SELECT cd_cadastro 
+                                        FROM compra AS c 
+                                        WHERE c.cd_compra = i.cd_compra) = {$cd_cadastro}) AND e.cd_tipoevento = 1),0) AS bloq_academico";
     }
 
     $sql = "SELECT 
@@ -41,12 +41,12 @@
                 ,e.nr_classifi
                 ,e.nr_lotacao
                 ,e.dt_evento
-                ,IF ((IFNULL((SELECT SUM(qt_compra) 
+                ,IF ((IFNULL((SELECT count(*) 
                             FROM comprait 
                             WHERE comprait.cd_evento = e.cd_evento)
                         ,0) >= e.nr_lotacao),1,0) AS lotado
                 ,e.cd_evento
-                ,IFNULL((SELECT SUM(qt_compra) 
+                ,IFNULL((SELECT count(*) 
                             FROM comprait 
                             WHERE comprait.cd_evento = e.cd_evento)
                         ,0) AS qtd_vendas
@@ -54,9 +54,8 @@
             FROM evento AS e
             WHERE IFNULL(e.sn_cancelado,'N') = 'N'
             {$filtro}
-            AND publica = 'S'
+            AND sn_publica = 'S'
             ORDER BY e.dt_evento DESC";
-
     $query = mysqli_query($conexao, $sql);
     $lista = [];
 

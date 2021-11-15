@@ -6,7 +6,7 @@
 
     $data = [
         "ds_fpagto" => $obj['ds_fpagto'],
-        "qt_parcela" => isset($obj['qt_parcela'])?$obj['qt_parcela']:null,
+        "qt_parcela" => $obj['qt_parcela'],
         "vl_min" => isset($obj['vl_min'])?$obj['vl_min']:null
     ];
 

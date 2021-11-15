@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 11-Nov-2021 às 15:37
+-- Tempo de geração: 12-Nov-2021 às 15:52
 -- Versão do servidor: 5.7.31
 -- versão do PHP: 7.3.21
 
@@ -36,7 +36,18 @@ CREATE TABLE IF NOT EXISTS `album` (
   PRIMARY KEY (`cd_album`),
   KEY `fk1044_idx` (`cd_album`),
   KEY `fk10444_idx` (`cd_evento`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `album`
+--
+
+INSERT INTO `album` (`cd_album`, `cd_evento`, `ds_album`, `ft_caminho`) VALUES
+(1, 6, 'Imagem 1', 'arquivos/uploads_evento_albuns/123656564413496998202111100152.jpg'),
+(2, 6, 'Imagem 2', 'arquivos/uploads_evento_albuns/977734227416250997202111100153.jpg'),
+(3, 6, 'Imagem 3', 'arquivos/uploads_evento_albuns/1547244803622760182202111100153.jpg'),
+(4, 6, 'Imagem 4', 'arquivos/uploads_evento_albuns/3261893022927436240202111100153.jpg'),
+(5, 6, 'Imagem 5', 'arquivos/uploads_evento_albuns/388740376332729440202111100153.jpg');
 
 -- --------------------------------------------------------
 
@@ -403,13 +414,26 @@ CREATE TABLE IF NOT EXISTS `compra` (
   `cd_cadastro` int(11) NOT NULL,
   `cd_compra` int(11) NOT NULL AUTO_INCREMENT,
   `cd_fpagto` int(11) NOT NULL,
-  `dt_compra` date NOT NULL,
-  `hr_compra` time NOT NULL,
+  `dt_compra` timestamp NOT NULL,
   `vl_total` decimal(18,2) DEFAULT NULL,
   PRIMARY KEY (`cd_compra`),
   KEY `fk103_idx` (`cd_cadastro`),
   KEY `fk203` (`cd_fpagto`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `compra`
+--
+
+INSERT INTO `compra` (`cd_cadastro`, `cd_compra`, `cd_fpagto`, `dt_compra`, `vl_total`) VALUES
+(2, 1, 1, '2021-11-05 01:58:43', '235.00'),
+(7, 2, 3, '2021-11-05 02:01:42', '40.00'),
+(7, 3, 3, '2021-11-05 02:02:05', '90.00'),
+(2, 4, 3, '2021-11-05 05:48:51', '70.00'),
+(6, 5, 3, '2021-11-05 05:50:05', '70.00'),
+(10, 6, 2, '2021-11-06 04:37:55', '200.00'),
+(10, 7, 2, '2021-11-06 04:43:34', '180.00'),
+(1, 8, 2, '2021-11-12 03:19:03', '240.00');
 
 -- --------------------------------------------------------
 
@@ -420,15 +444,32 @@ CREATE TABLE IF NOT EXISTS `compra` (
 DROP TABLE IF EXISTS `comprait`;
 CREATE TABLE IF NOT EXISTS `comprait` (
   `cd_compra` int(11) NOT NULL,
-  `cd_ingresso` varchar(20) NOT NULL,
   `cd_evento` int(11) NOT NULL,
-  `qt_compra` int(11) NULL,
+  `qt_compra` int(11) NOT NULL,
   `vl_compra` decimal(18,2) NOT NULL,
-  `sn_cancelado` char(1) DEFAULT 'N',
-  PRIMARY KEY (`cd_compra`,`cd_ingresso`,`cd_evento`),
-  KEY `cd_ingresso_idx` (`cd_ingresso`),
+  `consciencia_cancelamento` int(1) DEFAULT NULL,
+  PRIMARY KEY (`cd_compra`,`cd_evento`),
+  KEY `cd_ingresso_idx` (`cd_evento`),
   KEY `cd_compra_idx` (`cd_compra`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `comprait`
+--
+
+INSERT INTO `comprait` (`cd_compra`, `cd_evento`, `qt_compra`, `vl_compra`, `consciencia_cancelamento`) VALUES
+(1, 2, 1, '100.00', NULL),
+(1, 3, 1, '15.00', NULL),
+(1, 5, 2, '20.00', NULL),
+(1, 7, 1, '80.00', 1),
+(2, 5, 2, '20.00', NULL),
+(3, 6, 3, '30.00', NULL),
+(4, 12, 1, '70.00', NULL),
+(5, 12, 1, '70.00', NULL),
+(6, 2, 2, '100.00', NULL),
+(7, 1, 2, '90.00', NULL),
+(8, 2, 2, '100.00', NULL),
+(8, 4, 2, '20.00', NULL);
 
 -- --------------------------------------------------------
 
@@ -475,10 +516,11 @@ CREATE TABLE IF NOT EXISTS `evento` (
   `nr_classifi` int(11) DEFAULT NULL,
   `cd_tipoevento` int(11) NOT NULL,
   `hr_evento` time NOT NULL,
-  `nr_lotacao` int(11) NULL,
-  `sn_publica` char(1) NOT NULL DEFAULT 'N',
+  `nr_lotacao` int(11) NOT NULL,
+  `publica` char(1) NOT NULL DEFAULT 'N',
+  `dt_publica` datetime DEFAULT NULL,
   `motivo_cancelamento` varchar(255) DEFAULT NULL,
-  `carga_horaria` decimal(6,2) DEFAULT NULL,
+  `carga` decimal(18,2) DEFAULT NULL,
   PRIMARY KEY (`cd_evento`),
   KEY `fk104_idx` (`cd_cidade`),
   KEY `fk204_idx` (`cd_promocao`),
@@ -489,16 +531,16 @@ CREATE TABLE IF NOT EXISTS `evento` (
 -- Extraindo dados da tabela `evento`
 --
 
-INSERT INTO `evento` (`cd_evento`, `cd_cidade`, `cd_promocao`, `ds_evento`, `ds_local`, `dt_evento`, `ft_caminho`, `ft_evento`, `sn_cancelado`, `vl_venda`, `vl_promocao`, `nr_classifi`, `cd_tipoevento`, `hr_evento`, `nr_lotacao`, `sn_publica`, `motivo_cancelamento`, `carga_horaria`) VALUES
-(1, 70, NULL, 'Show Gusttavo Lima', 'Ginasio', '2021-11-23', 'arquivos/uploads_evento/225962606625243596202110192345.jpg', NULL, NULL, '90.00', NULL, NULL, 4, '12:00:00', 1000, 'S', NULL, NULL),
-(2, 61, NULL, 'Show Ivete Sangalo', 'Ginasio', '2022-03-21', 'arquivos/uploads_evento/1089548478331145980202110180119.png', NULL, NULL, '100.00', NULL, 10, 4, '13:00:00', 2, 'S', NULL, NULL),
-(3, 70, 2, 'Palestra motivacional', 'Ginasio 2', '2022-03-21', 'arquivos/uploads_evento/1157140418406253351202110180120.jpg', NULL, NULL, '25.00', '15.00', 14, 5, '20:00:00', 2, 'S', NULL, NULL),
-(4, 72, 3, 'Evento de incentivo a leitura', 'Ginasio', '2022-03-25', 'arquivos/uploads_evento/48027062486993442202111042350.jpg', NULL, NULL, '50.00', '20.00', NULL, 3, '12:00:00', 1000, 'S', NULL, NULL),
-(5, 69, 3, 'Show Luan Santana', 'Ginasio', '2022-03-16', 'arquivos/uploads_evento/2782980288758537495202111042359.jpg', NULL, NULL, '70.00', '20.00', NULL, 4, '08:00:00', 1000, 'S', NULL, NULL),
-(6, 1, NULL, 'Curso de mÃ¡gica', 'Ginasio', '2021-11-06', 'arquivos/uploads_evento/52839379419850508202110180130.jpg', NULL, NULL, '30.00', NULL, NULL, 3, '15:00:00', 3, 'S', NULL, NULL),
-(7, 3, NULL, 'Show   Wesley safadÃ£o', 'Ginasio', '2022-01-29', 'arquivos/uploads_evento/863015299628290534202110180123.jpg', NULL, 'S', '80.00', NULL, NULL, 4, '19:00:00', 1000, 'S', 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', NULL),
-(11, 37, 3, 'evento de teste', 'local teste', '2021-12-22', NULL, NULL, NULL, '100.00', '20.00', 10, 5, '14:00:00', 2, 'S', NULL, NULL),
-(12, 1, NULL, 'Curso bÃ¡sico de programaÃ§Ã£o web', 'local teste', '2021-11-04', 'arquivos/uploads_evento/1561899626017209948202111050000.png', NULL, NULL, '70.00', NULL, NULL, 1, '15:00:00', 100, 'S', NULL, '4.00');
+INSERT INTO `evento` (`cd_evento`, `cd_cidade`, `cd_promocao`, `ds_evento`, `ds_local`, `dt_evento`, `ft_caminho`, `ft_evento`, `sn_cancelado`, `vl_venda`, `vl_promocao`, `nr_classifi`, `cd_tipoevento`, `hr_evento`, `nr_lotacao`, `publica`, `dt_publica`, `motivo_cancelamento`, `carga`) VALUES
+(1, 70, NULL, 'Show Gusttavo Lima', 'Ginasio', '2021-11-23', 'arquivos/uploads_evento/225962606625243596202110192345.jpg', NULL, NULL, '90.00', NULL, NULL, 4, '12:00:00', 1000, 'S', '2021-11-02 13:00:24', NULL, NULL),
+(2, 61, NULL, 'Show Ivete Sangalo', 'Ginasio', '2022-03-21', 'arquivos/uploads_evento/1089548478331145980202110180119.png', NULL, NULL, '100.00', NULL, 10, 4, '13:00:00', 5, 'S', '2021-11-02 13:00:24', NULL, NULL),
+(3, 70, 2, 'Palestra motivacional', 'Ginasio 2', '2022-03-21', 'arquivos/uploads_evento/1157140418406253351202110180120.jpg', NULL, NULL, '25.00', '15.00', 14, 5, '20:00:00', 2, 'S', '2021-11-02 13:00:24', NULL, NULL),
+(4, 72, 3, 'Evento de incentivo a leitura', 'Ginasio', '2022-03-25', 'arquivos/uploads_evento/48027062486993442202111042350.jpg', NULL, NULL, '50.00', '20.00', NULL, 3, '12:00:00', 1000, 'S', '2021-11-06 01:52:55', NULL, NULL),
+(5, 69, 3, 'Show Luan Santana', 'Ginasio', '2022-03-16', 'arquivos/uploads_evento/2782980288758537495202111042359.jpg', NULL, NULL, '70.00', '20.00', NULL, 4, '08:00:00', 1000, 'S', '2021-11-06 01:52:48', NULL, NULL),
+(6, 1, NULL, 'Curso de mÃ¡gica', 'Ginasio', '2021-11-06', 'arquivos/uploads_evento/52839379419850508202110180130.jpg', NULL, NULL, '30.00', NULL, NULL, 3, '15:00:00', 3, 'S', '2021-11-02 13:00:24', NULL, NULL),
+(7, 3, NULL, 'Show Wesley safadÃ£o', 'Ginasio', '2022-01-29', 'arquivos/uploads_evento/863015299628290534202110180123.jpg', NULL, 'S', '80.00', NULL, NULL, 4, '19:00:00', 1000, 'S', '2021-11-02 13:00:24', 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', NULL),
+(11, 37, 3, 'evento de teste', 'local teste', '2021-12-22', NULL, NULL, NULL, '100.00', '20.00', 10, 5, '14:00:00', 2, 'S', '2021-11-02 16:27:39', NULL, NULL),
+(12, 1, NULL, 'Curso bÃ¡sico de programaÃ§Ã£o web', 'local teste', '2021-11-04', 'arquivos/uploads_evento/1561899626017209948202111050000.png', NULL, NULL, '70.00', NULL, NULL, 1, '15:00:00', 100, 'S', '2021-11-06 03:51:07', NULL, '4.00');
 
 -- --------------------------------------------------------
 
@@ -510,8 +552,8 @@ DROP TABLE IF EXISTS `fpagamento`;
 CREATE TABLE IF NOT EXISTS `fpagamento` (
   `cd_fpagto` int(11) NOT NULL AUTO_INCREMENT,
   `ds_fpagto` varchar(50) NOT NULL,
-  `qt_parcela` int(11) NOT NULL,
-  `vl_min` decimal(18,2) NULL,
+  `qt_parcela` int(11) DEFAULT NULL,
+  `vl_min` decimal(18,2) DEFAULT NULL,
   PRIMARY KEY (`cd_fpagto`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
@@ -522,7 +564,7 @@ CREATE TABLE IF NOT EXISTS `fpagamento` (
 INSERT INTO `fpagamento` (`cd_fpagto`, `ds_fpagto`, `qt_parcela`, `vl_min`) VALUES
 (1, '3x no cartÃ£o de crÃ©dito', 3, '150.00'),
 (2, '2x no cartÃ£o de crÃ©dito', 2, '100.00'),
-(3, 'Avista', 1, 0.00);
+(3, 'Avista', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -546,13 +588,41 @@ CREATE TABLE IF NOT EXISTS `fpagamentoit` (
 
 DROP TABLE IF EXISTS `ingresso`;
 CREATE TABLE IF NOT EXISTS `ingresso` (
-  `cd_ingresso` varchar(20) NOT NULL,
+  `cd_compra` int(11) NOT NULL,
   `cd_evento` int(11) NOT NULL,
-  `nr_lote` varchar(20) NULL,
-  `sn_presenca` char(1) DEFAULT 'N',	
-  PRIMARY KEY (`cd_evento`,`cd_ingresso`),
+  `seq` int(11) NOT NULL,
+  `nr_lote` varchar(20) NOT NULL,
+  `check_presenca` int(1) DEFAULT NULL,
+  PRIMARY KEY (`cd_compra`,`cd_evento`,`seq`),
+  KEY `fk105_idx1` (`cd_compra`),
   KEY `fk105_idx11` (`cd_evento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `ingresso`
+--
+
+INSERT INTO `ingresso` (`cd_compra`, `cd_evento`, `seq`, `nr_lote`, `check_presenca`) VALUES
+(1, 2, 1, '4fa19d5b0f', NULL),
+(1, 3, 1, '6935a71862', NULL),
+(1, 5, 1, '53086b8ec3', NULL),
+(1, 5, 2, 'b660f2e59d', NULL),
+(1, 7, 1, '2e91e6bfbb', NULL),
+(2, 5, 1, '28ae3636fa', NULL),
+(2, 5, 2, '25256d0cbc', NULL),
+(3, 6, 1, 'd64b713d85', NULL),
+(3, 6, 2, 'c496161558', NULL),
+(3, 6, 3, '9319f08ddb', NULL),
+(4, 12, 1, '6e692faf31', 1),
+(5, 12, 1, '6c403d323a', NULL),
+(6, 2, 1, '322f82caa8', NULL),
+(6, 2, 2, '130ce7b205', NULL),
+(7, 1, 1, 'f2c8b5da8d', NULL),
+(7, 1, 2, '52971ea861', NULL),
+(8, 2, 1, 'd17a9adc80', NULL),
+(8, 2, 2, '95d9a36daf', NULL),
+(8, 4, 1, '932f3b70e8', NULL),
+(8, 4, 2, '3e98532a64', NULL);
 
 -- --------------------------------------------------------
 
@@ -566,8 +636,8 @@ CREATE TABLE IF NOT EXISTS `login` (
   `nm_usuario` varchar(50) NOT NULL,
   `senha` varchar(50) NOT NULL,
   `cd_permissao` int(11) NOT NULL,
-  PRIMARY KEY (`cd_cadastro`),
   UNIQUE KEY `nm_usuario_unique` (`nm_usuario`),
+  UNIQUE KEY `cd_cadastro_unique` (`cd_cadastro`),
   KEY `fk207_idx` (`cd_permissao`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
@@ -617,19 +687,19 @@ INSERT INTO `permissao` (`cd_permissao`, `ds_permissao`) VALUES
 
 DROP TABLE IF EXISTS `promocao`;
 CREATE TABLE IF NOT EXISTS `promocao` (
-  `cd_promocao` int(11) NOT NULL AUTO_INCREMENT,
-  `ds_promocao` varchar(45) NOT NULL,
-  `vl_promocao` decimal(18,2) DEFAULT NULL,
+  `cd_promossao` int(11) NOT NULL AUTO_INCREMENT,
+  `ds_promossao` varchar(45) NOT NULL,
+  `vl_promossao` decimal(18,2) DEFAULT NULL,
   `dt_prazoini` date DEFAULT NULL,
   `dt_prazofim` date DEFAULT NULL,
-  PRIMARY KEY (`cd_promocao`)
+  PRIMARY KEY (`cd_promossao`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `promocao`
 --
 
-INSERT INTO `promocao` (`cd_promocao`, `ds_promocao`, `vl_promocao`, `dt_prazoini`, `dt_prazofim`) VALUES
+INSERT INTO `promocao` (`cd_promossao`, `ds_promossao`, `vl_promossao`, `dt_prazoini`, `dt_prazofim`) VALUES
 (1, 'Idoso 80+', '15.00', NULL, NULL),
 (2, 'CrianÃ§a 2021, crianÃ§a atÃ© 13 anos', '15.00', '2021-10-01', '2021-10-31'),
 (3, 'Estudante 2021', '20.00', '2021-01-01', '2021-12-31');
@@ -688,12 +758,11 @@ ALTER TABLE `compra`
 --
 ALTER TABLE `comprait`
   ADD CONSTRAINT `fk106` FOREIGN KEY (`cd_compra`) REFERENCES `compra` (`cd_compra`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk206` FOREIGN KEY (`cd_evento`,`cd_ingresso`) REFERENCES `ingresso` (`cd_evento`,`cd_ingresso`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk2066` FOREIGN KEY (`cd_evento`) REFERENCES `evento` (`cd_evento`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk206` FOREIGN KEY (`cd_evento`) REFERENCES `evento` (`cd_evento`) ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `empresa`
---  
+--
 ALTER TABLE `empresa`
   ADD CONSTRAINT `fk101` FOREIGN KEY (`cd_cidade`) REFERENCES `cidade` (`cd_cidade`) ON UPDATE CASCADE;
 
@@ -702,7 +771,7 @@ ALTER TABLE `empresa`
 --
 ALTER TABLE `evento`
   ADD CONSTRAINT `fk104` FOREIGN KEY (`cd_cidade`) REFERENCES `cidade` (`cd_cidade`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk204` FOREIGN KEY (`cd_promocao`) REFERENCES `promocao` (`cd_promocao`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk204` FOREIGN KEY (`cd_promocao`) REFERENCES `promocao` (`cd_promossao`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk304` FOREIGN KEY (`cd_tipoevento`) REFERENCES `tipoevento` (`cd_tipoevento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -715,7 +784,9 @@ ALTER TABLE `fpagamentoit`
 -- Limitadores para a tabela `ingresso`
 --
 ALTER TABLE `ingresso`
-  ADD CONSTRAINT `fk1055` FOREIGN KEY (`cd_evento`) REFERENCES `evento` (`cd_evento`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk1055` FOREIGN KEY (`cd_evento`) REFERENCES `evento` (`cd_evento`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk1066` FOREIGN KEY (`cd_compra`) REFERENCES `compra` (`cd_compra`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk1077` FOREIGN KEY (`cd_compra`,`cd_evento`) REFERENCES `comprait` (`cd_compra`, `cd_evento`) ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `login`

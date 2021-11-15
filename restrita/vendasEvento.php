@@ -49,7 +49,7 @@
                         <td class="text-center">{{l.sexo=='F'?'Feminino':'Masculino'}}</td>
                         <td class="text-center">{{l.dt_nascto}}</td>
                         <td class="text-center">{{l.qt_compra}}</td>
-                        <td class="text-center">{{(l.vl_compra*l.qt_compra) | currency:'R$'}}</td>
+                        <td class="text-center">{{(l.vl_compra) | currency:'R$'}}</td>
                         <td class="text-center">{{l.dt_compra_br}}</td>
                     </tr>
                 </tbody>

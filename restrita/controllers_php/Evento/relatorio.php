@@ -9,7 +9,7 @@
                 ,DATE_FORMAT(dt_evento, '%d/%m/%Y') AS dt_evento_br
                 ,DATE_FORMAT(hr_evento, '%H:%i') AS hr_evento
                 ,(SELECT ds_evento FROM tipoevento AS c WHERE c.cd_tipoevento = e.cd_tipoevento) AS nome_tipo_evento
-                ,IFNULL((SELECT ds_promossao FROM promocao AS c WHERE c.cd_promossao = e.cd_promocao),'') AS nome_promocao
+                ,IFNULL((SELECT ds_promocao FROM promocao AS c WHERE c.cd_promocao = e.cd_promocao),'') AS nome_promocao
 
                 ,IFNULL(sn_cancelado,'N') AS sn_cancelado
                 ,nr_lotacao
@@ -37,7 +37,7 @@
                             ,c.nr_contato
                             ,item.qt_compra
                             ,item.vl_compra
-                            ,(SELECT DATE_FORMAT(dt_compra, '%d/%m/%Y %H:%i') FROM compra AS i WHERE i.cd_compra = item.cd_compra) AS dt_compra_br
+                            ,(SELECT DATE_FORMAT(CONCAT(dt_compra,' ',hr_compra), '%d/%m/%Y %H:%i') FROM compra AS i WHERE i.cd_compra = item.cd_compra) AS dt_compra_br
                         FROM comprait AS item
                         INNER JOIN cadastro AS c ON c.cd_cadastro = (SELECT cd_cadastro FROM compra AS i WHERE i.cd_compra = item.cd_compra)
                         WHERE item.cd_evento  = {$cd_evento}
@@ -46,16 +46,14 @@
         $lista[$i] = $item;
 
         $query_clientes = mysqli_query($conexao, $sql_clientes);
-        $qtd = 0;
         $valor = 0;
         $lista[$i]['clientes'] = [];
         while($item_clientes = mysqli_fetch_array($query_clientes, MYSQLI_ASSOC)){
             $lista[$i]['clientes'][] = $item_clientes;
-            $qtd += $item_clientes['qt_compra'];
-            $valor += $item_clientes['qt_compra'] * $item_clientes['vl_compra'];
+            $valor += $item_clientes['vl_compra'];
         } 
 
-        $lista[$i]['qtd'] = $qtd;
+        $lista[$i]['qtd'] = count($lista[$i]['clientes']);
         $lista[$i]['valor'] = $valor;
         $i++;
     } 

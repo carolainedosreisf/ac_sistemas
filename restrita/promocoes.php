@@ -34,24 +34,24 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <table class="table table-striped table-bordered table-responsive">
+            <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th width="5%" class="text-center">#</th>
-                        <th>Promoção</th>
-                        <th width="8%" class="text-center">Dt. Início</th>
-                        <th width="8%" class="text-center">Dt. Fim</th>
-                        <th width="8%" class="text-center">Status</th>
+                        <th width="60%">Promoção</th>
+                        <th width="10%" class="text-center">Dt. Início</th>
+                        <th width="10%" class="text-center">Dt. Fim</th>
+                        <th width="10%" class="text-center">Status</th>
                         <th width="5%" class="text-center">Editar</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-show="(lista_promocoes | filter:filtrar | filter:{status:filtro_status} ).length <=0">
-                        <td class="text-center" colspan="4">Nenhum resgistro encontrado.</td>
+                        <td class="text-center" colspan="6">Nenhum resgistro encontrado.</td>
                     </tr>
                     <tr pagination-id="pg_promocoes" dir-paginate="l in lista_promocoes| filter:filtrar | filter:{status:filtro_status} | itemsPerPage:20">
-                        <td class="text-center">{{l.cd_promossao}}</td>
-                        <td>{{l.ds_promossao}} ({{l.vl_promossao | currency:'R$'}})</td>
+                        <td class="text-center">{{l.cd_promocao}}</td>
+                        <td>{{l.ds_promocao}} ({{l.vl_promocao | currency:'R$'}})</td>
                         <td class="text-center">{{l.dt_prazoini}}</td>
                         <td class="text-center">{{l.dt_prazofim}}</td>
                         <td class="text-center">{{l.status=='A'?'Ativa':'Inativa'}}</td>
@@ -96,20 +96,20 @@
                         </div>
                     </div>
                     <form name="form_promocao" id="form_promocao" novalidate ng-submit="setPromocao()">
-                        <div class="row form-group" ng-show="cad.cd_promossao">
+                        <div class="row form-group" ng-show="cad.cd_promocao">
                             <div class="col-sm-3">
-                                <label for="cd_promossao">Código:</label>
-                                <input type="text" class="form-control" name="cd_promossao" id="cd_promossao" autocomplete="off" ng-model="cad.cd_promossao" ng-disabled="true">
+                                <label for="cd_promocao">Código:</label>
+                                <input type="text" class="form-control" name="cd_promocao" id="cd_promocao" autocomplete="off" ng-model="cad.cd_promocao" ng-disabled="true">
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col-sm-8" ng-class="form_promocao.ds_promossao.$invalid && (form_promocao.$submitted || form_promocao.ds_promossao.$dirty)?'has-error':''">
-                                <label for="ds_promossao">Descrição:</label>
-                                <input type="text" name="ds_promossao" autocomplete="of" class="form-control" maxlength="45" ng-model="cad.ds_promossao" ng-required="true">
+                            <div class="col-sm-8" ng-class="form_promocao.ds_promocao.$invalid && (form_promocao.$submitted || form_promocao.ds_promocao.$dirty)?'has-error':''">
+                                <label for="ds_promocao">Descrição:</label>
+                                <input type="text" name="ds_promocao" autocomplete="of" class="form-control" maxlength="45" ng-model="cad.ds_promocao" ng-required="true">
                             </div>
-                            <div class="col-sm-4" ng-class="form_promocao.vl_promossao.$invalid && (form_promocao.$submitted || form_promocao.vl_promossao.$dirty)?'has-error':''">
-                                <label for="vl_promossao">Valor:</label>
-                                <input type="text" class="form-control" name="vl_promossao" id="vl_promossao" autocomplete="off" ng-model="cad.vl_promossao" required="required" maxlength="22" ui-number-mask="2">
+                            <div class="col-sm-4" ng-class="form_promocao.vl_promocao.$invalid && (form_promocao.$submitted || form_promocao.vl_promocao.$dirty)?'has-error':''">
+                                <label for="vl_promocao">Valor:</label>
+                                <input type="text" class="form-control" name="vl_promocao" id="vl_promocao" autocomplete="off" ng-model="cad.vl_promocao" required="required" maxlength="22" ui-number-mask="2">
                             </div>
                         </div>
 

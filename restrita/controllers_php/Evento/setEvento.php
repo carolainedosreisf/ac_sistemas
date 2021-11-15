@@ -11,7 +11,7 @@
         "cd_cidade" => $obj['cd_cidade'],
         "cd_promocao" => isset($obj['cd_promocao'])?$obj['cd_promocao']:null,
         "vl_promocao" => isset($obj['vl_promocao'])?$obj['vl_promocao']:null,
-        "carga" => isset($obj['carga'])?$obj['carga']:null,
+        "carga_horaria" => isset($obj['carga_horaria'])?$obj['carga_horaria']:null,
         "ds_evento" => $obj['ds_evento'],
         "ds_local" => $obj['ds_local'],
         "dt_evento" => formataData($obj['dt_evento'],1),
@@ -20,12 +20,8 @@
         "nr_classifi" => isset($obj['nr_classifi'])?$obj['nr_classifi']:null,
         "cd_tipoevento" => $obj['cd_tipoevento'],
         "nr_lotacao" => $obj['nr_lotacao'],
-        "publica" => $obj['publica'],
+        "sn_publica" => $obj['sn_publica'],
     ];
-
-    if($obj['publica']=='S'){
-        $data['dt_publica'] =  date("Y-m-d H:i:s");
-    }
 
     if(isset($obj['ft_caminho_novo'])){
         if($obj['ft_caminho_novo']){

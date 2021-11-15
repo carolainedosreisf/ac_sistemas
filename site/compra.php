@@ -160,6 +160,15 @@
                                 </div>
                             </div>
                         </div>
+                        <div ng-show="lista_error_academico.length > 0">
+                            <div class="row form-group" ng-repeat="l in lista_error_academico">
+                                <div class="col-sm-12">
+                                    <div class="alert alert-danger" role="alert">
+                                        O evento <b>'{{l}}'</b> é um evento do tipo acadêmico, por tanto só é permitido uma compra por cliente. Exclua ele do seu carrinho para finalizar a compra.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row form-group">
                             <div class="col-sm-6" ng-class="form_compra.cd_fpagto.$invalid && (form_compra.$submitted || form_compra.cd_fpagto.$dirty)?'has-error':''">
                                 <label for="cd_fpagto">Forma de pagamento:</label>

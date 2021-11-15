@@ -32,7 +32,7 @@
             <table class="table table-striped table-bordered table-eventos">
                 <thead>
                     <tr>
-                        <th width="10%" class="text-center">Número lote</th>
+                        <th width="10%" class="text-center">Ingresso</th>
                         <th>Dados da Compra</th>
                         <th width="10%" class="text-center">Ckeck</th>
                     </tr>
@@ -42,7 +42,7 @@
                         <td class="text-center" colspan="3">Nenhum resgistro encontrado.</td>
                     </tr>
                     <tr ng-repeat="l in lista_ingressos | filter:filtro">
-                        <td class="text-center">{{l.nr_lote}}</td>
+                        <td class="text-center">{{l.cd_ingresso}}</td>
                         <td>
                             <b>Nome:</b> {{l.nm_cadastro}} <br>
                             <b>CPF:</b> {{l.nr_cpf}} <br>
@@ -50,7 +50,7 @@
 
                         </td>
                         <td class="text-center">
-                            <input style="width:25px;height:25px;"  ng-click="setCheckIngresso(l)" ng-disabled="l.check_presenca==1" ng-checked="l.check_presenca==1" ng-model="check_presenca[l.nr_lote]" type="checkbox" name="check_presenca_{{$index}}" id="check_presenca{{$index}}">
+                            <input style="width:25px;height:25px;"  ng-click="setCheckIngresso(l)" ng-disabled="l.sn_presenca=='S'" ng-checked="l.sn_presenca=='S'" ng-model="check_presenca[l.cd_ingresso]" type="checkbox" name="check_presenca_{{$index}}" id="check_presenca{{$index}}">
                         </td>
                     </tr>
                 </tbody>

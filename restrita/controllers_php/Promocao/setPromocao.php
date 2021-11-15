@@ -19,18 +19,18 @@
     }
 
     $data = [
-        "ds_promossao" => $obj['ds_promossao'],
-        "vl_promossao" => $obj['vl_promossao'],
+        "ds_promocao" => $obj['ds_promocao'],
+        "vl_promocao" => $obj['vl_promocao'],
         "dt_prazoini" => $dt_prazoini,
         "dt_prazofim" => $dt_prazofim
     ];
 
-    $id = isset($obj['cd_promossao'])?$obj['cd_promossao']:0;
-    $semAspa = ['vl_promossao'];
+    $id = isset($obj['cd_promocao'])?$obj['cd_promocao']:0;
+    $semAspa = ['vl_promocao'];
 
     if($id){
         $update = montaUpdate($data,$semAspa);
-        $sql = "UPDATE promocao SET {$update} WHERE cd_promossao = {$id}";
+        $sql = "UPDATE promocao SET {$update} WHERE cd_promocao = {$id}";
         $query = mysqli_query($conexao, $sql);
         
     }else{

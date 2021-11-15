@@ -101,9 +101,9 @@
                             
                         </div>
                         <div class="row form-group">
-                            <div class="col-sm-6">
+                            <div class="col-sm-6" ng-class="form_forma_pagamento.qt_parcela.$invalid && (form_forma_pagamento.$submitted || form_forma_pagamento.qt_parcela.$dirty)?'has-error':''">
                                 <label for="qt_parcela">Qtd Parcelas:</label>
-                                <input type="text" class="form-control" name="qt_parcela" id="qt_parcela" autocomplete="off" ng-model="cad.qt_parcela" maxlength="11" ui-number-mask="0">
+                                <input type="text" class="form-control" name="qt_parcela" id="qt_parcela" autocomplete="off" ng-model="cad.qt_parcela" maxlength="11" ui-number-mask="0" ng-required="true">
                             </div>
                             <div class="col-sm-6">
                                 <label for="vl_min">Valor Mínino:</label>

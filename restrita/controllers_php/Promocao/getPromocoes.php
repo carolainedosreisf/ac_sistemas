@@ -3,11 +3,11 @@
     require '../../funcoes.php';
    
     $sql = "SELECT 
-                cd_promossao
-                ,ds_promossao
+                cd_promocao
+                ,ds_promocao
                 ,DATE_FORMAT(dt_prazoini, '%d/%m/%Y') AS dt_prazoini_br
                 ,DATE_FORMAT(dt_prazofim, '%d/%m/%Y') AS dt_prazofim_br
-                ,vl_promossao
+                ,vl_promocao
                 ,IF(
                     IFNULL(CONCAT(dt_prazoini,' 00:00:00'),NOW()) > NOW(),
                     'I',
@@ -15,7 +15,7 @@
                     'A','I'
                     )) AS status
             FROM promocao AS e
-            ORDER BY status ASC,cd_promossao DESC";
+            ORDER BY status ASC,cd_promocao DESC";
 
     $query = mysqli_query($conexao, $sql);
     $lista = [];

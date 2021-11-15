@@ -112,7 +112,7 @@
                             </button>
                       
                             <button ng-click="openSetEvento(l.cd_evento)" class="btn btn-primary" data-html="true" data-toggle="tooltip" tooltip data-placement="top" data-original-title="Editar/Ver">
-                                <i class="glyphicon glyphicon-{{l.publica=='N'?'pencil':'search'}}"></i>
+                                <i class="glyphicon glyphicon-{{l.sn_publica=='N'?'pencil':'search'}}"></i>
                             </button>
 
                             <button class="btn btn-danger" ng-disabled="l.permite_cancela==0" ng-click="openCancelamento(l)"data-html="true" data-toggle="tooltip" tooltip data-placement="top" data-original-title="Cancelar Evento">
@@ -153,7 +153,7 @@
                         
                             <div class="row form-group">
                                 <div class="col-sm-12" ng-class="form_cancelamento.motivo_cancelamento.$invalid && (form_cancelamento.$submitted || form_cancelamento.motivo_cancelamento.$dirty)?'has-error':''">
-                                    <label for="ds_promossao">Descrição:</label>
+                                    <label for="ds_promocao">Descrição:</label>
                                     <textarea name="motivo_cancelamento" id="motivo_cancelamento" autocomplete="off" rows="4" class="form-control" maxlength="255" ng-model="cad.motivo_cancelamento " ng-required="true"></textarea>
                                 </div>
                             </div>

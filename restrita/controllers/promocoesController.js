@@ -6,7 +6,7 @@ app.controller('promocoesController', ['$scope', '$http','$filter', function($sc
     $scope.openModalCad = function(dados = {}){
         $scope.cad = angular.copy(dados);
 
-        $scope.txt_modal = (typeof $scope.cad.cd_promossao != 'undefined'?" Editar":"Cadastrar")+" Promoção";
+        $scope.txt_modal = (typeof $scope.cad.cd_promocao != 'undefined'?" Editar":"Cadastrar")+" Promoção";
         $('#cadPromocao').modal('show');
     }
 
