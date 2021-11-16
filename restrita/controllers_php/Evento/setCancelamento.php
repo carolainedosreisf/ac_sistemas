@@ -21,6 +21,7 @@
                     c.nm_cadastro
                     ,c.ed_email
                     ,SUM(item.vl_compra) AS vl_reembolso
+                    ,COUNT(*) AS qt_compra
                     ,CONCAT(DATE_FORMAT(e.dt_evento, '%d/%m/%Y'),' ',DATE_FORMAT(e.hr_evento, '%H:%i')) AS dt_evento
                     ,(SELECT ds_evento FROM tipoevento AS c WHERE c.cd_tipoevento = e.cd_tipoevento) AS nome_tipo_evento
                     ,e.ds_evento
@@ -38,7 +39,7 @@
             $valor = number_format($item['vl_reembolso'],2,",",".");
             $to = 'caroldosreis97@gmail.com'; 
             //$to = $item['ed_email']; 
-            $email_subject = utf8_decode("Blablabla Eventos avisa: O evento {$item['ds_evento']} ({$item['nome_tipo_evento']}) foi cancelado -----");
+            $email_subject = utf8_decode("Blablabla Eventos avisa: O evento {$item['ds_evento']} ({$item['nome_tipo_evento']}) foi cancelado");
             $texto = utf8_decode("<!DOCTYPE html>
             <html lang='en'>
             <head>
@@ -58,6 +59,7 @@
                         <b>Evento: </b>{$item['ds_evento']} ({$item['nome_tipo_evento']}) <br>
                         <b>Data Evento: </b>{$item['dt_evento']}<br>
                         <b>Valor a ser reembolsado: </b>R$ {$valor} <br>
+                        <b>Qtd. Ingresso(s): </b>{$item['qt_compra']} <br>
                         <b>Motivo do cancelamento: </b>{$item['motivo_cancelamento']}
                     </span>
                 </div>

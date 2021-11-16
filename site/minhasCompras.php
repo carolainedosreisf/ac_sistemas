@@ -56,8 +56,7 @@
                                         </div>
                                     </td>
                                     <td width="40%">
-                                        <span class="text"><b>Valor Unitário: </b>{{e.vl_venda | currency:'R$'}} </span>
-                                        <span class="text"><b>Valor Total: </b>{{e.vl_venda*e.qt_compra | currency:'R$'}}</span>
+                                        <span class="text"><b>Valor Total: </b>{{e.vl_venda | currency:'R$'}}</span>
                                         <span class="text"><b>Quantidade: </b>{{e.qt_compra}}</span>
                                     </td>
                                     <td width="10%">
