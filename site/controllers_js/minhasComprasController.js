@@ -57,7 +57,8 @@ app.controller('minhasComprasController', ['$scope', '$http','$filter','$locatio
             }else{
                 var data = {
                     cd_evento:dados.cd_evento,
-                    cd_compra:dados.cd_compra
+                    cd_compra:dados.cd_compra,
+                    cd_cadastro:$scope.usuario.cd_cadastro
                 }
                 window.open('../gerar_certificado/gerador.php?t='+btoa(JSON.stringify(data)),'_blank');
             }

@@ -11,7 +11,7 @@
 				</div>
 				<div class="contatos">
 					<span class="item-contatos">
-						<i class="fa fa-envelope"></i> <span>blablablaentrada@gmail.com</span>
+						<i class="fa fa-envelope"></i> <span>blablablaeventosempresa@gmail.com</span>
 					</span>
 					<span class="item-contatos">
 						<i class="fa fa-phone"></i> <span>(48) 9999-9999</span>

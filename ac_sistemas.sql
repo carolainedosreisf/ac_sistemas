@@ -728,3 +728,21 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+DROP TABLE IF EXISTS `certificado`;
+CREATE TABLE certificado(
+  `cd_cadastro` int(11) NOT NULL,
+  `cd_evento` int(11) NOT NULL,
+  `hash_certificado` VARCHAR(50) NOT NULL,
+  `dt_realizado` DATE NOT NULL,
+  `dt_finalizado` DATE NOT NULL,
+  `carga_horaria` DECIMAL(6,2),
+  `ds_ceritificado` VARCHAR(80) NOT NULL,
+  PRIMARY KEY (`cd_cadastro`,`cd_evento`),
+  KEY `cd_cadastro_idx00` (`cd_cadastro`),
+  KEY `cd_evento_idx00` (`cd_evento`)
+);
+
+ALTER TABLE `certificado`
+  ADD CONSTRAINT `fk1077` FOREIGN KEY (`cd_cadastro`) REFERENCES `cadastro` (`cd_cadastro`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk20777` FOREIGN KEY (`cd_evento`) REFERENCES `evento` (`cd_evento`) ON UPDATE CASCADE;
+

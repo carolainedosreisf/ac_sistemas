@@ -79,7 +79,7 @@
             </div>
             <div class="col-sm-2" ng-class="form_evento.carga_horaria.$invalid && (form_evento.$submitted || form_evento.carga_horaria.$dirty)?'has-error':''">
                 <label for="carga_horaria">CH:</label>
-                <input type="text" class="form-control" name="carga_horaria" id="carga_horaria" autocomplete="off" ng-model="cad.carga_horaria" ng-required="cad.cd_tipoevento==1" maxlength="22" ui-number-mask="2" ng-disabled="disabled_">
+                <input type="text" class="form-control" name="carga_horaria" id="carga_horaria" autocomplete="off" ng-model="cad.carga_horaria" ng-required="cad.cd_tipoevento==1" maxlength="8" ui-number-mask="2" ng-disabled="disabled_">
             </div>
             <div class="col-sm-2" ng-class="form_evento.vl_venda.$invalid && (form_evento.$submitted || form_evento.vl_venda.$dirty)?'has-error':''">
                 <label for="vl_venda">Valor de Venda:</label>
