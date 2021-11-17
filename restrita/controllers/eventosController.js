@@ -252,7 +252,7 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
         if($scope.form_cancelamento.$valid){
             swal({
                 title: "Atenção",
-                text: "Ao cancelar todos os clientes que compram serão notificados e reembolsados. Deseja realmente cancelar esse evento?",
+                text: "Ao cancelar, todos os clientes que compraram serão notificados e reembolsados. Deseja realmente cancelar o evento?",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
