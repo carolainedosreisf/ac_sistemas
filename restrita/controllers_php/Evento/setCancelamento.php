@@ -37,8 +37,8 @@
         while($item = mysqli_fetch_array($query, MYSQLI_ASSOC)){
             $clientes[] = $item;
             $valor = number_format($item['vl_reembolso'],2,",",".");
-            $to = 'caroldosreis97@gmail.com'; 
-            //$to = $item['ed_email']; 
+            //$to = 'caroldosreis97@gmail.com'; 
+            $to = $item['ed_email']; 
             $email_subject = utf8_decode("Blablabla Eventos avisa: O evento {$item['ds_evento']} ({$item['nome_tipo_evento']}) foi cancelado");
             $texto = utf8_decode("<!DOCTYPE html>
             <html lang='en'>
@@ -55,7 +55,7 @@
                 <div class='bs-callout-default' style='width:70%;padding: 20px;margin: 20px 0;border: 1px solid #eee;border-left-color: #d9534f;border-left-width: 5px;border-radius: 3px;'>
                     <h3 style='text-align:center;font-family: 'Zen Antique', serif;'>Aviso!</h3>
                     <span>
-                        <i>Olá {$item['nm_cadastro']}, o evento que voce comprou foi cancelado, EM BREVE VOCÊ SERÁ REEMBOLSADO!</i><br><br>
+                        <i>Olá {$item['nm_cadastro']}, o evento que você comprou foi cancelado, EM BREVE VOCÊ SERÁ REEMBOLSADO!</i><br><br>
                         <b>Evento: </b>{$item['ds_evento']} ({$item['nome_tipo_evento']}) <br>
                         <b>Data Evento: </b>{$item['dt_evento']}<br>
                         <b>Valor a ser reembolsado: </b>R$ {$valor} <br>

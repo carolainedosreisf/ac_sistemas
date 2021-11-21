@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 17-Nov-2021 às 03:28
+-- Tempo de geração: 21-Nov-2021 às 15:12
 -- Versão do servidor: 5.7.31
 -- versão do PHP: 7.3.21
 
@@ -554,9 +554,9 @@ INSERT INTO `evento` (`cd_evento`, `cd_cidade`, `cd_promocao`, `ds_evento`, `ds_
 (2, 61, NULL, 'Show Ivete Sangalo', 'Ginasio', '2022-03-21', 'arquivos/uploads_evento/1089548478331145980202110180119.png', NULL, NULL, '100.00', NULL, 10, 4, '13:00:00', 2, 'S', NULL, NULL),
 (3, 70, 2, 'Palestra motivacional', 'Ginasio 2', '2022-03-21', 'arquivos/uploads_evento/1157140418406253351202110180120.jpg', NULL, NULL, '25.00', '15.00', 14, 5, '20:00:00', 2, 'S', NULL, NULL),
 (4, 72, 3, 'Evento de incentivo a leitura', 'Ginasio', '2022-03-25', 'arquivos/uploads_evento/48027062486993442202111042350.jpg', NULL, NULL, '50.00', '20.00', NULL, 3, '12:00:00', 1000, 'S', NULL, NULL),
-(5, 69, 3, 'Show Luan Santana', 'Ginasio', '2022-03-16', 'arquivos/uploads_evento/2782980288758537495202111042359.jpg', NULL, NULL, '70.00', '20.00', NULL, 4, '08:00:00', 1000, 'S', NULL, NULL),
+(5, 69, NULL, 'Show Luan Santana', 'Ginasio', '2022-03-16', 'arquivos/uploads_evento/2782980288758537495202111042359.jpg', NULL, NULL, '70.00', NULL, NULL, 4, '08:00:00', 1000, 'S', NULL, NULL),
 (6, 1, NULL, 'Curso de mÃ¡gica', 'Ginasio', '2021-11-30', 'arquivos/uploads_evento/52839379419850508202110180130.jpg', NULL, NULL, '30.00', NULL, NULL, 3, '15:00:00', 3, 'S', NULL, NULL),
-(7, 3, NULL, 'Show   Wesley safadÃ£o', 'Ginasio', '2022-01-29', 'arquivos/uploads_evento/863015299628290534202110180123.jpg', NULL, NULL, '80.00', NULL, NULL, 4, '19:00:00', 1000, 'S', NULL, NULL),
+(7, 3, NULL, 'Show   Wesley safadÃ£o', 'Ginasio', '2021-11-21', 'arquivos/uploads_evento/863015299628290534202110180123.jpg', NULL, NULL, '80.00', NULL, NULL, 4, '19:00:00', 1000, 'S', NULL, NULL),
 (11, 37, 3, 'evento de teste', 'local teste', '2021-12-22', NULL, NULL, NULL, '100.00', '20.00', 10, 5, '14:00:00', 2, 'S', NULL, NULL),
 (12, 1, NULL, 'Curso bÃ¡sico de programaÃ§Ã£o web', 'local teste', '2021-11-14', 'arquivos/uploads_evento/1561899626017209948202111050000.png', NULL, NULL, '70.00', NULL, NULL, 1, '15:00:00', 100, 'S', NULL, '4.50');
 

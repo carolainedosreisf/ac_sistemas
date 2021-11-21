@@ -72,7 +72,7 @@
                         <th width="5%" class="text-center">#</th>
                         <th width="5%" class="text-center">Imagem</th>
                         <th>Evento</th>
-                        <th width="25%" class="text-center">Lotação/Álbm/Ver/Cancelar</th>
+                        <th width="25%" class="text-center">Lotação/Álbum/Ver/Cancelar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -115,7 +115,7 @@
                                 <i class="glyphicon glyphicon-{{l.sn_publica=='N'?'pencil':'search'}}"></i>
                             </button>
 
-                            <button class="btn btn-danger" ng-disabled="l.permite_cancela==0" ng-click="openCancelamento(l)"data-html="true" data-toggle="tooltip" tooltip data-placement="top" data-original-title="Cancelar Evento">
+                            <button class="btn btn-danger" ng-disabled="l.permite_cancela==0 || l.sn_publica=='N'" ng-click="openCancelamento(l)"data-html="true" data-toggle="tooltip" tooltip data-placement="top" data-original-title="Cancelar Evento">
                                 <i class="glyphicon glyphicon-remove"></i>
                             </button>
                         </td>

@@ -38,7 +38,7 @@
         session_start();
         $_SESSION['usuario'] = $item;
         $_SESSION['usuario']['tempo_inatividade'] = strtotime(date("Y-m-d H:i:s")."+30 minutes");
-        //$_SESSION['usuario']['tempo_inatividade'] = strtotime(date("Y-m-d H:i:s")."+15 seconds");
+        //$_SESSION['usuario']['tempo_inatividade'] = strtotime(date("Y-m-d H:i:s")."+5 seconds");
 
         echo $item['cd_permissao'];
     }else{

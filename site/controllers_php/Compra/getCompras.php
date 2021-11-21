@@ -11,7 +11,6 @@
                 ,vl_total
                 ,CONCAT(dt_compra,' ',hr_compra) AS dt_compra_
                 ,DATE_FORMAT(CONCAT(dt_compra,' ',hr_compra), '%d/%m/%Y %H:%i') AS dt_compra_br
-                ,(SELECT sum(qt_compra) FROM comprait AS a WHERE a.cd_compra  = c.cd_compra) AS qt_compra
             FROM compra AS c
             WHERE cd_cadastro = {$cd_cadastro}
             ORDER BY 5 DESC";
@@ -20,6 +19,8 @@
     $lista = [];
     $i = 0;
     while($item = mysqli_fetch_array($query, MYSQLI_ASSOC)){
+        $count = 0;
+
         $lista[$i] = $item;
         $cd_compra = $item['cd_compra'];
         $sql_evento = "SELECT 
@@ -59,7 +60,9 @@
         $query_evento = mysqli_query($conexao, $sql_evento);
         while($item_evento = mysqli_fetch_array($query_evento, MYSQLI_ASSOC)){
             $lista[$i]['eventos'][] = $item_evento;
+            $count+= $item_evento['qt_compra'];
         }
+        $lista[$i]['qt_compra'] = $count;
         $i++;
     } 
 

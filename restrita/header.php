@@ -12,6 +12,7 @@
     }
     $usuario = $_SESSION['usuario'];
 
+    //$_SESSION['usuario']['tempo_inatividade'] = strtotime(date("Y-m-d H:i:s")."+5 seconds");
     $_SESSION['usuario']['tempo_inatividade'] = strtotime(date("Y-m-d H:i:s")."+30 minutes");
 
 ?>
@@ -72,8 +73,8 @@
                     <li><a href="promocoes.php">Promoções</a></li>
                     <li><a href="tiposEventos.php">Tipos de Eventos</a></li>
                     <li><a href="index.php">Eventos</a></li>
-                    <li><a href="checkIngressos.php">Check Ingressos</a></li>
                     <li><a href="formasPagamento.php">Formas de Pagamento</a></li>
+                    <li><a href="checkIngressos.php">Check Ingressos</a></li>
                     <li><a href="clientes.php">Clientes</a></li>
                     <li><a href="logout.php">Sair</a></li>
                 </ul>

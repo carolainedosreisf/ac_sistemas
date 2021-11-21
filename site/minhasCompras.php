@@ -84,8 +84,7 @@
                                             <span class="text"><b>Data Evento: </b>{{e.dt_evento_br}} {{e.hr_evento}}</span>
                                             <span class="text"><b>Classificação: </b>{{e.nr_classifi==0?'Livre':e.nr_classifi}}</span>
 
-                                            <span class="text"><b>Valor Unitário: </b>{{e.vl_venda | currency:'R$'}} </span>
-                                            <span class="text"><b>Valor Total: </b>{{e.vl_venda*e.qt_compra | currency:'R$'}}</span>
+                                            <span class="text"><b>Valor Total: </b>{{e.vl_venda | currency:'R$'}}</span>
                                             <span class="text"><b>Quantidade: </b>{{e.qt_compra}}</span>
 
                                             <a ng-click="openIngressos(e)" style="margin:5px auto;" class="btn btn-success btn-sm">Ingresso(s) <i class="fa fa-ticket"></i></a>

@@ -117,7 +117,7 @@
 						<b>Valor a ser reembolsado: </b> {{l.vl_reembolso | currency:'R$'}} <br>
 						<b>Qtd. Ingresso(s): </b> {{l.qt_compra}}<br>
 						<b>Motivo Cancelamento:</b> {{l.motivo_cancelamento}} <br><br>
-						<i>Para nós confirmar que recebeu e leu essa mensagem clique no botão a baixo, para mais detalhes acesse o menu "MINHAS COMPRAS".</i><br><br>
+						<i>Para nós confirmar que recebeu e leu essa mensagem clique no botão a baixo e para mais detalhes acesse o menu "MINHAS COMPRAS".</i><br><br>
 						<button class="btn btn-primary" ng-click="setConscienciaCancelamento(l)">Ok. Estou ciente</button>
 					</div>
 				</div>

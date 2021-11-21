@@ -1095,10 +1095,13 @@ button.main_bt {
 }
 
 
-@media (max-width:500px) {
+@media (max-width:600px) {
 	.saudacao-usuario{
 		font-size: 15px;
 	}
+	.navbar-lg .navbar-brand {
+		padding-top: 10px !important;
+	}	
 }
 
 @media (max-width:600px) {
