@@ -20,7 +20,8 @@
                            	FROM compra AS c 
                            	WHERE c.cd_compra =  b.cd_compra) = e.cd_cadastro),0
                  ) AS qtd_eventos   
-            FROM cadastro AS e";
+            FROM cadastro AS e
+            ORDER BY 12 DESC, 2 ASC";
 
     $query = mysqli_query($conexao, $sql);
     $lista = [];

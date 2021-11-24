@@ -100,7 +100,7 @@ app.controller('eventosController', ['$scope', '$http','$filter','$window', func
             if($scope.cad.sn_publica=='S'){
                 swal({
                     title: "Atenção",
-                    text: "Você esta colocando o campo 'Publicar' como 'Sim', ao comfirmar essa ação o evento será publicado no site e não será mais possivel edita-lo.\nDeseja realmente confirmar essa ação?",
+                    text: "Você esta colocando o campo 'Publicar' como 'Sim', ao confirmar essa ação o evento será publicado no site e não será mais possivel edita-lo.\nDeseja realmente confirmar essa ação?",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonClass: "btn-danger",

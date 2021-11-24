@@ -7,7 +7,7 @@
     $filtro = "";
 
     if($ocorrido){
-        $filtro .= " AND IF(CONCAT(dt_evento,' ',e.hr_evento) < NOW(),1,0) = 1";
+        $filtro .= " AND EXISTS(SELECT 1 FROM album AS al WHERE al.cd_evento = e.cd_evento)";
     }else{
         $filtro .= " AND dt_evento > NOW()";
 
